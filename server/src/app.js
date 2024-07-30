@@ -18,39 +18,21 @@ const app = express();
 
 const morganFormat = ":method :url :status :response-time ms";
 
-// app.use(
-//   morgan(morganFormat, {
-//     stream: {
-//       write: (message) => {
-//         const logObject = {
-//           method: message.split(" ")[0],
-//           url: message.split(" ")[1],
-//           status: message.split(" ")[2],
-//           responseTime: message.split(" ")[3],
-//         };
-//         logger.info(JSON.stringify(logObject));
-//       },
-//     },
-//   })
-// );
-
-if (process.env.NODE_ENV !== "production") {
-  app.use(
-    morgan(morganFormat, {
-      stream: {
-        write: (message) => {
-          const logObject = {
-            method: message.split(" ")[0],
-            url: message.split(" ")[1],
-            status: message.split(" ")[2],
-            responseTime: message.split(" ")[3],
-          };
-          console.log(JSON.stringify(logObject)); // Or use any other logger for non-production environments
-        },
+app.use(
+  morgan(morganFormat, {
+    stream: {
+      write: (message) => {
+        const logObject = {
+          method: message.split(" ")[0],
+          url: message.split(" ")[1],
+          status: message.split(" ")[2],
+          responseTime: message.split(" ")[3],
+        };
+        logger.info(JSON.stringify(logObject));
       },
-    })
-  );
-}
+    },
+  })
+);
 
 app.use(credentials);
 
