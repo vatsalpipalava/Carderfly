@@ -1,14 +1,14 @@
 import express from "express";
 import cors from "cors";
 import path from "path";
-import morgan from "morgan";
+// import morgan from "morgan";
 import cookieParser from "cookie-parser";
 import session from "express-session";
 import passport from "passport";
 import { fileURLToPath } from "url";
 import { corsOptions } from "./config/options.js";
 import { credentials } from "./middlewares/credentials.middleware.js";
-import logger from "./utils/logger.js";
+// import logger from "./utils/logger.js";
 import { ObjectId } from "mongodb";
 import Stripe from "stripe";
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
@@ -16,23 +16,23 @@ const endpointSecret = process.env.STRIPE_WEBHOOK_SECRET_KEY;
 
 const app = express();
 
-const morganFormat = ":method :url :status :response-time ms";
+// const morganFormat = ":method :url :status :response-time ms";
 
-app.use(
-  morgan(morganFormat, {
-    stream: {
-      write: (message) => {
-        const logObject = {
-          method: message.split(" ")[0],
-          url: message.split(" ")[1],
-          status: message.split(" ")[2],
-          responseTime: message.split(" ")[3],
-        };
-        logger.info(JSON.stringify(logObject));
-      },
-    },
-  })
-);
+// app.use(
+//   morgan(morganFormat, {
+//     stream: {
+//       write: (message) => {
+//         const logObject = {
+//           method: message.split(" ")[0],
+//           url: message.split(" ")[1],
+//           status: message.split(" ")[2],
+//           responseTime: message.split(" ")[3],
+//         };
+//         logger.info(JSON.stringify(logObject));
+//       },
+//     },
+//   })
+// );
 
 app.use(credentials);
 
