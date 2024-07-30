@@ -1,0 +1,28 @@
+.cropper {
+  position: relative;
+  width: auto;
+  height: 70vh;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.cropper-feature {
+  position: relative;
+  width: auto;
+  max-height: 70vh;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0px;
+  overflow: auto;
+}
+
+.advanced-cropper {
+  background-color: #000000 !important;
+}
+
+
