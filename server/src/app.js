@@ -257,7 +257,7 @@ app.use(passport.initialize());
 app.use(passport.session()); // persistent login sessions
 
 // routes import
-import rootRoutes from "./routes/root.routes.js";
+import rootRoutes from "./routes/root.routes.js"
 import healthRoutes from "./routes/health.routes.js";
 import userRoutes from "./routes/user.routes.js";
 import cardRoutes from "./routes/card.routes.js";
@@ -274,16 +274,5 @@ app.use("/api/v1/user", userRoutes);
 app.use("/api/v1/card", cardRoutes);
 app.use("/api/v1/subscribe", subscribeRoutes);
 app.use("/api/v1/invoice", invoiceRoutes);
-
-// app.all("*", (req, res) => {
-//   res.status(404);
-//   if (req.accepts("html")) {
-//     res.sendFile(path.join(__dirname, "views", "404.html"));
-//   } else if (req.accepts("json")) {
-//     res.json({ error: "404 Not Found" });
-//   } else {
-//     res.type("txt").send("404 Not Found");
-//   }
-// });
 
 export { app };
