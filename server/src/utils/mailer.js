@@ -1,5 +1,5 @@
 import nodemailer from "nodemailer";
-import logger from "./logger.js";
+// import logger from "./logger.js";
 
 // Function to replace placeholders in the template with actual values
 function replacePlaceholders(template, values) {
@@ -33,10 +33,12 @@ const sendEmail = async (valueInput, recipientMails, template, subject) => {
   // Send the email
   transporter.sendMail(mailOptions, (error, info) => {
     if (error) {
-      logger.error(`Error sending email: ${error}`);
+      // logger.error(`Error sending email: ${error}`);
+      console.error(`Error sending email: ${error}`);
       return;
     }
-    logger.info(`Email sent: ${info.response}`);
+    // logger.info(`Email sent: ${info.response}`);
+    console.log(`Email sent: ${info.response}`);
   });
 };
 
