@@ -15,14 +15,14 @@ const corsOptions = {
 const cookieOptions = {
   httpOnly: true,
   sameSite: "Strict",
-  secure: false,
+  secure: true,
   maxAge: 24 * 60 * 60 * 1000,
 };
 
 const clearCookieOptions = {
   httpOnly: true,
   sameSite: "Strict",
-  secure: false,
+  secure: true,
 };
 
 export { corsOptions, cookieOptions, clearCookieOptions };
