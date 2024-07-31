@@ -1,6 +1,7 @@
 import mongoose from "mongoose";
-import path from "path";
+import path, { dirname } from "path";
 import fs from "fs";
+import { fileURLToPath } from "url";
 import vCardsJS from "vcards-js";
 import { ApiError } from "../utils/ApiError.js";
 import { ApiResponse } from "../utils/ApiResponse.js";
@@ -8,6 +9,10 @@ import { asyncHandler } from "../utils/asyncHandler.js";
 import { Card } from "../models/card.model.js";
 
 const baseURL = process.env.BACKEND_URL;
+
+// Create __dirname for ES modules
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
 // Middleware to handle base64 image conversion and storage
 const convertAndStoreImages = (images, fieldName, publicLink, storedFiles) => {
@@ -28,7 +33,8 @@ const base64ToFile = (base64String, fileName, publicLink) => {
   }
 
   const imageBuffer = Buffer.from(matches[2], "base64");
-  const dirPath = path.join(process.cwd(), "uploads", publicLink);
+  // const dirPath = path.join("uploads", publicLink);
+  const dirPath = path.join(__dirname, "..", "..", "public", "temp", publicLink);
 
   // Create directory if it doesn't exist
   if (!fs.existsSync(dirPath)) {
