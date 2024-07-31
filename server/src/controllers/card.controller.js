@@ -28,7 +28,7 @@ const base64ToFile = (base64String, fileName, publicLink) => {
   }
 
   const imageBuffer = Buffer.from(matches[2], "base64");
-  const dirPath = path.join("uploads", publicLink);
+  const dirPath = path.join(process.cwd(), "uploads", publicLink);
 
   // Create directory if it doesn't exist
   if (!fs.existsSync(dirPath)) {
