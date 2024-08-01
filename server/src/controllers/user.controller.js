@@ -469,7 +469,7 @@ const handleSocialLogin = asyncHandler(async (req, res) => {
 
   res.status(301).redirect(
     // redirect user to the frontend with access and refresh token in case user is not using cookies
-    `${process.env.FRONTEND_URL}/dashboard`
+    `${process.env.SEC_FRONTEND_URL}/dashboard`
   );
   // res.json({ accessToken });
 });
@@ -634,7 +634,7 @@ const forgotPassword = asyncHandler(async (req, res) => {
 
   await sendEmail(
     {
-      resetPasswordLink: `${process.env.FRONTEND_URL}/reset-password/${forgotPasswordToken}`,
+      resetPasswordLink: `${process.env.SEC_FRONTEND_URL}/reset-password/${forgotPasswordToken}`,
       firstName: user.firstName,
       lastName: user.lastName,
     },

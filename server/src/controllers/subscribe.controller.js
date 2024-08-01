@@ -103,8 +103,8 @@ const checkoutSession = asyncHandler(async (req, res) => {
       userId: userId,
       cardId: cardId,
     },
-    success_url: `${process.env.FRONTEND_URL}/checkout/payment/success/subscribe/card/${cardId}/{CHECKOUT_SESSION_ID}`,
-    cancel_url: `${process.env.FRONTEND_URL}/dashboard/my-cards`,
+    success_url: `${process.env.SEC_FRONTEND_URL}/checkout/payment/success/subscribe/card/${cardId}/{CHECKOUT_SESSION_ID}`,
+    cancel_url: `${process.env.SEC_FRONTEND_URL}/dashboard/my-cards`,
     // automatic_tax: { enabled: true },
     tax_id_collection: {
       enabled: true,

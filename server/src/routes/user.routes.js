@@ -81,7 +81,7 @@ router.route("/google").get(
 
 router.route("/google/callback").get(
   passport.authenticate("google", {
-    failureRedirect: `${process.env.FRONTEND_URL}/login`,
+    failureRedirect: `${process.env.SEC_FRONTEND_URL}/login`,
   }),
   handleSocialLogin
 );
