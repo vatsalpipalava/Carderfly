@@ -168,14 +168,14 @@ function Dashboard() {
           <div className="grid gap-4 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-2 xl:grid-cols-4">
             <Card className="sm:col-span-2" x-chunk="dashboard-05-chunk-0">
               <CardHeader className="pb-3">
-                <CardTitle>Your Orders</CardTitle>
+                <CardTitle>Your Cards</CardTitle>
                 <CardDescription className="max-w-lg text-balance leading-relaxed">
-                  Introducing Our Dynamic Orders Dashboard for Seamless
+                  Introducing Our Dynamic Carderfly Dashboard for Seamless
                   Management and Insightful Analysis.
                 </CardDescription>
               </CardHeader>
               <CardFooter>
-                <Button>Create New Order</Button>
+                <Button>Create new card</Button>
               </CardFooter>
             </Card>
           </div>

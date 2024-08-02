@@ -36,7 +36,7 @@ export function FeatureContentTemplate({
                       className="aspect-square h-full w-full rounded-lg object-cover shadow-md"
                     />
                   </CardContent>
-                  <CardContent className="px-2 py-1">
+                  <CardContent className="px-2 py-2">
                     <p>{subSection.heading}</p>
                   </CardContent>
                 </Card>

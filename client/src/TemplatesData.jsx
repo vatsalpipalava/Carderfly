@@ -4,6 +4,7 @@ import Simple from "./Theme/Simple";
 import ModernThemeImg from "./assets/templates/modern.png";
 import Modern from "./Theme/Modern";
 import Standard from "./Theme/Standard";
+import RichBlack from "./Theme/RichBlack";
 
 // import RichBlackThemeImg from "./assets/templates/richblack.png";
 // import RichblackTheme from "./themes/RichblackTheme";
@@ -30,6 +31,11 @@ const templates = [
     // imageUrl: ModernThemeImg,
     templateComponents: Standard,
   },
+  {
+    id: "rich-black",
+    name: "Rich Black Theme",
+    templateComponents: RichBlack
+  }
 //   {
 //     id: "rich-black",
 //     name: "Rich Black Theme",
