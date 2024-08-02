@@ -21,10 +21,19 @@ const cardSchema = new Schema(
     profileImg: {
       type: String,
     },
+    profileImgPublicId: {
+      type: String,
+    },
     backCoverImg: {
       type: String,
     },
+    backCoverImgPublicId: {
+      type: String,
+    },
     logoImg: {
+      type: String,
+    },
+    logoImgPublicId: {
       type: String,
     },
     firstName: {
@@ -71,6 +80,7 @@ const cardSchema = new Schema(
           {
             _id: String,
             image: String,
+            imagePublicId: String,
             heading: String,
           },
         ],
