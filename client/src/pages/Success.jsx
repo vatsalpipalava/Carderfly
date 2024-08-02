@@ -61,16 +61,18 @@ export function Success() {
     <>
       <header className="fixed left-0 top-0 z-50 h-28 w-full bg-background shadow-lg dark:shadow-[#212121]">
         <div className="mx-auto h-auto w-full max-w-6xl px-4 py-8 sm:px-6">
-          <div className="flex h-auto w-auto items-center justify-start gap-6">
-            <img
-              src={CarderflyLogo}
-              className="h-auto w-12 object-cover"
-              alt="logo"
-            />
-            <h3 className="scroll-m-20 text-[1.7rem] font-semibold tracking-wide">
-              CARDERFLY
-            </h3>
-          </div>
+          <Link to="/dashboard">
+            <div className="flex h-auto w-auto items-center justify-start gap-6">
+              <img
+                src={CarderflyLogo}
+                className="h-auto w-12 object-cover"
+                alt="logo"
+              />
+              <h3 className="scroll-m-20 text-[1.7rem] font-semibold tracking-wide">
+                CARDERFLY
+              </h3>
+            </div>
+          </Link>
         </div>
       </header>
       {error ? (
@@ -121,7 +123,14 @@ export function Success() {
                   </p>
                 </div>
                 <Link
-                  href="#"
+                  to="/"
+                  className="inline-flex h-10 items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground shadow transition-colors hover:bg-primary/90 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50"
+                  prefetch={false}
+                >
+                  Go to Dashboard
+                </Link>
+                <Link
+                  to="/"
                   className="inline-flex h-10 items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground shadow transition-colors hover:bg-primary/90 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50"
                   prefetch={false}
                 >

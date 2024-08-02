@@ -75,7 +75,7 @@ export function Checkout() {
     };
 
     checkValidSubscription();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   if (notFound) {
@@ -105,7 +105,6 @@ export function Checkout() {
       setLoading(false);
       setErrMsg("");
       window.location.href = response.data.data.url;
-      
     } catch (err) {
       setLoading(false);
       if (!err?.response) {
@@ -129,16 +128,18 @@ export function Checkout() {
     <>
       <header className="fixed left-0 top-0 z-50 h-28 w-full bg-background shadow-lg dark:shadow-[#212121]">
         <div className="mx-auto h-auto w-full max-w-6xl px-4 py-8 sm:px-6">
-          <div className="flex h-auto w-auto items-center justify-start gap-6">
-            <img
-              src={CarderflyLogo}
-              className="h-auto w-12 object-cover"
-              alt="logo"
-            />
-            <h3 className="scroll-m-20 text-[1.7rem] font-semibold tracking-wide">
-              CARDERFLY
-            </h3>
-          </div>
+          <Link to="/dashboard">
+            <div className="flex h-auto w-auto items-center justify-start gap-6">
+              <img
+                src={CarderflyLogo}
+                className="h-auto w-12 object-cover"
+                alt="logo"
+              />
+              <h3 className="scroll-m-20 text-[1.7rem] font-semibold tracking-wide">
+                CARDERFLY
+              </h3>
+            </div>
+          </Link>
         </div>
       </header>
       {validError ? (

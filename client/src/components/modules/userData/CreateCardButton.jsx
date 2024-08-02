@@ -5,9 +5,10 @@ import { useState } from "react";
 import { useSelector } from "react-redux";
 import { useToast } from "@/components/ui/use-toast";
 import useAxiosPrivate from "@/hooks/useAxiosPrivate";
+import { useNavigate } from "react-router-dom";
 
 export function CreateCardButton() {
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
   // const dispatch = useDispatch();
   const axiosPrivate = useAxiosPrivate();
   const [error, setError] = useState("");
@@ -97,13 +98,14 @@ export function CreateCardButton() {
 
     setLoading(true);
     try {
-      await axiosPrivate.post("/card/create-card", cardData);
+      const response = await axiosPrivate.post("/card/create-card", cardData);
       setLoading(false);
       toast({
         title: "Grate! Success.",
         description: "Card Created Successfully.",
       });
       setError("");
+      navigate(`/checkout/card/subscribe/${response.data.data.card._id}`)
     } catch (err) {
       setLoading(false);
       if (!err?.response) {
