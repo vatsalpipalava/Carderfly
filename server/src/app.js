@@ -78,158 +78,166 @@ app.post(
       return;
     }
 
-    // Handle the event
-    switch (event.type) {
-      case "checkout.session.completed":
-        const checkoutSessionCompleted = event.data.object;
+    if (event.type === "checkout.session.completed") {
+      const checkoutSessionCompleted = event.data.object;
 
-        const checkoutSessionId = checkoutSessionCompleted.id;
-        const customerId = checkoutSessionCompleted.customer;
-        const subscriptionId = checkoutSessionCompleted.subscription;
-        const invoiceId = checkoutSessionCompleted.invoice;
-        const stripeAmount = checkoutSessionCompleted.amount_total;
-        const creates_at = checkoutSessionCompleted.created;
+      const checkoutSessionId = checkoutSessionCompleted.id;
+      const customerId = checkoutSessionCompleted.customer;
+      const subscriptionId = checkoutSessionCompleted.subscription;
+      const invoiceId = checkoutSessionCompleted.invoice;
+      const stripeAmount = checkoutSessionCompleted.amount_total;
+      const creates_at = checkoutSessionCompleted.created;
 
-        const userIdString = checkoutSessionCompleted.metadata.userId;
-        const cardIdString = checkoutSessionCompleted.metadata.cardId;
+      const userIdString = checkoutSessionCompleted.metadata.userId;
+      const cardIdString = checkoutSessionCompleted.metadata.cardId;
 
-        try {
-          const subscriptionMetadataUpdate = await stripe.subscriptions.update(
-            subscriptionId,
-            {
-              cancel_at_period_end: true,
-              metadata: {
-                userId: userIdString,
-                cardId: cardIdString,
-              },
-            }
-          );
-
-          const userId = new ObjectId(userIdString);
-          const cardId = new ObjectId(cardIdString);
-
-          const selectedSubscription = subscriptionDetails.find(
-            (subscriptionDetail) =>
-              subscriptionDetail.stripeAmount === stripeAmount
-          );
-
-          const { planId, amount, duration, month } = selectedSubscription;
-
-          const startDate = new Date(creates_at * 1000);
-          const endDate = new Date(startDate);
-          endDate.setMonth(endDate.getMonth() + month);
-
-          // Determine subscription status
-          const currentDate = new Date();
-          let subscriptionStatus;
-          if (currentDate > endDate) {
-            subscriptionStatus = "expired";
-          } else {
-            subscriptionStatus = "inProgress";
+      try {
+        const subscriptionMetadataUpdate = await stripe.subscriptions.update(
+          subscriptionId,
+          {
+            cancel_at_period_end: true,
+            metadata: {
+              userId: userIdString,
+              cardId: cardIdString,
+            },
           }
+        );
 
-          const subscription = new Subscribe({
-            userId: userId,
-            cardId: cardId,
-            subscriptionPlanId: planId,
-            subscriptionStatus: subscriptionStatus,
-            subscriptionAmount: amount,
-            subscriptionDuration: duration,
-            stripeSessionId: checkoutSessionId,
-            stripeCustomerId: customerId,
-            stripeSubscriptionId: subscriptionId,
-            stripeInvoiceId: invoiceId,
-            startDate: startDate,
-            endDate: endDate,
-          });
+        const userId = new ObjectId(userIdString);
+        const cardId = new ObjectId(cardIdString);
 
-          const subscribe = await subscription.save();
+        const selectedSubscription = subscriptionDetails.find(
+          (subscriptionDetail) =>
+            subscriptionDetail.stripeAmount === stripeAmount
+        );
 
-          const card = await Card.findOne({ _id: cardId, userId: userId });
-          if (!card) {
-            return response.status(500).json({
-              success: false,
-              status: 500,
-              message: "Failed to update card schema",
-            });
-          }
+        const { planId, amount, duration, month } = selectedSubscription;
 
-          card.subscribeId = subscribe._id;
-          card.isPublic = true;
-          // const updateCard = await Card.findOneAndUpdate({_id: cardId, userId: userId}, {subscribeId: subscribe._id, isPublic: true});
-          await card.save();
+        const startDate = new Date(creates_at * 1000);
+        const endDate = new Date(startDate);
+        endDate.setMonth(endDate.getMonth() + month);
 
-          return response.status(200).json({
-            success: true,
-            message: "Subscription and Card updated successfully",
-          });
-        } catch (error) {
-          return response.status(500).json({
-            success: false,
-            message: "An error occurred while processing the subscription",
-            error: error.message,
-          });
+        // Determine subscription status
+        const currentDate = new Date();
+        let subscriptionStatus;
+        if (currentDate > endDate) {
+          subscriptionStatus = "expired";
+        } else {
+          subscriptionStatus = "inProgress";
         }
-        break;
 
-      case "customer.subscription.deleted":
-        const customerSubscriptionDeleted = event.data.object;
+        const subscription = new Subscribe({
+          userId: userId,
+          cardId: cardId,
+          subscriptionPlanId: planId,
+          subscriptionStatus: subscriptionStatus,
+          subscriptionAmount: amount,
+          subscriptionDuration: duration,
+          stripeSessionId: checkoutSessionId,
+          stripeCustomerId: customerId,
+          stripeSubscriptionId: subscriptionId,
+          stripeInvoiceId: invoiceId,
+          startDate: startDate,
+          endDate: endDate,
+        });
 
-        const user_Id = customerSubscriptionDeleted.metadata.userId;
-        const card_Id = customerSubscriptionDeleted.metadata.cardId;
+        const subscribe = await subscription.save();
 
-        if (!user_Id && !card_Id) {
+        const card = await Card.findOne({ _id: cardId, userId: userId });
+        if (!card) {
           return response.status(500).json({
             success: false,
-            status: 400,
-            message: "CARD_ID and USER_ID not found",
+            status: 500,
+            message: "Failed to update card schema",
           });
         }
 
-        try {
-          const subscription = await Subscribe.findOne({
-            userId: user_Id,
-            cardId: card_Id,
-          });
-          if (!subscription) {
-            return response.status(404).json({
-              success: false,
-              message: "Subscription not found",
-            });
-          }
+        card.subscribeId = subscribe._id;
+        card.isPublic = true;
+        // const updateCard = await Card.findOneAndUpdate({_id: cardId, userId: userId}, {subscribeId: subscribe._id, isPublic: true});
+        await card.save();
 
-          subscription.subscriptionStatus = "expired";
-          await subscription.save();
-
-          const card = await Card.findOne({ _id: card_Id, userId: user_Id });
-          if (!card) {
-            return response.status(404).json({
-              success: false,
-              message: "Card not found",
-            });
-          }
-
-          card.isPublic = false;
-          card.subscribeId = null;
-          await card.save();
-
-          return response.status(200).json({
-            success: true,
-            message: "Subscription and Card updated successfully",
-          });
-        } catch (error) {
-          return response.status(500).json({
-            success: false,
-            message: "An error occurred while updating subscription and card",
-          });
-        }
-        break;
-      default:
-        console.log(`Unhandled event type ${event.type}`);
+        return response.status(200).json({
+          success: true,
+          message: "Subscription and Card updated successfully",
+        });
+      } catch (error) {
+        return response.status(500).json({
+          success: false,
+          message: "An error occurred while processing the subscription",
+          error: error.message,
+        });
+      }
     }
 
+    if (event.type === "customer.subscription.deleted") {
+      const customerSubscriptionDeleted = event.data.object;
+
+      const user_Id = customerSubscriptionDeleted.metadata.userId;
+      const card_Id = customerSubscriptionDeleted.metadata.cardId;
+
+      if (!user_Id && !card_Id) {
+        return response.status(500).json({
+          success: false,
+          status: 400,
+          message: "CARD_ID and USER_ID not found",
+        });
+      }
+
+      try {
+        const subscription = await Subscribe.findOne({
+          userId: user_Id,
+          cardId: card_Id,
+        });
+        if (!subscription) {
+          return response.status(404).json({
+            success: false,
+            message: "Subscription not found",
+          });
+        }
+
+        subscription.subscriptionStatus = "expired";
+        await subscription.save();
+
+        const card = await Card.findOne({ _id: card_Id, userId: user_Id });
+        if (!card) {
+          return response.status(404).json({
+            success: false,
+            message: "Card not found",
+          });
+        }
+
+        card.isPublic = false;
+        card.subscribeId = null;
+        await card.save();
+
+        return response.status(200).json({
+          success: true,
+          message: "Subscription and Card updated successfully",
+        });
+      } catch (error) {
+        return response.status(500).json({
+          success: false,
+          message: "An error occurred while updating subscription and card",
+        });
+      }
+    }
+
+    // Handle the event
+    // switch (event.type) {
+    //   case "checkout.session.completed":
+
+    //     break;
+
+    //   case "customer.subscription.deleted":
+
+    //     break;
+    //   default:
+    //     console.log(`Unhandled event type ${event.type}`);
+    // }
+
     // Return a 200 response to acknowledge receipt of the event
-    response.send();
+    response.send().end();
   }
 );
 
@@ -257,7 +265,7 @@ app.use(passport.initialize());
 app.use(passport.session()); // persistent login sessions
 
 // routes import
-import rootRoutes from "./routes/root.routes.js"
+import rootRoutes from "./routes/root.routes.js";
 import healthRoutes from "./routes/health.routes.js";
 import userRoutes from "./routes/user.routes.js";
 import cardRoutes from "./routes/card.routes.js";
