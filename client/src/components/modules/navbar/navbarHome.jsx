@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { House, Menu, Network, Tag } from "lucide-react";
+import { Box, House, Menu, Network, Tag } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
@@ -31,13 +31,19 @@ export function Navbar() {
             Home
           </Link>
           <Link
-            to="/"
+            to="/#how-it-works"
             className="text-[16px] text-muted-foreground transition-colors hover:text-foreground"
           >
             How it works
           </Link>
           <Link
-            href="/"
+            to="/#feature"
+            className="text-[16px] text-muted-foreground transition-colors hover:text-foreground"
+          >
+            Feature
+          </Link>
+          <Link
+            to="/#pricing"
             className="text-[16px] text-muted-foreground transition-colors hover:text-foreground"
           >
             Pricing
@@ -71,13 +77,20 @@ export function Navbar() {
                   <span>Home</span>
                 </Link>
                 <Link
-                  to="/"
+                  to="/#how-it-works"
                   className="flex items-center gap-4 text-muted-foreground hover:text-foreground"
                 >
                   <Network className="h-6 w-6" /> <span>How it works</span>
                 </Link>
                 <Link
-                  href="#"
+                  to="/#feature"
+                  className="flex items-center gap-4 text-muted-foreground hover:text-foreground"
+                >
+                  <Box className="h-6 w-6" />
+                  <span>Feature</span>
+                </Link>
+                <Link
+                  to="/#pricing"
                   className="flex items-center gap-4 text-muted-foreground hover:text-foreground"
                 >
                   <Tag className="h-6 w-6" />

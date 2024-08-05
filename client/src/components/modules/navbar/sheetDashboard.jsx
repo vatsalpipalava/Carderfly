@@ -35,7 +35,7 @@ function SheetDashboard() {
             className="group flex h-10 w-10 shrink-0 items-center justify-center gap-2 rounded-xl bg-primary text-lg font-semibold text-primary-foreground md:text-base ml-5 mb-4"
           >
             <Carderfly className="h-[26px] w-[26px] fill-white transition-all group-hover:scale-110" />
-            <span className="sr-only">Acme Inc</span>
+            <span className="sr-only">Carderfly</span>
           </Link>
           <Link
             to="/dashboard"

@@ -4,7 +4,7 @@ import { cn } from "@/lib/utils";
 import { AnimatedBeam } from "@/components/magicui/animated-beam";
 
 import { forwardRef } from "react";
-import ShineBorder from "../magicui/shine-border";
+import ShineBorder from "@/components/magicui/shine-border";
 import { FaFacebookSquare, FaInstagram, FaYoutube } from "react-icons/fa";
 import { RxLinkedinLogo } from "react-icons/rx";
 import { RiLink } from "react-icons/ri";

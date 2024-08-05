@@ -1,4 +1,5 @@
-import { Routes, Route } from "react-router-dom";
+import { useEffect } from "react";
+import { Routes, Route, useLocation } from "react-router-dom";
 import "./App.css";
 import { ModeToggle } from "./components/dark-mode/mode-toggle";
 
@@ -31,57 +32,74 @@ import { ForgotPassword } from "./pages/ForgotPassword";
 import { ResetPassword } from "./pages/ResetPassword";
 import Dashboard from "./pages/Dashboard";
 
+const ScrollToSection = () => {
+  const { hash } = useLocation();
+
+  useEffect(() => {
+    if (hash) {
+      const element = document.getElementById(hash.substring(1));
+      if (element) {
+        element.scrollIntoView({ behavior: "smooth" });
+      }
+    }
+  }, [hash]);
+
+  return null;
+};
+
 function App() {
   return (
-    <Routes>
-      <Route path="/" element={<Layout />}>
-        <Route
-          path="u/verify-email/:emailVerificationToken/:userId"
-          element={<EmailVerification />}
-        />
-        <Route path=":publicLink" element={<SubscribedCard />} />
-        <Route path="forgot-password" element={<ForgotPassword />} />
-        <Route
-          path="reset-password/:forgotPasswordToken"
-          element={<ResetPassword />}
-        />
-        
+    <>
+      <ScrollToSection />
+      <Routes>
+        <Route path="/" element={<Layout />}>
+          <Route
+            path="u/verify-email/:emailVerificationToken/:userId"
+            element={<EmailVerification />}
+          />
+          <Route path=":publicLink" element={<SubscribedCard />} />
+          <Route path="forgot-password" element={<ForgotPassword />} />
+          <Route
+            path="reset-password/:forgotPasswordToken"
+            element={<ResetPassword />}
+          />
 
-        <Route element={<PersistLogin />}>
-          <Route index element={<Home />} />
-          <Route path="register" element={<RegisterForm />} />
-          <Route path="login" element={<LoginForm />} />
-          <Route path="theme" element={<ModeToggle />} />
+          <Route element={<PersistLogin />}>
+            <Route index element={<Home />} />
+            <Route path="register" element={<RegisterForm />} />
+            <Route path="login" element={<LoginForm />} />
+            <Route path="theme" element={<ModeToggle />} />
 
-          <Route element={<RequireAuth />}>
-            <Route path="view-card/:cardId" element={<MyCardById />} />
-            <Route path="/dashboard" element={<DashboardLayout />}>
-              <Route index element={<Dashboard />} />
-              <Route path="create-card" element={<CreateCard />} />
-              <Route path="my-cards" element={<MyCards />} />
+            <Route element={<RequireAuth />}>
+              <Route path="view-card/:cardId" element={<MyCardById />} />
+              <Route path="/dashboard" element={<DashboardLayout />}>
+                <Route index element={<Dashboard />} />
+                <Route path="create-card" element={<CreateCard />} />
+                <Route path="my-cards" element={<MyCards />} />
+                <Route
+                  path="create-card/:templateId/enter-details"
+                  element={<EnterDetails />}
+                />
+                <Route path="edit-card/:cardId" element={<EditCard />} />
+                <Route path="transactions" element={<Transactions />} />
+                <Route path="invoice/:subscribeId" element={<Invoice />} />
+                <Route path="settings" element={<Settings />} />
+              </Route>
+
               <Route
-                path="create-card/:templateId/enter-details"
-                element={<EnterDetails />}
+                path="checkout/card/subscribe/:cardId"
+                element={<Checkout />}
               />
-              <Route path="edit-card/:cardId" element={<EditCard />} />
-              <Route path="transactions" element={<Transactions />} />
-              <Route path="invoice/:subscribeId" element={<Invoice />} />
-              <Route path="settings" element={<Settings />} />
+              <Route
+                path="checkout/payment/success/subscribe/card/:cardId/:sessionId"
+                element={<Success />}
+              />
             </Route>
-
-            <Route
-              path="checkout/card/subscribe/:cardId"
-              element={<Checkout />}
-            />
-            <Route
-              path="checkout/payment/success/subscribe/card/:cardId/:sessionId"
-              element={<Success />}
-            />
           </Route>
+          <Route path="*" element={<NotFound />} />
         </Route>
-        <Route path="*" element={<NotFound />} />
-      </Route>
-    </Routes>
+      </Routes>
+    </>
   );
 }
 
