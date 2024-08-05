@@ -12,6 +12,7 @@ import {
   PhoneIcon,
 } from "lucide-react";
 import { Skeleton } from "@/components/ui/skeleton";
+import { Helmet } from "react-helmet";
 
 export function Success() {
   const { cardId, sessionId } = useParams();
@@ -59,6 +60,9 @@ export function Success() {
 
   return (
     <>
+      <Helmet>
+        <title>Success</title>
+      </Helmet>
       <header className="fixed left-0 top-0 z-50 h-28 w-full bg-background shadow-lg dark:shadow-[#212121]">
         <div className="mx-auto h-auto w-full max-w-6xl px-4 py-8 sm:px-6">
           <Link to="/dashboard">

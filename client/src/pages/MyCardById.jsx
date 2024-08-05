@@ -11,6 +11,7 @@ import useStyle from "@/hooks/useStyle";
 import templates from "@/TemplatesData";
 import NotFound from "./NotFound";
 import Loader from "@/components/modules/loader/loader";
+import HelmetLayout from "@/components/layouts/HelmetLayout";
 
 function MyCardById() {
   const { cardId } = useParams();
@@ -102,8 +103,18 @@ function MyCardById() {
 
   const TemplateComponent = selectedTemplate?.templateComponents;
 
+  const dynamicTitle = `${card?.firstName} ${card?.lastName} | ${card?.jobTitle} | ${card?.businessName}`;
+  const dynamicDescription = `${card?.businessDescription}`;
+  const dynamicImageUrl = `${card?.logoImg}`;
+  const dynamicPageUrl = `${import.meta.env.VITE_FRONTEND_URL}/${card?.publicLink}`;
+
   return (
-    <>
+    <HelmetLayout
+      title={dynamicTitle}
+      description={dynamicDescription}
+      imageUrl={dynamicImageUrl}
+      pageUrl={dynamicPageUrl}
+    >
       <div className="px-4 sm:px-6">
         {/* Error Message */}
         {errMsg ? (
@@ -117,7 +128,7 @@ function MyCardById() {
       <div className="relative mx-auto h-[100dvh] w-full max-w-[500px]">
         <TemplateComponent cardData={card} />
       </div>
-    </>
+    </HelmetLayout>
   );
 }
 

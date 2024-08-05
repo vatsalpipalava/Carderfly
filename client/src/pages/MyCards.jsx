@@ -56,6 +56,7 @@ import LogoutDropdown from "@/components/modules/navbar/logoutDropdown";
 import useAxiosPrivate from "@/hooks/useAxiosPrivate";
 import { useDebounce } from "@/hooks/useDebounce";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Helmet } from "react-helmet";
 
 function MyCards() {
   const { setStyle } = useStyle();
@@ -149,6 +150,9 @@ function MyCards() {
 
   return (
     <>
+    <Helmet>
+        <title>My Cards</title>
+      </Helmet>
       <header className="sticky top-0 z-30 flex h-14 items-center gap-4 border-b bg-background px-4 py-3 sm:h-auto">
         <SheetDashboard />
 

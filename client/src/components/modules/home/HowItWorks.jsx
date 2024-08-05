@@ -17,9 +17,8 @@ export function HowItWorks() {
         </Badge>
       </div>
       <h1 className="mb-24 scroll-m-20 text-center text-4xl font-extrabold tracking-tight lg:text-5xl">
-        Invest in income-generating
-        <br />
-        real estate, easily.
+        Follow the Process with
+        <br />4 Easy Steps
       </h1>
       <div className="grid w-full grid-cols-1 gap-20 md:grid-cols-2">
         <AspectRatio ratio={1 / 1}>
@@ -64,7 +63,7 @@ export function HowItWorks() {
                     <span className="text-xl font-bold text-white">2</span>
                   </div>
                   <p className="text-xl font-semibold">
-                    Create your profile in 2 minutes
+                    Browse & Choose Templates
                   </p>
                 </div>
               }
@@ -83,7 +82,7 @@ export function HowItWorks() {
                     <span className="text-xl font-bold text-white">3</span>
                   </div>
                   <p className="text-xl font-semibold">
-                    Create your profile in 2 minutes
+                    Enter Details & Generate Your Card{" "}
                   </p>
                 </div>
               }
@@ -102,7 +101,7 @@ export function HowItWorks() {
                     <span className="text-xl font-bold text-white">4</span>
                   </div>
                   <p className="text-xl font-semibold">
-                    Create your profile in 2 minutes
+                    Subscribe & Activate Sharing{" "}
                   </p>
                 </div>
               }

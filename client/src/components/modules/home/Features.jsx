@@ -39,9 +39,9 @@ export function Features() {
           }}
           text={
             <h1 className="mb-24 scroll-m-20 text-center text-4xl font-extrabold tracking-tight lg:text-5xl">
-              Build your dream site.
+              Explore the Comprehensive
               <br />
-              No compromises.
+              Features of Carderfly
             </h1>
           }
         />
@@ -64,18 +64,20 @@ export function Features() {
                 </div>
                 <div className="flex flex-col gap-2">
                   <h4 className="scroll-m-20 text-xl font-semibold tracking-tight">
-                    Social Share
+                    Integration with Social Media Platforms
                   </h4>
                   <p className="text-sm text-muted-foreground">
-                    Collaborate with your team on Slack. Planner Easily schedule
-                    and plan your workflow.
+                    Customers have the option to link their social media
+                    profiles (including Facebook, Instagram, Twitter, and
+                    LinkedIn) via digital business cards associated with the
+                    company&apos;s presence on various social platforms.
                   </p>
                 </div>
               </div>
             }
           />
 
-          {/* 2 Easy Action */}
+          {/* 2 Real-Time Preview and Editing Capabilities */}
           <FadeText
             direction="right"
             framerProps={{
@@ -88,11 +90,12 @@ export function Features() {
                 </div>
                 <div className="flex flex-col gap-2">
                   <h4 className="scroll-m-20 text-xl font-semibold tracking-tight">
-                    Easy Action
+                    Real-Time Preview and Editing Capabilities
                   </h4>
                   <p className="text-sm text-muted-foreground">
-                    Collaborate with your team on Slack. Planner Easily schedule
-                    and plan your workflow.
+                    Real-time preview and editing capabilities enable users to
+                    view and modify their business cards instantly, facilitating
+                    quick and seamless customization.
                   </p>
                 </div>
               </div>
@@ -119,8 +122,8 @@ export function Features() {
                     Feature Content
                   </h4>
                   <p className="text-sm text-muted-foreground">
-                    Collaborate with your team on Slack. Planner Easily schedule
-                    and plan your workflow.
+                    Seamlessly add and highlight your products, services, and
+                    items to attract and inform your customers.
                   </p>
                 </div>
               </div>
@@ -143,15 +146,16 @@ export function Features() {
                     Scan and Download QR Code
                   </h4>
                   <p className="text-sm text-muted-foreground">
-                    Collaborate with your team on Slack. Planner Easily schedule
-                    and plan your workflow.
+                    Download the QR code to share your digital card seamlessly
+                    with clients and partners, enhancing your networking
+                    experience.{" "}
                   </p>
                 </div>
               </div>
             }
           />
 
-          {/* 5 Feature */}
+          {/* 5 company details */}
           <FadeText
             direction="left"
             framerProps={{
@@ -171,8 +175,9 @@ export function Features() {
                     Company Details
                   </h4>
                   <p className="text-sm text-muted-foreground">
-                    Collaborate with your team on Slack. Planner Easily schedule
-                    and plan your workflow.
+                    Share essential information about your company to enhance
+                    transparency and build strong connections with your
+                    audience.
                   </p>
                 </div>
               </div>
@@ -195,8 +200,9 @@ export function Features() {
                     Downloadable VCF file
                   </h4>
                   <p className="text-sm text-muted-foreground">
-                    Collaborate with your team on Slack. Planner Easily schedule
-                    and plan your workflow.
+                    This feature includes a VCF file download button on the
+                    digital business card, allowing clients to effortlessly save
+                    company contact data on their devices.
                   </p>
                 </div>
               </div>

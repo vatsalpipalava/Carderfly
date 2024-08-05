@@ -31,6 +31,7 @@ import useAxiosPrivate from "@/hooks/useAxiosPrivate";
 import NotFound from "./NotFound";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Separator } from "@/components/ui/separator";
+import { Helmet } from "react-helmet";
 
 export default function Invoice() {
   const { subscribeId } = useParams();
@@ -104,6 +105,9 @@ export default function Invoice() {
 
   return (
     <>
+    <Helmet>
+        <title>Invoice</title>
+      </Helmet>
       <header className="sticky top-0 z-30 flex h-14 items-center gap-4 border-b bg-background px-4 py-3 sm:h-auto">
         <SheetDashboard />
         <Breadcrumb>

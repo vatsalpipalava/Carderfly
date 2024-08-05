@@ -35,6 +35,7 @@ import axios from "@/api/axios";
 import NotFound from "./NotFound";
 import Loader from "@/components/modules/loader/loader";
 import Carderfly from "@/assets/svgs/carderfly";
+import { Helmet } from "react-helmet";
 
 export function EmailVerification() {
   const { emailVerificationToken, userId } = useParams();
@@ -157,6 +158,10 @@ export function EmailVerification() {
   }
 
   return (
+    <>
+    <Helmet>
+        <title>Email Verify</title>
+      </Helmet>
     <div className="flex min-h-screen flex-col items-center justify-center gap-1 p-4">
       <div className="flex h-14 items-center lg:h-[60px]">
         <Link
@@ -251,5 +256,6 @@ export function EmailVerification() {
         </CardContent>
       </Card>
     </div>
+    </>
   );
 }

@@ -43,6 +43,7 @@ import { Color } from "@/components/modules/editData/Color";
 import { EditCardButton } from "@/components/modules/editData/EditCardButton";
 
 import { setCard } from "@/slices/editCardSlice";
+import { Helmet } from "react-helmet";
 
 function EditCard() {
   const dispatch = useDispatch();
@@ -129,6 +130,9 @@ function EditCard() {
 
   return (
     <>
+    <Helmet>
+        <title>Edit Card</title>
+      </Helmet>
       <header className="sticky top-0 z-30 flex h-14 items-center gap-4 border-b bg-background px-4 py-3 sm:h-auto">
         <SheetDashboard />
 

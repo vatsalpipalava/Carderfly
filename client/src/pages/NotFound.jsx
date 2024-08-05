@@ -1,8 +1,13 @@
 import { Link } from "react-router-dom";
 import { Separator } from "@/components/ui/separator";
+import { Helmet } from "react-helmet";
 
 export default function NotFound() {
   return (
+    <>
+    <Helmet>
+        <title>Not Found</title>
+      </Helmet>
     <div className="flex min-h-[100dvh] flex-col items-center justify-center bg-muted px-4 py-12 sm:px-6 lg:px-8">
       <div className="mx-auto max-w-md text-center">
         <h1 className="mt-8 text-6xl font-bold tracking-tight text-foreground sm:text-7xl">
@@ -24,5 +29,6 @@ export default function NotFound() {
         </div>
       </div>
     </div>
+    </>
   );
 }

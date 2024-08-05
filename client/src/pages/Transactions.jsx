@@ -59,6 +59,7 @@ import { useDebounce } from "@/hooks/useDebounce";
 import useAxiosPrivate from "@/hooks/useAxiosPrivate";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Alert, AlertDescription } from "@/components/ui/alert";
+import { Helmet } from "react-helmet";
 
 function TransactionRow({ transaction, visibleColumns }) {
   // const [status, setStatus] = useState("");
@@ -148,12 +149,12 @@ function TransactionRow({ transaction, visibleColumns }) {
             <DropdownMenuLabel>Actions</DropdownMenuLabel>
             <DropdownMenuSeparator />
             <Link to={`/dashboard/invoice/${transaction._id}`}>
-            <DropdownMenuItem>
-              <div className="flex items-center">
-                <NotebookText className="mr-2 h-4 w-4 text-muted-foreground" />
-                <div>Open Invoice</div>
-              </div>
-            </DropdownMenuItem>
+              <DropdownMenuItem>
+                <div className="flex items-center">
+                  <NotebookText className="mr-2 h-4 w-4 text-muted-foreground" />
+                  <div>Open Invoice</div>
+                </div>
+              </DropdownMenuItem>
             </Link>
             <DropdownMenuItem>
               <div className="flex items-center">
@@ -284,6 +285,9 @@ export function Transactions() {
 
   return (
     <>
+      <Helmet>
+        <title>Transactions</title>
+      </Helmet>
       <header className="sticky top-0 z-30 flex h-14 items-center gap-4 border-b bg-background px-4 py-3 sm:h-auto">
         <SheetDashboard />
         <Breadcrumb>

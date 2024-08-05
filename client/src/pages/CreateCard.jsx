@@ -22,6 +22,7 @@ import useStyle from "@/hooks/useStyle";
 import templates from "@/TemplatesData";
 import SheetDashboard from "@/components/modules/navbar/sheetDashboard";
 import LogoutDropdown from "@/components/modules/navbar/logoutDropdown";
+import { Helmet } from "react-helmet";
 
 function CreateCard() {
   const { setStyle } = useStyle();
@@ -38,6 +39,9 @@ function CreateCard() {
 
   return (
     <>
+    <Helmet>
+        <title>Select Template</title>
+      </Helmet>
       <header className="sticky top-0 z-30 flex h-14 items-center gap-4 border-b bg-background px-4 py-3 sm:h-auto">
         <SheetDashboard />
 

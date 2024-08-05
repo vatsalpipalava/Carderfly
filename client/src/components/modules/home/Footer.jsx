@@ -23,9 +23,10 @@ export function Footer() {
             </Link>
 
             <div className="text-sm text-white/70">
-              Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ab
-              corporis id dolor saepe, unde nemo. Minus hic placeat soluta optio
-              rerum deleniti ad totam ut ea enim. Ipsa, eius atque?
+              Modernize networking with dynamic digital business cards. Elevate
+              brand presence, streamline connections, and gain insights for
+              strategic growth. Transforming business cards into indispensable
+              tools.
             </div>
 
             <div className="mt-6 flex items-center gap-3">
@@ -87,7 +88,7 @@ export function Footer() {
               variant="link"
               className="text-md h-auto px-0 py-0 font-normal text-white hover:font-medium hover:text-primary sm:px-4"
             >
-              <Link to="/">Terms and condition</Link>
+              <Link to="/terms-of-service">Terms and condition</Link>
             </Button>
 
             <Button

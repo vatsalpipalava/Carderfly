@@ -107,13 +107,14 @@ export function CustomizeCard() {
           <div className="flex h-full w-full flex-col items-start justify-center gap-10">
             <h1 className="scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl">
               {" "}
-              One Click Connects Client to Company Social Media Profiles Through
-              Carderfly
+              Seamlessly Add and Highlight Your Products, Services, and Items to
+              Attract and Inform Your Customers
             </h1>
             <p className="text-xl text-muted-foreground">
-              With our Carderfly, your clients can easily connect with you on
-              your social media platforms. One click takes clients to your
-              Facebook, Instagram, LinkedIn, and more.
+              Easily add and feature your products, services, and items to
+              capture the attention of your customers. Craft concise yet
+              compelling descriptions to boost visibility and engage your
+              potential clients effectively.
             </p>
             <Link to="/login">
               <motion.button

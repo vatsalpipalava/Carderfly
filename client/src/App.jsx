@@ -31,6 +31,7 @@ import Invoice from "./pages/Invoice";
 import { ForgotPassword } from "./pages/ForgotPassword";
 import { ResetPassword } from "./pages/ResetPassword";
 import Dashboard from "./pages/Dashboard";
+import { TermsOfService } from "./pages/TermsOfService";
 
 const ScrollToSection = () => {
   const { hash } = useLocation();
@@ -63,6 +64,7 @@ function App() {
             path="reset-password/:forgotPasswordToken"
             element={<ResetPassword />}
           />
+          <Route path="terms-of-service" element={<TermsOfService />} />
 
           <Route element={<PersistLogin />}>
             <Route index element={<Home />} />

@@ -35,6 +35,7 @@ import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
+import { Helmet } from "react-helmet";
 
 function TransactionRow({ cardList }) {
   const start = new Date(cardList.startDate);
@@ -149,6 +150,9 @@ function Dashboard() {
 
   return (
     <>
+    <Helmet>
+        <title>Dashboard</title>
+      </Helmet>
       <header className="sticky top-0 z-30 flex h-14 items-center gap-4 border-b bg-background px-4 py-3 sm:h-auto">
         <SheetDashboard />
 

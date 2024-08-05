@@ -35,6 +35,7 @@ import { SecondaryAction } from "@/components/modules/userData/SecondaryAction";
 import { FeatureContent } from "@/components/modules/userData/FeatureContent";
 import { Color } from "@/components/modules/userData/Color";
 import { CreateCardButton } from "@/components/modules/userData/CreateCardButton";
+import { Helmet } from "react-helmet";
 
 function EnterDetails() {
   const dispatch = useDispatch();
@@ -69,6 +70,9 @@ function EnterDetails() {
 
   return (
     <>
+    <Helmet>
+        <title>Add Details</title>
+      </Helmet>
       <header className="sticky top-0 z-30 flex h-14 items-center gap-4 border-b bg-background px-4 py-3 sm:h-auto">
         <SheetDashboard />
 
