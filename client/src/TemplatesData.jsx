@@ -5,6 +5,7 @@ import ModernThemeImg from "./assets/templates/modern.png";
 import Modern from "./Theme/Modern";
 import Standard from "./Theme/Standard";
 import RichBlack from "./Theme/RichBlack";
+import Premium from "./Theme/Premium";
 
 // import RichBlackThemeImg from "./assets/templates/richblack.png";
 // import RichblackTheme from "./themes/RichblackTheme";
@@ -35,19 +36,13 @@ const templates = [
     id: "rich-black",
     name: "Rich Black Theme",
     templateComponents: RichBlack
+  },
+  {
+    id: "premium",
+    name: "Premium Theme",
+    templateComponents: Premium
   }
-//   {
-//     id: "rich-black",
-//     name: "Rich Black Theme",
-//     imageUrl: RichBlackThemeImg,
-//     templateComponents: Richblack
-//   },
-//   {
-//     id: "dynamic",
-//     name: "Dynamic Theme",
-//     imageUrl: DynamicThemeImg,
-//     templateComponents: Dynamic
-//   },
+
 ];
 
 export default templates;

@@ -36,6 +36,9 @@ export function Pricing() {
             className="z-20 cursor-pointer flex-col items-start justify-center shadow-2xl"
             gradientColor={theme === "dark" ? "#262626" : "#D9D9D955"}
           >
+            <CardHeader className="px-4 pb-0 pt-6 text-xl font-semibold sm:px-6">
+              <Badge className="w-[4.5rem]">Quarterly</Badge>
+            </CardHeader>
             <CardHeader className="p-4 text-xl font-semibold sm:p-6">
               Starter Plan
             </CardHeader>
@@ -46,19 +49,21 @@ export function Pricing() {
               <div className="flex w-full flex-col gap-4">
                 <div className="flex w-full items-center gap-4">
                   <SquareCheck className="h-5 w-5 text-primary" />
-                  <p>Cancel at period end.</p>
+                  <p>3 Months access per card.</p>
                 </div>
                 <div className="flex w-full items-center gap-4">
                   <SquareCheck className="h-5 w-5 text-primary" />
-                  <p>Cancel at period end.</p>
+                  <p>Share any where, any time.</p>
                 </div>
                 <div className="flex w-full items-center gap-4">
                   <SquareCheck className="h-5 w-5 text-primary" />
-                  <p>Cancel at period end.</p>
+                  <p>Simple and easy-to-use interface</p>
                 </div>
                 <div className="flex w-full items-center gap-4">
                   <SquareCheck className="h-5 w-5 text-primary" />
-                  <p>Cancel at period end.</p>
+                  <p className="break-words">
+                    Cancel subscription at period&apos;s end
+                  </p>
                 </div>
               </div>
             </CardBody>
@@ -68,29 +73,32 @@ export function Pricing() {
             className="z-10 cursor-pointer flex-col items-start justify-center shadow-2xl"
             gradientColor={theme === "dark" ? "#262626" : "#D9D9D955"}
           >
+            <CardHeader className="px-4 pb-0 pt-6 text-xl font-semibold sm:px-6">
+              <Badge className="w-[5.2rem]">Bi-annually</Badge>
+            </CardHeader>
             <CardHeader className="p-4 text-xl font-semibold sm:p-6">
               Standard Plan
             </CardHeader>
             <CardBody className="h-auto px-4 pb-4 sm:px-6 sm:pb-6">
               <h3 className="mb-6 scroll-m-20 text-4xl font-semibold tracking-tight">
-                ₹599<span className="text-lg">/ 6 Months</span>
+                ₹599 <span className="text-lg">/ 6 Months</span>
               </h3>
               <div className="flex w-full flex-col gap-4">
                 <div className="flex w-full items-center gap-4">
                   <SquareCheck className="h-5 w-5 text-primary" />
-                  <p>Cancel at period end.</p>
+                  <p>6 Months access per card.</p>
                 </div>
                 <div className="flex w-full items-center gap-4">
                   <SquareCheck className="h-5 w-5 text-primary" />
-                  <p>Cancel at period end.</p>
+                  <p>Share any where, any time.</p>
                 </div>
                 <div className="flex w-full items-center gap-4">
                   <SquareCheck className="h-5 w-5 text-primary" />
-                  <p>Cancel at period end.</p>
+                  <p>Simple and easy-to-use interface</p>
                 </div>
                 <div className="flex w-full items-center gap-4">
                   <SquareCheck className="h-5 w-5 text-primary" />
-                  <p>Cancel at period end.</p>
+                  <p>Cancel subscription at period&apos;s end</p>
                 </div>
               </div>
             </CardBody>
@@ -100,6 +108,9 @@ export function Pricing() {
             className="z-10 cursor-pointer flex-col items-start justify-center shadow-2xl"
             gradientColor={theme === "dark" ? "#262626" : "#D9D9D955"}
           >
+            <CardHeader className="px-4 pb-0 pt-6 text-xl font-semibold sm:px-6">
+              <Badge className="w-[4.4rem]">Annually</Badge>
+            </CardHeader>
             <CardHeader className="p-4 text-xl font-semibold sm:p-6">
               Premium Plan
             </CardHeader>
@@ -110,19 +121,19 @@ export function Pricing() {
               <div className="flex w-full flex-col gap-4">
                 <div className="flex w-full items-center gap-4">
                   <SquareCheck className="h-5 w-5 text-primary" />
-                  <p>Cancel at period end.</p>
+                  <p>12 Months access per card.</p>
                 </div>
                 <div className="flex w-full items-center gap-4">
                   <SquareCheck className="h-5 w-5 text-primary" />
-                  <p>Cancel at period end.</p>
+                  <p>Share any where, any time.</p>
                 </div>
                 <div className="flex w-full items-center gap-4">
                   <SquareCheck className="h-5 w-5 text-primary" />
-                  <p>Cancel at period end.</p>
+                  <p>Simple and easy-to-use interface</p>
                 </div>
                 <div className="flex w-full items-center gap-4">
                   <SquareCheck className="h-5 w-5 text-primary" />
-                  <p>Cancel at period end.</p>
+                  <p>Cancel subscription at period&apos;s end</p>
                 </div>
               </div>
             </CardBody>
