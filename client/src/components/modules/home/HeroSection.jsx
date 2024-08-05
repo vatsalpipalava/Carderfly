@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
 
-import { Building2, ChevronRightIcon } from "lucide-react";
+import { Building2, ChevronRightIcon, Earth } from "lucide-react";
 
 import { AspectRatio } from "@radix-ui/react-aspect-ratio";
 import { Button } from "@/components/ui/button";
@@ -138,10 +138,11 @@ export function HeroSection() {
                     </div>
                     <div className="absolute right-5 top-[25%] z-10 flex items-center gap-3 rounded-full border bg-background p-[6px]">
                       <div className="flex h-8 w-8 items-center justify-center rounded-full bg-primary sm:h-10 sm:w-10">
-                        <Building2 className="h-4 w-4 text-white sm:h-5 sm:w-5" />
+                        <Earth className="h-4 w-4 text-white sm:h-5 sm:w-5" />
                       </div>
                       <p className="mr-2 text-[14px] font-semibold sm:text-[16px]">
-                        Downloadable contact file
+                        Easy Share Globally
+
                       </p>
                     </div>
                   </div>
