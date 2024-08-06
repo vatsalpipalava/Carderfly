@@ -39,7 +39,7 @@ import {
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { ImWhatsapp } from "react-icons/im";
 
-function RichBlack({ cardData }) {
+function BusinessPrime({ cardData }) {
   const dispatch = useDispatch();
 
   const { style } = useStyle();
@@ -423,4 +423,4 @@ function RichBlack({ cardData }) {
   );
 }
 
-export default RichBlack;
+export default BusinessPrime;

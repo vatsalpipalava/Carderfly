@@ -1,48 +1,147 @@
-import SimpleThemeImg from "./assets/templates/simple.png";
-import Simple from "./Theme/Simple";
+import ProfessionalSuiteImg from "./assets/templates/simple.png";
+import CorporateEleganceImg from "./assets/templates/modern.png";
 
-import ModernThemeImg from "./assets/templates/modern.png";
-import Modern from "./Theme/Modern";
-import Standard from "./Theme/Standard";
-import RichBlack from "./Theme/RichBlack";
-import Premium from "./Theme/Premium";
-
-// import RichBlackThemeImg from "./assets/templates/richblack.png";
-// import RichblackTheme from "./themes/RichblackTheme";
-
-// import DynamicThemeImg from "./assets/templates/dynamic.png";
-// import DynamicTheme from "./themes/DynamicTheme";
+import ProfessionalSuite from "./Theme/ProfessionalSuite";
+import CorporateElegance from "./Theme/CorporateElegance";
+import ExecutiveClass from "./Theme/ExecutiveClass";
+import BusinessPrime from "./Theme/BusinessPrime";
+import ProfessionalEdge from "./Theme/ProfessionalEdge";
+import PrestigeConnect from "./Theme/PrestigeConnect";
 
 const templates = [
   {
-    id: "simple",
-    name: "Simple Theme",
-    imageUrl: SimpleThemeImg,
-    templateComponents: Simple,
+    id: "professional-suite",
+    name: "Professional Suite",
+    imageUrl: ProfessionalSuiteImg,
+    templateComponents: ProfessionalSuite,
   },
   {
-    id: "modern",
-    name: "Modern Theme",
-    imageUrl: ModernThemeImg,
-    templateComponents: Modern,
+    id: "corporate-elegance",
+    name: "Corporate Elegance",
+    imageUrl: CorporateEleganceImg,
+    templateComponents: CorporateElegance,
   },
   {
-    id: "standard",
-    name: "Standard Theme",
-    // imageUrl: ModernThemeImg,
-    templateComponents: Standard,
+    id: "executive-class",
+    name: "Executive Class",
+    templateComponents: ExecutiveClass,
   },
   {
-    id: "rich-black",
-    name: "Rich Black Theme",
-    templateComponents: RichBlack
+    id: "business-prime",
+    name: "BusinessPrime",
+    templateComponents: BusinessPrime,
   },
   {
-    id: "premium",
-    name: "Premium Theme",
-    templateComponents: Premium
-  }
-
+    id: "professional-edge",
+    name: "Professional Edge",
+    templateComponents: ProfessionalEdge,
+  },
+  {
+    id: "prestige-connect",
+    name: "Prestige Connect",
+    templateComponents: PrestigeConnect,
+  },
 ];
 
 export default templates;
+
+// import ProfessionalSuiteImg from "./assets/templates/professional-suite.png";
+// import CorporateEleganceImg from "./assets/templates/corporate-elegance.png";
+
+// import ProfessionalSuite from "./Theme/ProfessionalSuite";
+// import CorporateElegance from "./Theme/CorporateElegance";
+// import ExecutiveClass from "./Theme/ExecutiveClass";
+// import BusinessPrime from "./Theme/BusinessPrime";
+// import EliteNetworker from "./Theme/EliteNetworker";
+// import ProfessionalEdge from "./Theme/ProfessionalEdge";
+// import PrestigeConnect from "./Theme/PrestigeConnect";
+// import CorporateIdentity from "./Theme/CorporateIdentity";
+// import PrimeEssentials from "./Theme/PrimeEssentials";
+// import SignatureSeries from "./Theme/SignatureSeries";
+// import ExecutiveDesign from "./Theme/ExecutiveDesign";
+// import ProfessionalTouch from "./Theme/ProfessionalTouch";
+// import BusinessPrestige from "./Theme/BusinessPrestige";
+// import ExecutiveElite from "./Theme/ExecutiveElite";
+// import CorporateMasterpiece from "./Theme/CorporateMasterpiece";
+
+// const templates = [
+//   {
+//     id: "professional-suite",
+//     name: "Professional Suite",
+//     imageUrl: ProfessionalSuiteImg,
+//     templateComponents: ProfessionalSuite,
+//   },
+//   {
+//     id: "corporate-elegance",
+//     name: "Corporate Elegance",
+//     imageUrl: CorporateEleganceImg,
+//     templateComponents: CorporateElegance,
+//   },
+//   {
+//     id: "executive-class",
+//     name: "Executive Class",
+//     templateComponents: ExecutiveClass,
+//   },
+//   {
+//     id: "business-prime",
+//     name: "Business Prime",
+//     templateComponents: BusinessPrime,
+//   },
+//   {
+//     id: "elite-networker",
+//     name: "Elite Networker",
+//     templateComponents: EliteNetworker,
+//   },
+//   {
+//     id: "professional-edge",
+//     name: "Professional Edge",
+//     templateComponents: ProfessionalEdge,
+//   },
+//   {
+//     id: "prestige-connect",
+//     name: "Prestige Connect",
+//     templateComponents: PrestigeConnect,
+//   },
+//   {
+//     id: "corporate-identity",
+//     name: "Corporate Identity",
+//     templateComponents: CorporateIdentity,
+//   },
+//   {
+//     id: "prime-essentials",
+//     name: "Prime Essentials",
+//     templateComponents: PrimeEssentials,
+//   },
+//   {
+//     id: "signature-series",
+//     name: "Signature Series",
+//     templateComponents: SignatureSeries,
+//   },
+//   {
+//     id: "executive-design",
+//     name: "Executive Design",
+//     templateComponents: ExecutiveDesign,
+//   },
+//   {
+//     id: "professional-touch",
+//     name: "Professional Touch",
+//     templateComponents: ProfessionalTouch,
+//   },
+//   {
+//     id: "business-prestige",
+//     name: "Business Prestige",
+//     templateComponents: BusinessPrestige,
+//   },
+//   {
+//     id: "executive-elite",
+//     name: "Executive Elite",
+//     templateComponents: ExecutiveElite,
+//   },
+//   {
+//     id: "corporate-masterpiece",
+//     name: "Corporate Masterpiece",
+//     templateComponents: CorporateMasterpiece,
+//   },
+// ];
+
+// export default templates;

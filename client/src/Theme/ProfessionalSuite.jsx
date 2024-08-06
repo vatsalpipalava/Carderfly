@@ -3,22 +3,21 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 
-import { MdLocationOn, MdEmail } from "react-icons/md";
-import { IoCallSharp, IoEarth, IoShare } from "react-icons/io5";
+import { MdLocationOn, MdOutlineQrCode2, MdEmail } from "react-icons/md";
+import { IoCallSharp, IoEarth } from "react-icons/io5";
+import { ImShare2 } from "react-icons/im";
 import { RiWhatsappFill } from "react-icons/ri";
-import { HiMiniPlusCircle } from "react-icons/hi2";
-
-import { QrCode } from "lucide-react";
+import { FiPlus } from "react-icons/fi";
 
 import { Button } from "@/components/ui/button";
-import { ScrollArea } from "@/components/ui/scroll-area";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
+import { ScrollArea } from "@/components/ui/scroll-area";
 // import { Separator } from "@/components/ui/separator";
 
 import useStyle from "@/hooks/useStyle";
 import { PrimaryActionTemplate } from "@/components/modules/templateComponents/PrimaryActionTemplate";
-import { FeatureContentTemplate } from "@/components/modules/templateComponents/FeatureContentTemplate";
 import { SecondaryActionTemplate } from "@/components/modules/templateComponents/SecondaryActionTemplate";
+import { FeatureContentTemplate } from "@/components/modules/templateComponents/FeatureContentTemplate";
 import { QrCodeDrawerTemplate } from "@/components/modules/templateComponents/QrCodeDrawerTemplate";
 import { HandleShareTemplate } from "@/components/modules/templateComponents/HandleShareTemplate";
 import { DownloadVcfTemplate } from "@/components/modules/templateComponents/DownloadVcfTemplate";
@@ -39,7 +38,7 @@ import {
   reQrCode,
 } from "@/slices/cardSlice";
 
-function Modern({ cardData }) {
+function ProfessionalSuite({ cardData }) {
   const dispatch = useDispatch();
 
   const { style } = useStyle();
@@ -63,21 +62,22 @@ function Modern({ cardData }) {
   );
 
   useEffect(() => {
-    dispatch(reButtonBg("#004170"));
-    dispatch(reBackground("#F9F9F9"));
+    dispatch(reButtonBg("#DC2626"));
+    dispatch(reBackground("#FFFFFF"));
     dispatch(reText("#000000"));
     dispatch(reButtonText("#FFFFFF"));
-    dispatch(reCardBg("#0294FF"));
-    dispatch(reCardText("#FFFFFF"));
+    dispatch(reCardBg("#F1F1F1"));
+    dispatch(reCardText("#000000"));
     // dispatch(reCardSeparator("#E5E5E5"));
-    dispatch(reCardIcon("#FFFFFF"));
+    dispatch(reCardIcon("#000000"));
     dispatch(reFeatureText("#000000"));
     dispatch(reFeatureSeparator("#E5E5E5"));
-    dispatch(reFooterBg("#0294ff"));
-    dispatch(reFooterIcon("#FFFFFF"));
+    dispatch(reFooterBg("#4E4E4E"));
+    dispatch(reFooterIcon("#E1E1E1"));
     dispatch(reQrCode("#4E4E4E"));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
   return (
     <div
       className={`relative mx-auto flex h-full max-w-[500px] flex-col overflow-hidden ${style.mobileRadius}`}
@@ -93,7 +93,7 @@ function Modern({ cardData }) {
             alt="Image"
             className="aspect-[13/6] object-cover"
           />
-          <div className="absolute bottom-0 left-4 translate-y-1/2 transform">
+          <div className="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2 transform">
             <img
               src={cardData?.profileImg}
               alt="profile"
@@ -101,22 +101,22 @@ function Modern({ cardData }) {
             />
           </div>
         </div>
-        <div className="w-full p-4">
+        <div className="w-full p-6">
           <div className="w-full">
-            <h3 className="mb-1 scroll-m-20 text-2xl font-semibold tracking-tight">
+            <h3 className="mb-1 scroll-m-20 text-center text-2xl font-semibold tracking-tight">
               {cardData?.firstName} {cardData?.lastName}
             </h3>
-            <p className="mb-1 italic">{cardData?.jobTitle}</p>
-            <div className="mb-1 text-lg font-semibold">
+            <p className="mb-1 text-center italic">{cardData?.jobTitle}</p>
+            <div className="mb-1 text-center text-lg font-semibold">
               {cardData?.businessName}
             </div>
-            <p className="mb-6 text-sm text-muted-foreground">
+            <p className="mb-6 text-center text-sm">
               {cardData?.businessDescription}
             </p>
           </div>
 
           {/* Primary Action */}
-          <div className="mb-8 flex w-full flex-wrap justify-start gap-4">
+          <div className="mb-8 flex w-full flex-wrap justify-center gap-6">
             <PrimaryActionTemplate
               primaryActions={cardData?.primaryActions}
               propButtonBg={cardData?.colors?.buttonBg}
@@ -124,27 +124,27 @@ function Modern({ cardData }) {
             />
           </div>
 
-          {/* Contact Card */}
           <Card
-            className="mb-8 flex w-full border-none shadow-[0_8px_30px_rgba(0,0,0,0.1)]"
+            className="mb-6 border-none shadow-lg"
             style={{
+              backgroundColor: cardData?.colors?.cardBg,
               color: cardData?.colors?.cardText,
             }}
           >
-            <CardHeader className="flex w-[35%] items-center justify-center bg-white p-1">
+            <CardHeader className="flex items-center justify-center bg-transparent pb-4">
               <img
                 src={cardData?.logoImg}
                 alt="logo"
-                className="h-auto max-w-[100%] object-cover"
+                className="h-auto max-w-[70%] rounded-md bg-transparent object-cover"
               />
             </CardHeader>
-            <CardContent
-              className="w-[65%] rounded-r-lg px-2 py-6"
-              style={{
-                backgroundColor: cardData?.colors?.cardBg,
-              }}
-            >
-              <div className="flex w-full items-center gap-2">
+
+            <CardContent>
+              {/* <Separator
+                style={{ backgroundColor: cardData?.colors?.cardSeparator }}
+                className="my-3"
+              /> */}
+              <div className="mt-3 flex w-full items-center gap-4">
                 <MdLocationOn
                   className="h-5 w-5"
                   style={{ color: cardData?.colors?.cardIcon }}
@@ -152,7 +152,11 @@ function Modern({ cardData }) {
                 <p className="w-full">{cardData?.businessAddress}</p>
               </div>
 
-              <div className="mt-3 flex w-full items-center gap-2">
+              {/* <Separator
+                style={{ backgroundColor: cardData?.colors?.cardSeparator }}
+                className="my-3"
+              /> */}
+              <div className="mt-3 flex w-full items-center gap-4">
                 <IoCallSharp
                   className="h-5 w-5"
                   style={{ color: cardData?.colors?.cardIcon }}
@@ -160,7 +164,11 @@ function Modern({ cardData }) {
                 <p className="w-full">{mobile?.value}</p>
               </div>
 
-              <div className="mt-3 flex w-full items-center gap-2">
+              {/* <Separator
+                style={{ backgroundColor: cardData?.colors?.cardSeparator }}
+                className="my-3"
+              /> */}
+              <div className="mt-3 flex w-full items-center gap-4">
                 <MdEmail
                   className="h-5 w-5"
                   style={{ color: cardData?.colors?.cardIcon }}
@@ -174,7 +182,7 @@ function Modern({ cardData }) {
                     style={{ backgroundColor: cardData?.colors?.cardSeparator }}
                     className="my-3"
                   /> */}
-                  <div className="mt-3 flex w-full items-center gap-2">
+                  <div className="mt-3 flex w-full items-center gap-4">
                     <IoEarth
                       className="h-5 w-5"
                       style={{ color: cardData?.colors?.cardIcon }}
@@ -187,7 +195,7 @@ function Modern({ cardData }) {
           </Card>
 
           {/* Secondary Actions */}
-          <div className="mb-8 flex w-full flex-wrap justify-start gap-4">
+          <div className="mb-8 flex w-full flex-wrap justify-center gap-6">
             <SecondaryActionTemplate
               secondaryActions={cardData?.secondaryActions}
             />
@@ -203,7 +211,7 @@ function Modern({ cardData }) {
             />
           </div>
 
-          <div className="mb-11">
+          <div className="mb-4">
             <p
               className="text-center text-sm text-muted-foreground"
               style={{ color: cardData?.colors?.text }}
@@ -226,7 +234,7 @@ function Modern({ cardData }) {
 
       {/* Footer */}
       <footer
-        className="absolute bottom-4 left-0 right-0 z-50 mx-auto h-12 max-w-[92%] rounded-lg py-2"
+        className="absolute bottom-3 left-0 right-0 z-50 mx-auto max-w-[90%] rounded-full py-2"
         style={{ backgroundColor: cardData?.colors?.footerBg }}
       >
         <div className="mx-auto grid h-full w-full grid-cols-5">
@@ -270,36 +278,30 @@ function Modern({ cardData }) {
             </button>
           )}
 
-          <button
-            onClick={() =>
-              DownloadVcfTemplate(cardData?._id, cardData?.publicLink)
-            }
-            type="button"
-            className="relative inline-flex flex-grow flex-col items-center px-6 py-3"
-          >
-            <div
-              className="absolute bottom-1 rounded-full border-4 p-3"
-              style={{
-                backgroundColor: cardData?.colors?.buttonBg,
-                borderColor: cardData?.colors?.background,
-              }}
+          <div className="flex items-center justify-center">
+            <button
+              type="button"
+              onClick={() =>
+                DownloadVcfTemplate(cardData?._id, cardData?.publicLink)
+              }
+              className="group inline-flex h-10 w-10 items-center justify-center rounded-full"
+              style={{ backgroundColor: cardData?.colors?.buttonBg }}
             >
-              <HiMiniPlusCircle
-                className="h-8 w-8"
+              <FiPlus
+                className="h-6 w-6"
                 style={{ color: cardData?.colors?.buttonText }}
               />
-            </div>
-            <span className="sr-only">VCF</span>
-          </button>
+            </button>
+          </div>
 
-          {/* QR Code */}
+          {/* Qr Code Drawer */}
           <button
             type="button"
             onClick={handleOpenQrDrawer}
             className="group inline-flex flex-col items-center justify-center rounded-s-full px-5"
           >
             {/* <QrCode className="h-6 w-6" /> style={{color: cardData?.colors?.footerIcon}} */}
-            <QrCode
+            <MdOutlineQrCode2
               className="h-6 w-6"
               style={{ color: cardData?.colors?.footerIcon }}
             />
@@ -316,14 +318,13 @@ function Modern({ cardData }) {
             qrCodeProp={cardData?.colors?.qrCode}
           />
 
-          {/* Share */}
           <button
             onClick={() => HandleShareTemplate(cardData?.publicLink)}
             type="button"
             className="group inline-flex flex-col items-center justify-center rounded-e-full px-5"
           >
-            <IoShare
-              className="h-6 w-6"
+            <ImShare2
+              className="mb-1 h-5 w-5"
               style={{ color: cardData?.colors?.footerIcon }}
             />
           </button>
@@ -333,4 +334,4 @@ function Modern({ cardData }) {
   );
 }
 
-export default Modern;
+export default ProfessionalSuite;

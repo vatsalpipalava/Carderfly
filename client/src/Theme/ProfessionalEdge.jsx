@@ -3,8 +3,6 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 
-import { MdLocationOn, MdEmail } from "react-icons/md";
-import { IoCallSharp, IoEarth } from "react-icons/io5";
 import { QrCode, Share } from "lucide-react";
 import Phone from "@/assets/svgs/phone";
 import Whatsapp from "@/assets/svgs/whatsapp";
@@ -42,7 +40,7 @@ import Location from "@/assets/svgs/location";
 import Mail from "@/assets/svgs/mail";
 import Website from "@/assets/svgs/website";
 
-function Premium({ cardData }) {
+function ProfessionalEdge({ cardData }) {
   const dispatch = useDispatch();
 
   const { style } = useStyle();
@@ -86,6 +84,7 @@ function Premium({ cardData }) {
     dispatch(reQrCode("#4E4E4E"));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
   return (
     <div
       className={`relative mx-auto flex h-full max-w-[500px] flex-col overflow-hidden ${style.mobileRadius} z-50`}
@@ -144,7 +143,7 @@ function Premium({ cardData }) {
             />
           </div>
 
-          <div className="mt-6 flex w-full flex-col gap-[10px]">
+          <div className="mt-6 flex w-full flex-col gap-[10px] no-underline">
             <div
               className="flex w-full items-center gap-[10px] rounded-[10px] p-4 shadow-lg"
               style={{
@@ -166,10 +165,7 @@ function Premium({ cardData }) {
                 color: cardData?.colors?.cardText,
               }}
             >
-              <Phone
-                className="h-6 w-6"
-                color={cardData?.colors?.cardIcon}
-              />
+              <Phone className="h-6 w-6" color={cardData?.colors?.cardIcon} />
               <p className="w-full">{mobile?.value}</p>
             </div>
 
@@ -180,10 +176,7 @@ function Premium({ cardData }) {
                 color: cardData?.colors?.cardText,
               }}
             >
-              <Mail
-                className="h-6 w-6"
-                color={cardData?.colors?.cardIcon}
-              />
+              <Mail className="h-6 w-6" color={cardData?.colors?.cardIcon} />
               <p className="w-full">{email?.value}</p>
             </div>
 
@@ -222,7 +215,7 @@ function Premium({ cardData }) {
           />
         </div>
 
-        <div className="mb-4">
+        <div className="mb-20">
           <p
             className="text-center text-sm text-muted-foreground"
             style={{ color: cardData?.colors?.text }}
@@ -254,10 +247,7 @@ function Premium({ cardData }) {
               to={`tel:${mobile.value}`}
               className="inline-flex flex-col items-center justify-center"
             >
-              <Phone
-                className="h-6 w-6"
-                color={cardData?.colors?.footerIcon}
-              />
+              <Phone className="h-6 w-6" color={cardData?.colors?.footerIcon} />
             </Link>
           ) : (
             <button className="inline-flex flex-col items-center justify-center">
@@ -331,7 +321,7 @@ function Premium({ cardData }) {
             logoImgProp={cardData?.logoImg}
             backgroundProp={cardData?.colors?.background}
             buttonBgProp={cardData?.colors?.buttonBg}
-            buttonTextProp={cardData?.colors?.buttonText}
+            buttonTextProp={cardData?.colors?.buttonText / 100}
             textProp={cardData?.colors?.text}
             qrCodeProp={cardData?.colors?.qrCode}
           />
@@ -352,4 +342,4 @@ function Premium({ cardData }) {
   );
 }
 
-export default Premium;
+export default ProfessionalEdge;

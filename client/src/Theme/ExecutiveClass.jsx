@@ -43,7 +43,7 @@ import {
   reQrCode,
 } from "@/slices/cardSlice";
 
-function Standard({ cardData }) {
+function ExecutiveClass({ cardData }) {
   const dispatch = useDispatch();
   const { style } = useStyle();
 
@@ -216,7 +216,7 @@ function Standard({ cardData }) {
 
       {/* Footer */}
       <footer
-        className="absolute bottom-0 left-0 right-0 z-50 rounded-t-xl flex items-center justify-around px-4 py-3 shadow-lg"
+        className="absolute bottom-0 left-0 right-0 z-50 flex items-center justify-around rounded-t-xl px-4 py-3 shadow-lg"
         style={{ backgroundColor: cardData?.colors?.footerBg }}
       >
         {mobile && mobile?.value ? (
@@ -422,4 +422,4 @@ function Standard({ cardData }) {
   );
 }
 
-export default Standard;
+export default ExecutiveClass;
