@@ -87,7 +87,7 @@ function ProfessionalEdge({ cardData }) {
 
   return (
     <div
-      className={`relative mx-auto flex h-full max-w-[500px] flex-col overflow-hidden ${style.mobileRadius} z-50`}
+      className={`relative mx-auto flex h-full max-w-[500px] flex-col overflow-hidden ${style.mobileRadius} font-open z-50`}
       style={{
         backgroundColor: cardData?.colors?.background,
         color: cardData?.colors?.text,

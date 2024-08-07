@@ -86,14 +86,14 @@ function PrestigeConnect({ cardData }) {
     dispatch(reFeatureText("#FFFFFF"));
     dispatch(reFeatureSeparator("#E5E5E5"));
     dispatch(reFooterBg("#FFFFFF"));
-    dispatch(reFooterIcon("#494949"));
+    dispatch(reFooterIcon("#000000"));
     dispatch(reQrCode("#2AA9A9"));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
     <div
-      className={`relative mx-auto flex h-full max-w-[500px] flex-col overflow-hidden ${style.mobileRadius} z-50`}
+      className={`relative mx-auto flex h-full max-w-[500px] flex-col overflow-hidden ${style.mobileRadius} z-50 font-montserrat`}
       style={{
         backgroundColor: cardData?.colors?.background,
         color: cardData?.colors?.text,

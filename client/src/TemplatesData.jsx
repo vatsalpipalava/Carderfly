@@ -1,5 +1,7 @@
-import ProfessionalSuiteImg from "./assets/templates/simple.png";
-import CorporateEleganceImg from "./assets/templates/modern.png";
+import ProfessionalSuiteImg from "@/assets/templates/simple.png";
+import CorporateEleganceImg from "@/assets/templates/modern.png";
+import ProfessionalEdgeImg from "@/assets/templates/professional-edge.png";
+import PrestigeConnectImg from "@/assets/templates/prestige-connect.png";
 
 import ProfessionalSuite from "./Theme/ProfessionalSuite";
 import CorporateElegance from "./Theme/CorporateElegance";
@@ -7,6 +9,7 @@ import ExecutiveClass from "./Theme/ExecutiveClass";
 import BusinessPrime from "./Theme/BusinessPrime";
 import ProfessionalEdge from "./Theme/ProfessionalEdge";
 import PrestigeConnect from "./Theme/PrestigeConnect";
+import EliteNetworker from "./Theme/EliteNetworker";
 
 const templates = [
   {
@@ -34,12 +37,19 @@ const templates = [
   {
     id: "professional-edge",
     name: "Professional Edge",
+    imageUrl: ProfessionalEdgeImg,
     templateComponents: ProfessionalEdge,
   },
   {
     id: "prestige-connect",
     name: "Prestige Connect",
+    imageUrl: PrestigeConnectImg,
     templateComponents: PrestigeConnect,
+  },
+  {
+    id: "elite-networker",
+    name: "Elite Networker",
+    templateComponents: EliteNetworker,
   },
 ];
 
@@ -87,11 +97,11 @@ export default templates;
 //     name: "Business Prime",
 //     templateComponents: BusinessPrime,
 //   },
-//   {
-//     id: "elite-networker",
-//     name: "Elite Networker",
-//     templateComponents: EliteNetworker,
-//   },
+// {
+//   id: "elite-networker",
+//   name: "Elite Networker",
+//   templateComponents: EliteNetworker,
+// },
 //   {
 //     id: "professional-edge",
 //     name: "Professional Edge",

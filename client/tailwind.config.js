@@ -1,11 +1,12 @@
 /** @type {import('tailwindcss').Config} */
+
 module.exports = {
   darkMode: ["class"],
   content: [
-    './pages/**/*.{js,jsx}',
-    './components/**/*.{js,jsx}',
-    './app/**/*.{js,jsx}',
-    './src/**/*.{js,jsx}',
+    "./pages/**/*.{js,jsx}",
+    "./components/**/*.{js,jsx}",
+    "./app/**/*.{js,jsx}",
+    "./src/**/*.{js,jsx}",
   ],
   prefix: "",
   theme: {
@@ -17,6 +18,17 @@ module.exports = {
       },
     },
     extend: {
+      boxShadow: {
+        "inner-custom": "2px 2px 4px rgba(0, 0, 0, 0.25) inset",
+      },
+      fontSize: {
+        md: "16px",
+      },
+      fontFamily: {
+        laila: ["Laila", "sans-serif"],
+        montserrat: ["Montserrat", "sans-serif"],
+        open: ["Open Sans", "sans-serif"],
+      },
       colors: {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
@@ -74,4 +86,4 @@ module.exports = {
     },
   },
   plugins: [require("tailwindcss-animate")],
-}
+};

@@ -10,12 +10,7 @@ import {
   BreadcrumbPage,
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
-import {
-  Card,
-  CardContent,
-  CardHeader,
-} from "@/components/ui/card";
-// import { Progress } from "@/components/ui/progress";
+import { Card, CardContent, CardFooter } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 
 import useStyle from "@/hooks/useStyle";
@@ -23,6 +18,11 @@ import templates from "@/TemplatesData";
 import SheetDashboard from "@/components/modules/navbar/sheetDashboard";
 import LogoutDropdown from "@/components/modules/navbar/logoutDropdown";
 import { Helmet } from "react-helmet";
+
+import { ScrollArea } from "@/components/ui/scroll-area";
+import { Button } from "@/components/ui/button";
+import { motion } from "framer-motion";
+import { ChevronRightIcon } from "lucide-react";
 
 function CreateCard() {
   const { setStyle } = useStyle();
@@ -39,7 +39,7 @@ function CreateCard() {
 
   return (
     <>
-    <Helmet>
+      <Helmet>
         <title>Select Template</title>
       </Helmet>
       <header className="sticky top-0 z-30 flex h-14 items-center gap-4 border-b bg-background px-4 py-3 sm:h-auto">
@@ -68,65 +68,51 @@ function CreateCard() {
         <div className="p-4 sm:p-6 sm:px-6">
           <Separator />
         </div>
-        <main className="grid flex-1 grid-cols-1 items-start gap-4 p-4 sm:grid-cols-2 sm:px-6 sm:py-0 md:gap-8 lg:grid-cols-3">
+        <main className="mb-6 grid flex-1 grid-cols-1 items-start gap-4 p-4 sm:grid-cols-2 sm:px-6 sm:py-0 md:gap-8 lg:grid-cols-3">
           {templates.map((template) => (
-            // <Card x-chunk="dashboard-05-chunk-1" key={template.id}>
-            //   <CardHeader className="pb-2">
-            //     <CardDescription>This Week</CardDescription>
-            //     <CardTitle>{template.name}</CardTitle>
-            //   </CardHeader>
-            //   <CardContent>
-            //     <img
-            //       src={template.imageUrl}
-            //       alt={template.name}
-            //       className="h-96 w-full object-cover"
-            //     />
-            //   </CardContent>
-            //   <Separator />
-            //   <CardFooter>
-            //     <div className="mt-4 h-full w-full">
-            //       <Link
-            //         to={`/dashboard/create-card/${template.id}/enter-details`}
-            //       >
-            //         <Button
-            //           variant="outline"
-            //           size="icon"
-            //           className="h-11 w-11 rounded-full"
-            //         >
-            //           <IoMdCreate className="h-5 w-5" />
-            //         </Button>
-            //       </Link>
-            //     </div>
-            //   </CardFooter>
-            // </Card>
-            <Link
+            <Card
               key={template.id}
-              to={`/dashboard/create-card/${template.id}/enter-details`}
+              className="rounded-xl shadow-md hover:shadow-xl"
             >
-              <Card className="group w-full cursor-pointer rounded-3xl border-4 border-transparent bg-transparent p-1 hover:border-primary">
-                <CardContent className="relative overflow-hidden p-0">
+              <CardContent className="p-0">
+                <ScrollArea className="h-96 w-auto rounded-t-xl border-none">
                   <img
                     src={template.imageUrl}
                     alt={template.name}
-                    className="h-full w-full rounded-2xl object-cover transition-all duration-1000"
+                    className="h-full w-full object-cover"
                   />
-                  <div className="absolute inset-0 flex items-end rounded-2xl bg-gradient-to-t from-black/30 to-transparent p-4 opacity-0 transition-opacity group-hover:opacity-100">
-                    <CardHeader className="p-0 text-lg font-semibold text-white">
-                      {template.name}
-                    </CardHeader>
-                  </div>
-                </CardContent>
-              </Card>
-            </Link>
+                </ScrollArea>
+              </CardContent>
+              <CardFooter className="flex items-center justify-between rounded-b-xl bg-muted p-4">
+                <p className="text-lg font-semibold">{template.name}</p>
+                <Button asChild variant="link">
+                  <Link
+                    to={`/dashboard/create-card/${template.id}/enter-details`}
+                  >
+                    <motion.button
+                      className="relative flex w-auto cursor-pointer items-center justify-center rounded-full border-none bg-transparent p-0"
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      exit={{ opacity: 0 }}
+                    >
+                      <motion.span
+                        key="reaction"
+                        className="relative block font-semibold"
+                        initial={{ x: 0 }}
+                        exit={{ x: 50, transition: { duration: 0.1 } }}
+                      >
+                        <span className="group inline-flex items-center">
+                          Create{" "}
+                          <ChevronRightIcon className="ml-1 h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
+                        </span>
+                      </motion.span>
+                    </motion.button>
+                  </Link>
+                </Button>
+              </CardFooter>
+            </Card>
           ))}
         </main>
-
-        {/* <footer className="fixed bottom-0 right-0 ml-14 w-full bg-muted">
-        <div className="ml-0 flex justify-between p-4 sm:ml-14 sm:px-6">
-          <Button>Previous</Button>
-          <Button>Next</Button>
-        </div>
-      </footer> */}
       </div>
     </>
   );

@@ -25,8 +25,7 @@
   background-color: #000000 !important;
 }
 
-/* Add this to your CSS file or within a <style> tag in your component */
-
+/* parallax-scroll */
 .parallax-container {
   position: relative;
 }
@@ -46,7 +45,7 @@
   z-index: 1;
 }
 
-/* From Uiverse.io by joe-watson-sbf */ 
+/* Flip Card */
 .flip-card {
   background-color: transparent;
   width: 100%;
@@ -71,14 +70,12 @@
   transform-style: preserve-3d;
 }
 
-/* .flip-card:hover .flip-card-inner {
-  transform: rotateY(180deg);
-} */
 .flip {
   transform: rotateY(180deg);
 }
 
-.flip-card-front, .flip-card-back {
+.flip-card-front,
+.flip-card-back {
   position: absolute;
   display: flex;
   flex-direction: column;
@@ -92,8 +89,3 @@
 .flip-card-back {
   transform: rotateY(180deg);
 }
-
-
-
-
-

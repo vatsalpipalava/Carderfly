@@ -252,7 +252,7 @@ function ProfessionalSuite({ cardData }) {
           ) : (
             <button className="inline-flex flex-col items-center justify-center px-5">
               <IoCallSharp
-                className="h-6 w-6 text-gray-500"
+                className="h-6 w-6"
                 style={{ color: cardData?.colors?.footerIcon }}
               />
             </button>
