@@ -26,25 +26,25 @@ export function Navbar() {
           </Link>
           <Link
             to="/"
-            className="ml-6 text-[16px] text-muted-foreground transition-colors hover:text-foreground"
+            className="ml-6 text-base text-muted-foreground transition-colors hover:text-foreground"
           >
             Home
           </Link>
           <Link
             to="/#how-it-works"
-            className="text-[16px] text-muted-foreground transition-colors hover:text-foreground"
+            className="text-base text-muted-foreground transition-colors hover:text-foreground"
           >
             How it works
           </Link>
           <Link
             to="/#feature"
-            className="text-[16px] text-muted-foreground transition-colors hover:text-foreground"
+            className="text-base text-muted-foreground transition-colors hover:text-foreground"
           >
             Feature
           </Link>
           <Link
             to="/#pricing"
-            className="text-[16px] text-muted-foreground transition-colors hover:text-foreground"
+            className="text-base text-muted-foreground transition-colors hover:text-foreground"
           >
             Pricing
           </Link>
@@ -126,13 +126,13 @@ export function Navbar() {
           ) : (
             <>
               <div className="ml-auto hidden flex-initial md:block">
-                <Button asChild variant="ghost" className="text-[16px]">
+                <Button asChild variant="ghost" className="text-base">
                   <Link to="/login">Login</Link>
                 </Button>
               </div>
               <Button
                 asChild
-                className="ml-auto rounded-full px-6 text-[16px] md:ml-0"
+                className="ml-auto rounded-full px-6 text-base md:ml-0"
               >
                 <Link to="/register">Sign up</Link>
               </Button>

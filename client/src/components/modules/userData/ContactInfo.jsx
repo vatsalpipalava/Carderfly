@@ -134,7 +134,7 @@ export function ContactInfo() {
             />
           </div>
           <div className="h-full w-full">
-            <h5 className="text-md font-bold">Add Logo</h5>
+            <h5 className="text-base font-bold">Add Logo</h5>
             <p className="text-sm">Suggested format: svg, png, jpg</p>
           </div>
         </div>

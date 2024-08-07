@@ -157,7 +157,7 @@ export function SecondaryAction() {
               );
             })}
         </div> */}
-        <Accordion type="single" collapsible defaultValue="item-1">
+        <Accordion type="single" collapsible>
           <AccordionItem value="item-1" className="border-none">
             <AccordionTrigger className="px-6 hover:bg-muted hover:no-underline">
               Actions

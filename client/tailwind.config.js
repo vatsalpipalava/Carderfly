@@ -21,13 +21,12 @@ module.exports = {
       boxShadow: {
         "inner-custom": "2px 2px 4px rgba(0, 0, 0, 0.25) inset",
       },
-      fontSize: {
-        md: "16px",
-      },
       fontFamily: {
         laila: ["Laila", "sans-serif"],
         montserrat: ["Montserrat", "sans-serif"],
         open: ["Open Sans", "sans-serif"],
+        mulish: ["Mulish", "sans-serif"],
+        nobile: ["Nobile", "sans-serif"],
       },
       colors: {
         border: "hsl(var(--border))",

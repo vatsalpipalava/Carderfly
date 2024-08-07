@@ -52,7 +52,7 @@ export function Footer() {
             <Button
               asChild
               variant="link"
-              className="text-md h-auto px-0 py-0 font-normal text-white hover:font-medium hover:text-primary sm:px-4"
+              className="text-base h-auto px-0 py-0 font-normal text-white hover:font-medium hover:text-primary sm:px-4"
             >
               <Link to="/">Home</Link>
             </Button>
@@ -60,7 +60,7 @@ export function Footer() {
             <Button
               asChild
               variant="link"
-              className="text-md h-auto px-0 py-0 font-normal text-white hover:font-medium hover:text-primary sm:px-4"
+              className="text-base h-auto px-0 py-0 font-normal text-white hover:font-medium hover:text-primary sm:px-4"
             >
               <Link to="/#how-it-works">How it works</Link>
             </Button>
@@ -68,7 +68,7 @@ export function Footer() {
             <Button
               asChild
               variant="link"
-              className="text-md h-auto px-0 py-0 font-normal text-white hover:font-medium hover:text-primary sm:px-4"
+              className="text-base h-auto px-0 py-0 font-normal text-white hover:font-medium hover:text-primary sm:px-4"
             >
               <Link to="/#feature">Feature</Link>
             </Button>
@@ -76,7 +76,7 @@ export function Footer() {
             <Button
               asChild
               variant="link"
-              className="text-md h-auto px-0 py-0 font-normal text-white hover:font-medium hover:text-primary sm:px-4"
+              className="text-base h-auto px-0 py-0 font-normal text-white hover:font-medium hover:text-primary sm:px-4"
             >
               <Link to="/#pricing">Pricing</Link>
             </Button>
@@ -86,7 +86,7 @@ export function Footer() {
             <Button
               asChild
               variant="link"
-              className="text-md h-auto px-0 py-0 font-normal text-white hover:font-medium hover:text-primary sm:px-4"
+              className="text-base h-auto px-0 py-0 font-normal text-white hover:font-medium hover:text-primary sm:px-4"
             >
               <Link to="/terms-of-service">Terms and condition</Link>
             </Button>
@@ -94,7 +94,7 @@ export function Footer() {
             <Button
               asChild
               variant="link"
-              className="text-md h-auto px-0 py-0 font-normal text-white hover:font-medium hover:text-primary sm:px-4"
+              className="text-base h-auto px-0 py-0 font-normal text-white hover:font-medium hover:text-primary sm:px-4"
             >
               <Link to="/">Privacy policy</Link>
             </Button>

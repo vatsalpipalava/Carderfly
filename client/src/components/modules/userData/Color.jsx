@@ -213,7 +213,7 @@ export function Color() {
                 className="h-8 w-12 border-2 border-foreground rounded-sm shadow-[0px_0px_2px_#808080]"
                 style={{ backgroundColor: colors.buttonBg }}
               ></Button>
-              <p className="text-md font-semibold">Button Background</p>
+              <p className="text-base font-semibold">Button Background</p>
             </div>
             {displayButtonBg ? (
               <div className="absolute z-20 -mt-[21rem]">
@@ -239,7 +239,7 @@ export function Color() {
                 className="h-8 w-12 border-2 border-foreground rounded-sm shadow-[0px_0px_2px_#808080]"
                 style={{ backgroundColor: colors.background }}
               ></Button>
-              <p className="text-md font-semibold">Background</p>
+              <p className="text-base font-semibold">Background</p>
             </div>
             {displayBackground ? (
               <div className="absolute z-20 -mt-[21rem]">
@@ -265,7 +265,7 @@ export function Color() {
                 className="h-8 w-12 border-2 border-foreground rounded-sm shadow-[0px_0px_2px_#808080]"
                 style={{ backgroundColor: colors.text }}
               ></Button>
-              <p className="text-md font-semibold">Text</p>
+              <p className="text-base font-semibold">Text</p>
             </div>
             {displayText ? (
               <div className="absolute z-20 -mt-[21rem]">
@@ -291,7 +291,7 @@ export function Color() {
                 className="h-8 w-12 border-2 border-foreground rounded-sm shadow-[0px_0px_2px_#808080]"
                 style={{ backgroundColor: colors.buttonText }}
               ></Button>
-              <p className="text-md font-semibold">Button Text</p>
+              <p className="text-base font-semibold">Button Text</p>
             </div>
             {displayButtonText ? (
               <div className="absolute z-20 -mt-[21rem]">
@@ -317,7 +317,7 @@ export function Color() {
                 className="h-8 w-12 border-2 border-foreground rounded-sm shadow-[0px_0px_2px_#808080]"
                 style={{ backgroundColor: colors.cardBg }}
               ></Button>
-              <p className="text-md font-semibold">Card Background</p>
+              <p className="text-base font-semibold">Card Background</p>
             </div>
             {displayCardBg ? (
               <div className="absolute z-20 -mt-[21rem]">
@@ -343,7 +343,7 @@ export function Color() {
                 className="h-8 w-12 border-2 border-foreground rounded-sm shadow-[0px_0px_2px_#808080]"
                 style={{ backgroundColor: colors.cardText }}
               ></Button>
-              <p className="text-md font-semibold">Card Text</p>
+              <p className="text-base font-semibold">Card Text</p>
             </div>
             {displayCardText ? (
               <div className="absolute z-20 -mt-[21rem]">
@@ -369,7 +369,7 @@ export function Color() {
                 className="h-8 w-12 border-2 border-foreground rounded-sm shadow-[0px_0px_2px_#808080]"
                 style={{ backgroundColor: colors.cardSeparator }}
               ></Button>
-              <p className="text-md font-semibold">Card Separator</p>
+              <p className="text-base font-semibold">Card Separator</p>
             </div>
             {displayCardSeparator ? (
               <div className="absolute z-20 -mt-[21rem]">
@@ -395,7 +395,7 @@ export function Color() {
                 className="h-8 w-12 border-2 border-foreground rounded-sm shadow-[0px_0px_2px_#808080]"
                 style={{ backgroundColor: colors.cardIcon }}
               ></Button>
-              <p className="text-md font-semibold">Card Icon</p>
+              <p className="text-base font-semibold">Card Icon</p>
             </div>
             {displayCardIcon ? (
               <div className="absolute z-20 -mt-[21rem]">
@@ -421,7 +421,7 @@ export function Color() {
                 className="h-8 w-12 border-2 border-foreground rounded-sm shadow-[0px_0px_2px_#808080]"
                 style={{ backgroundColor: colors.featureText }}
               ></Button>
-              <p className="text-md font-semibold">Feature Text</p>
+              <p className="text-base font-semibold">Feature Text</p>
             </div>
             {displayFeatureText ? (
               <div className="absolute z-20 -mt-[21rem]">
@@ -447,7 +447,7 @@ export function Color() {
                 className="h-8 w-12 border-2 border-foreground rounded-sm shadow-[0px_0px_2px_#808080]"
                 style={{ backgroundColor: colors.featureSeparator }}
               ></Button>
-              <p className="text-md font-semibold">Feature Separator</p>
+              <p className="text-base font-semibold">Feature Separator</p>
             </div>
             {displayFeatureSeparator ? (
               <div className="absolute z-20 -mt-[21rem]">
@@ -473,7 +473,7 @@ export function Color() {
                 className="h-8 w-12 border-2 border-foreground rounded-sm shadow-[0px_0px_2px_#808080]"
                 style={{ backgroundColor: colors.footerBg }}
               ></Button>
-              <p className="text-md font-semibold">Footer Background</p>
+              <p className="text-base font-semibold">Footer Background</p>
             </div>
             {displayFooterBg ? (
               <div className="absolute z-20 -mt-[21rem]">
@@ -499,7 +499,7 @@ export function Color() {
                 className="h-8 w-12 border-2 border-foreground rounded-sm shadow-[0px_0px_2px_#808080]"
                 style={{ backgroundColor: colors.footerIcon }}
               ></Button>
-              <p className="text-md font-semibold">Footer Icon</p>
+              <p className="text-base font-semibold">Footer Icon</p>
             </div>
             {displayFooterIcon ? (
               <div className="absolute z-20 -mt-[21rem]">
@@ -525,7 +525,7 @@ export function Color() {
                 className="h-8 w-12 border-2 border-foreground rounded-sm shadow-[0px_0px_2px_#808080]"
                 style={{ backgroundColor: colors.qrCode }}
               ></Button>
-              <p className="text-md font-semibold">Qr Code</p>
+              <p className="text-base font-semibold">Qr Code</p>
             </div>
             {displayQrCode ? (
               <div className="absolute z-20 -mt-[21rem]">

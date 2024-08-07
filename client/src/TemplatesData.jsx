@@ -10,6 +10,7 @@ import BusinessPrime from "./Theme/BusinessPrime";
 import ProfessionalEdge from "./Theme/ProfessionalEdge";
 import PrestigeConnect from "./Theme/PrestigeConnect";
 import EliteNetworker from "./Theme/EliteNetworker";
+import CorporateIdentity from "./Theme/CorporateIdentity";
 
 const templates = [
   {
@@ -51,6 +52,11 @@ const templates = [
     name: "Elite Networker",
     templateComponents: EliteNetworker,
   },
+  {
+    id: "corporate-identity",
+    name: "Corporate Identity",
+    templateComponents: CorporateIdentity,
+  },
 ];
 
 export default templates;
@@ -58,13 +64,7 @@ export default templates;
 // import ProfessionalSuiteImg from "./assets/templates/professional-suite.png";
 // import CorporateEleganceImg from "./assets/templates/corporate-elegance.png";
 
-// import ProfessionalSuite from "./Theme/ProfessionalSuite";
-// import CorporateElegance from "./Theme/CorporateElegance";
-// import ExecutiveClass from "./Theme/ExecutiveClass";
-// import BusinessPrime from "./Theme/BusinessPrime";
-// import EliteNetworker from "./Theme/EliteNetworker";
-// import ProfessionalEdge from "./Theme/ProfessionalEdge";
-// import PrestigeConnect from "./Theme/PrestigeConnect";
+
 // import CorporateIdentity from "./Theme/CorporateIdentity";
 // import PrimeEssentials from "./Theme/PrimeEssentials";
 // import SignatureSeries from "./Theme/SignatureSeries";
@@ -75,48 +75,7 @@ export default templates;
 // import CorporateMasterpiece from "./Theme/CorporateMasterpiece";
 
 // const templates = [
-//   {
-//     id: "professional-suite",
-//     name: "Professional Suite",
-//     imageUrl: ProfessionalSuiteImg,
-//     templateComponents: ProfessionalSuite,
-//   },
-//   {
-//     id: "corporate-elegance",
-//     name: "Corporate Elegance",
-//     imageUrl: CorporateEleganceImg,
-//     templateComponents: CorporateElegance,
-//   },
-//   {
-//     id: "executive-class",
-//     name: "Executive Class",
-//     templateComponents: ExecutiveClass,
-//   },
-//   {
-//     id: "business-prime",
-//     name: "Business Prime",
-//     templateComponents: BusinessPrime,
-//   },
-// {
-//   id: "elite-networker",
-//   name: "Elite Networker",
-//   templateComponents: EliteNetworker,
-// },
-//   {
-//     id: "professional-edge",
-//     name: "Professional Edge",
-//     templateComponents: ProfessionalEdge,
-//   },
-//   {
-//     id: "prestige-connect",
-//     name: "Prestige Connect",
-//     templateComponents: PrestigeConnect,
-//   },
-//   {
-//     id: "corporate-identity",
-//     name: "Corporate Identity",
-//     templateComponents: CorporateIdentity,
-//   },
+
 //   {
 //     id: "prime-essentials",
 //     name: "Prime Essentials",

@@ -147,7 +147,7 @@ function EliteNetworker({ cardData }) {
             <h3 className="mb-1 scroll-m-20 text-center text-[22px] font-medium tracking-tight">
               {cardData?.firstName} {cardData?.lastName}
             </h3>
-            <p className="text-md mb-1 text-center italic">
+            <p className="text-base mb-1 text-center italic">
               {cardData?.jobTitle}
             </p>
             <div className="mb-1 text-center text-[22px] font-medium">

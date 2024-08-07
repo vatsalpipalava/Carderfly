@@ -117,11 +117,11 @@ function ProfessionalEdge({ cardData }) {
             <h3 className="mb-3 scroll-m-20 text-center text-xl font-semibold tracking-tight">
               {cardData?.firstName} {cardData?.lastName}
             </h3>
-            <p className="mb-3 text-center text-[16px]">{cardData?.jobTitle}</p>
+            <p className="mb-3 text-center text-base">{cardData?.jobTitle}</p>
             <div className="mb-3 text-center text-xl font-semibold">
               {cardData?.businessName}
             </div>
-            <p className="mb-[15px] text-center text-[16px]">
+            <p className="mb-[15px] text-center text-base">
               {cardData?.businessDescription}
             </p>
           </div>

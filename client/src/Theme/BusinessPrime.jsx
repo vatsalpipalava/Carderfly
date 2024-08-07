@@ -113,7 +113,7 @@ function BusinessPrime({ cardData }) {
             <div className="mb-1 text-center text-2xl font-bold">
               {cardData?.firstName} {cardData?.lastName}
             </div>
-            <div className="text-md mb-2 text-center italic">
+            <div className="text-base mb-2 text-center italic">
               {cardData?.jobTitle}
             </div>
             <div className="mb-2 text-center text-lg font-semibold">

@@ -135,7 +135,7 @@ export function PrimaryAction() {
               );
             })}
         </div> */}
-        <Accordion type="single" collapsible>
+        <Accordion type="single" collapsible defaultValue="item-1">
           <AccordionItem value="item-1" className="border-none">
             <AccordionTrigger className="hover:no-underline hover:bg-muted px-6">Actions</AccordionTrigger>
             <AccordionContent>

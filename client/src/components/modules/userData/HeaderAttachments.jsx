@@ -207,7 +207,7 @@ export function HeaderAttachments() {
             />
           </div>
           <div className="h-full w-full">
-            <h5 className="text-md font-bold">Add Profile</h5>
+            <h5 className="text-base font-bold">Add Profile</h5>
             <p className="text-sm">Suggested format: svg, png, jpg</p>
           </div>
         </div>
@@ -287,7 +287,7 @@ export function HeaderAttachments() {
             />
           </div>
           <div className="h-full w-full">
-            <h5 className="text-md font-bold">Add Cover Photo</h5>
+            <h5 className="text-base font-bold">Add Cover Photo</h5>
             <p className="text-sm">Suggested format: jpeg, png</p>
           </div>
         </div>

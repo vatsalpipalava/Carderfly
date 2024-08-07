@@ -36,7 +36,7 @@ export function FeatureTemplate2({
                       className="aspect-square h-full w-full rounded-2xl object-cover shadow-md"
                     />
                     <CardContent className="absolute bottom-0 left-0 w-full rounded-b-2xl bg-gradient-to-t from-[#00000066] from-80% to-100% px-3 pb-2 pt-3">
-                      <p className="mt-0 text-[16px] font-medium">
+                      <p className="mt-0 text-base font-medium">
                         {subSection.heading}
                       </p>
                     </CardContent>

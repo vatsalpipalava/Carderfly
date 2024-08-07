@@ -89,3 +89,12 @@
 .flip-card-back {
   transform: rotateY(180deg);
 }
+
+/* Corporate Identity footer */
+.button-hover {
+  transition: all ease-in-out 0.3s;
+}
+
+.button-hover:hover {
+  transform: translateY(-3px);
+}

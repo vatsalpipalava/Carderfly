@@ -207,7 +207,7 @@ export function FeatureContent() {
                       />
                     </div>
                     <div className="w-full">
-                      <h5 className="text-md font-bold">Add Media</h5>
+                      <h5 className="text-base font-bold">Add Media</h5>
                       <p className="text-sm">Suggested format: jpg, png</p>
                     </div>
                   </div>
@@ -314,7 +314,7 @@ export function FeatureContent() {
           >
             <FiPlus className="h-6 w-6 text-primary" />
           </Button>
-          <h5 className="text-md font-bold">Add Section</h5>
+          <h5 className="text-base font-bold">Add Section</h5>
         </div>
       </CardFooter>
     </Card>
