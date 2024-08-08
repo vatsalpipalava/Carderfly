@@ -27,6 +27,7 @@ module.exports = {
         open: ["Open Sans", "sans-serif"],
         mulish: ["Mulish", "sans-serif"],
         nobile: ["Nobile", "sans-serif"],
+        inter: ["Inter", "sans-serif"],
       },
       colors: {
         border: "hsl(var(--border))",

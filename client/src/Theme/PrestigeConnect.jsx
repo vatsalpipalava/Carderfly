@@ -100,7 +100,7 @@ function PrestigeConnect({ cardData }) {
       }}
     >
       <ScrollArea className="mb-10 flex-grow overflow-auto">
-        <div className="relative -z-50">
+        <div className="relative -z-10">
           <img
             src={cardData?.backCoverImg}
             alt="Image"
@@ -109,7 +109,7 @@ function PrestigeConnect({ cardData }) {
         </div>
         <div className="flex h-auto w-full flex-col gap-4 p-4">
           <Card
-            className="relative -z-40 -mt-16 h-auto w-full rounded-3xl p-4 shadow-[0px_4px_20px_0px_rgba(0,0,0,0.16)]"
+            className="relative z-50 -mt-16 h-auto w-full rounded-3xl border-none p-4 shadow-[0px_4px_20px_0px_rgba(0,0,0,0.16)]"
             style={{
               backgroundColor: cardData?.colors?.cardBg,
               color: cardData?.colors?.cardText,
@@ -127,9 +127,7 @@ function PrestigeConnect({ cardData }) {
               <h3 className="mb-3 scroll-m-20 text-center text-xl font-medium tracking-tight">
                 {cardData?.firstName} {cardData?.lastName}
               </h3>
-              <p className="mb-3 text-center text-base">
-                {cardData?.jobTitle}
-              </p>
+              <p className="mb-3 text-center text-base">{cardData?.jobTitle}</p>
               <div className="mb-3 text-center text-xl font-medium">
                 {cardData?.businessName}
               </div>
@@ -149,7 +147,7 @@ function PrestigeConnect({ cardData }) {
           </Card>
 
           <Card
-            className="h-full w-full rounded-3xl shadow-[0px_4px_20px_0px_rgba(0,0,0,0.16)]"
+            className="h-full w-full rounded-3xl border-none shadow-[0px_4px_20px_0px_rgba(0,0,0,0.16)]"
             style={{
               backgroundColor: cardData?.colors?.cardBg,
               color: cardData?.colors?.cardText,
@@ -333,7 +331,7 @@ function PrestigeConnect({ cardData }) {
             onClick={() =>
               DownloadVcfTemplate(cardData?._id, cardData?.publicLink)
             }
-            className="relative flex min-h-11 min-w-11 items-center justify-center rounded-xl"
+            className="relative min-h-11 min-w-11 rounded-xl"
             style={{ backgroundColor: cardData?.colors?.buttonBg }}
           >
             <div className="absolute inset-0">
@@ -349,7 +347,7 @@ function PrestigeConnect({ cardData }) {
 
           <QrCode
             onClick={handleOpenQrDrawer}
-            className="min-h-6 min-w-6 cursor-pointer text-gray-500"
+            className="min-h-6 min-w-6 cursor-pointer"
             style={{ color: cardData?.colors?.footerIcon }}
           />
           <QrCodeDrawerTemplate

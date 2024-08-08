@@ -11,6 +11,8 @@ import ProfessionalEdge from "./Theme/ProfessionalEdge";
 import PrestigeConnect from "./Theme/PrestigeConnect";
 import EliteNetworker from "./Theme/EliteNetworker";
 import CorporateIdentity from "./Theme/CorporateIdentity";
+import PrimeEssentials from "./Theme/PrimeEssentials";
+import ExecutiveDesign from "./Theme/ExecutiveDesign";
 
 const templates = [
   {
@@ -57,6 +59,16 @@ const templates = [
     name: "Corporate Identity",
     templateComponents: CorporateIdentity,
   },
+  {
+    id: "prime-essentials",
+    name: "Prime Essentials",
+    templateComponents: PrimeEssentials,
+  },
+  {
+    id: "executive-design",
+    name: "Executive Design",
+    templateComponents: ExecutiveDesign ,
+  },
 ];
 
 export default templates;
@@ -77,19 +89,9 @@ export default templates;
 // const templates = [
 
 //   {
-//     id: "prime-essentials",
-//     name: "Prime Essentials",
-//     templateComponents: PrimeEssentials,
-//   },
-//   {
 //     id: "signature-series",
 //     name: "Signature Series",
 //     templateComponents: SignatureSeries,
-//   },
-//   {
-//     id: "executive-design",
-//     name: "Executive Design",
-//     templateComponents: ExecutiveDesign,
 //   },
 //   {
 //     id: "professional-touch",

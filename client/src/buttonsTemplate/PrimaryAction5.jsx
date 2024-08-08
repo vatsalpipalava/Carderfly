@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 
 import { primaryActionField } from "@/components/modules/primaryActionField";
 
-export function PrimaryAction2({
+export function PrimaryAction5({
   primaryActions,
   propButtonBg,
   propButtonText,
@@ -20,23 +20,16 @@ export function PrimaryAction2({
           return (
             <Button
               key={value._id}
+              asChild
               size="icon"
-              className="relative min-h-12 min-w-12 rounded-xl"
-              style={{
-                backgroundColor: `${propButtonBg}`,
-                color: propButtonText,
-              }}
+              className="h-12 w-12 rounded-full"
+              style={{ backgroundColor: propButtonBg, color: propButtonText }}
             >
               <Link
                 to={`${addedField.linkPrefix}${value.value}${addedField.linkSuffix}`}
                 target="_blank"
               >
-                <div className="absolute inset-0">
-                  <div className="absolute left-0 top-0 h-1/2 w-full rounded-t-xl bg-[#00000014]"></div>
-                </div>
-                <span className="relative z-10">
-                  <IconContainer icon={addedField.icon} />
-                </span>
+                <IconContainer icon={addedField.icon} />
               </Link>
             </Button>
           );
