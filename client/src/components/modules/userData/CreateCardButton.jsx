@@ -34,10 +34,6 @@ export function CreateCardButton() {
     const publicLink = cardData.publicLink;
     const firstName = cardData.firstName;
     const lastName = cardData && cardData.lastName;
-    const jobTitle = cardData && cardData.jobTitle;
-    const businessName = cardData && cardData.businessName;
-    const businessAddress = cardData && cardData.businessAddress;
-    const businessDescription = cardData && cardData.businessDescription;
 
     const mobileAction = findById(cardData.primaryActions, "mobile");
     const emailAction = findById(cardData.primaryActions, "email");
@@ -53,26 +49,6 @@ export function CreateCardButton() {
 
     if (!lastName || !lastName.trim()) {
       setError("Please enter Last Name");
-      return;
-    }
-
-    if (!jobTitle || !jobTitle.trim()) {
-      setError("Please enter Job Title");
-      return;
-    }
-
-    if (!businessName || !businessName.trim()) {
-      setError("Please enter Business Name");
-      return;
-    }
-
-    if (!businessAddress || !businessAddress.trim()) {
-      setError("Please enter Business Address");
-      return;
-    }
-
-    if (!businessDescription || !businessDescription.trim()) {
-      setError("Please enter Business Description");
       return;
     }
 

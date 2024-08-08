@@ -13,7 +13,7 @@ const initialState = {
   lastName: "Doe",
   jobTitle: "Job Title",
   businessName: "Business Name",
-  businessAddress: "21, Main Street, Opp. Royal Farm, Mall Road.",
+  businessAddress: "26, Dean Street, 11201, New York, United States.",
   businessDescription: "Business Description",
   primaryActions: [
     {

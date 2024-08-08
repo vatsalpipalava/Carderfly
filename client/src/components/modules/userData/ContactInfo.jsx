@@ -39,7 +39,7 @@ export function ContactInfo() {
   const [openLogoDialog, setOpenLogoDialog] = useState(false);
 
   const dispatch = useDispatch();
-  const reLogo = useSelector((state) => state.card?.logoImg);
+  const cardData = useSelector((state) => state?.card);
 
   const [formData, setFormData] = useState({
     firstName: "",
@@ -114,9 +114,9 @@ export function ContactInfo() {
               htmlFor="logo-input"
               className="flex h-11 w-11 cursor-pointer items-center justify-center rounded-lg bg-secondary"
             >
-              {reLogo ? (
+              {cardData?.logoImg ? (
                 <img
-                  src={reLogo}
+                  src={cardData?.logoImg}
                   alt="logo"
                   className="h-11 w-11 rounded-lg object-cover"
                 />
@@ -172,14 +172,14 @@ export function ContactInfo() {
           <Input
             type="text"
             name="firstName"
-            value={formData.firstName}
+            value={formData.firstName || cardData?.firstName || ""}
             onChange={handleInputChange}
             placeholder="First Name"
           />
           <Input
             type="text"
             name="lastName"
-            value={formData.lastName}
+            value={formData.lastName || cardData?.lastName || ""}
             onChange={handleInputChange}
             placeholder="Last Name"
           />
@@ -188,27 +188,29 @@ export function ContactInfo() {
           <Input
             type="text"
             name="jobTitle"
-            value={formData.jobTitle}
+            value={formData.jobTitle || cardData?.jobTitle || ""}
             onChange={handleInputChange}
             placeholder="Job Title"
           />
           <Input
             type="text"
             name="businessName"
-            value={formData.businessName}
+            value={formData.businessName || cardData?.businessName || ""}
             onChange={handleInputChange}
             placeholder="Business Name"
           />
         </div>
         <Textarea
           name="businessAddress"
-          value={formData.businessAddress}
+          value={formData.businessAddress || cardData?.businessAddress || ""}
           onChange={handleInputChange}
           placeholder="Business Address"
         />
         <Textarea
           name="businessDescription"
-          value={formData.businessDescription}
+          value={
+            formData.businessDescription || cardData?.businessDescription || ""
+          }
           onChange={handleInputChange}
           placeholder="Business Description"
         />
