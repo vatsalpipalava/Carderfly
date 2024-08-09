@@ -3,8 +3,7 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 
-import { MdLocationOn, MdEmail } from "react-icons/md";
-import { IoCallSharp, IoEarth, IoShare } from "react-icons/io5";
+import { IoCallSharp, IoShare } from "react-icons/io5";
 import { RiWhatsappFill } from "react-icons/ri";
 import { HiMiniPlusCircle } from "react-icons/hi2";
 
@@ -38,6 +37,10 @@ import {
   reFooterIcon,
   reQrCode,
 } from "@/slices/cardSlice";
+import Location from "@/assets/svgs/location";
+import Phone from "@/assets/svgs/phone";
+import Mail from "@/assets/svgs/mail";
+import Website from "@/assets/svgs/website";
 
 function CorporateElegance({ cardData }) {
   const dispatch = useDispatch();
@@ -145,43 +148,37 @@ function CorporateElegance({ cardData }) {
               }}
             >
               <div className="flex w-full items-center gap-2">
-                <MdLocationOn
+                <Location
                   className="h-5 w-5"
-                  style={{ color: cardData?.colors?.cardIcon }}
+                  color={cardData?.colors?.cardIcon}
                 />
                 <p className="w-full">{cardData?.businessAddress}</p>
               </div>
 
               <div className="mt-3 flex w-full items-center gap-2">
-                <IoCallSharp
+                <Phone
                   className="h-5 w-5"
-                  style={{ color: cardData?.colors?.cardIcon }}
+                  color={cardData?.colors?.cardIcon}
                 />
                 <p className="w-full">{mobile?.value}</p>
               </div>
 
               <div className="mt-3 flex w-full items-center gap-2">
-                <MdEmail
+                <Mail
                   className="h-5 w-5"
-                  style={{ color: cardData?.colors?.cardIcon }}
+                  color={cardData?.colors?.cardIcon}
                 />
                 <p className="w-full">{email?.value}</p>
               </div>
 
               {website?.value ? (
-                <>
-                  {/* <Separator
-                    style={{ backgroundColor: cardData?.colors?.cardSeparator }}
-                    className="my-3"
-                  /> */}
                   <div className="mt-3 flex w-full items-center gap-2">
-                    <IoEarth
+                    <Website
                       className="h-5 w-5"
-                      style={{ color: cardData?.colors?.cardIcon }}
+                      color={cardData?.colors?.cardIcon}
                     />
                     <p className="w-full">{website?.value}</p>
                   </div>
-                </>
               ) : null}
             </CardContent>
           </Card>

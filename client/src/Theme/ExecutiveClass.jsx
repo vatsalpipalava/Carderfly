@@ -22,7 +22,8 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 import useStyle from "@/hooks/useStyle";
 import { PrimaryActionTemplate } from "@/components/modules/templateComponents/PrimaryActionTemplate";
 import { SecondaryActionTemplate } from "@/components/modules/templateComponents/SecondaryActionTemplate";
-import { CarouselTemplate } from "@/components/modules/templateComponents/CarouselTemplate";
+// import { CarouselTemplate } from "@/components/modules/templateComponents/CarouselTemplate";
+import { FeatureTemplate3 } from "@/featureTemplate/FeatureTemplate3";
 import { QrCodeDrawerTemplate } from "@/components/modules/templateComponents/QrCodeDrawerTemplate";
 import { HandleShareTemplate } from "@/components/modules/templateComponents/HandleShareTemplate";
 import { DownloadVcfTemplate } from "@/components/modules/templateComponents/DownloadVcfTemplate";
@@ -183,13 +184,19 @@ function ExecutiveClass({ cardData }) {
           </div>
 
           <div className="w-full">
-            <CarouselTemplate
+            {/* <CarouselTemplate
               sections={cardData?.sections}
               propText={cardData?.colors?.text}
               propFeatureText={cardData?.colors?.featureText}
               propFeatureSeparator={cardData?.colors?.featureSeparator}
               propButtonBg={cardData?.colors?.buttonBg}
               propButtonText={cardData?.colors?.buttonText}
+            /> */}
+            <FeatureTemplate3
+              sections={cardData?.sections}
+              propText={cardData?.colors?.text}
+              propFeatureText={cardData?.colors?.featureText}
+              propFeatureSeparator={cardData?.colors?.featureSeparator}
             />
           </div>
 

@@ -15,7 +15,7 @@ import {
   // reCardSeparator,
   reCardIcon,
   reFeatureText,
-  reFeatureSeparator,
+  // reFeatureSeparator,
   reFooterBg,
   reFooterIcon,
   reQrCode,
@@ -133,19 +133,19 @@ export function Color() {
     dispatch(reFeatureText(color.hex));
   };
 
-  const [displayFeatureSeparator, setDisplayFeatureSeparator] = useState(false);
-  const [featureSeparator, setFeatureSeparator] = useState(
-    colors.featureSeparator
-  );
+  // const [displayFeatureSeparator, setDisplayFeatureSeparator] = useState(false);
+  // const [featureSeparator, setFeatureSeparator] = useState(
+  //   colors.featureSeparator
+  // );
 
-  const handleFeatureSeparator = () => {
-    setDisplayFeatureSeparator(!displayFeatureSeparator);
-  };
+  // const handleFeatureSeparator = () => {
+  //   setDisplayFeatureSeparator(!displayFeatureSeparator);
+  // };
 
-  const handleFeatureSeparatorColorChange = (color) => {
-    setFeatureSeparator(color.hex);
-    dispatch(reFeatureSeparator(color.hex));
-  };
+  // const handleFeatureSeparatorColorChange = (color) => {
+  //   setFeatureSeparator(color.hex);
+  //   dispatch(reFeatureSeparator(color.hex));
+  // };
 
   const [displayFooterBg, setDisplayFooterBg] = useState(false);
   const [footerBg, setFooterBg] = useState(colors.footerBg);
@@ -193,7 +193,7 @@ export function Color() {
     // setDisplayCardSeparator(false);
     setDisplayCardIcon(false);
     setDisplayFeatureText(false);
-    setDisplayFeatureSeparator(false);
+    // setDisplayFeatureSeparator(false);
     setDisplayFooterBg(false);
     setDisplayFooterIcon(false);
     setDisplayQrCode(false);
@@ -207,6 +207,58 @@ export function Color() {
       <Separator />
       <CardContent className="p-4 sm:p-6">
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-6">
+          <div>
+            <div className="flex w-full items-center gap-6">
+              <Button
+                onClick={handleBackground}
+                size="icon"
+                className="h-8 w-12 rounded-sm border-2 border-foreground shadow-[0px_0px_2px_#808080]"
+                style={{ backgroundColor: colors.background }}
+              ></Button>
+              <p className="text-base font-semibold">Main Background</p>
+            </div>
+            {displayBackground ? (
+              <div className="absolute z-20 -mt-[21rem]">
+                <div
+                  className="fixed bottom-0 left-0 right-0 top-0"
+                  onClick={handleClose}
+                />
+                <SketchPicker
+                  disableAlpha
+                  color={background}
+                  onChange={handleBackgroundColorChange}
+                  className="text-black"
+                />
+              </div>
+            ) : null}
+          </div>
+
+          <div>
+            <div className="flex w-full items-center gap-6">
+              <Button
+                onClick={handleText}
+                size="icon"
+                className="h-8 w-12 rounded-sm border-2 border-foreground shadow-[0px_0px_2px_#808080]"
+                style={{ backgroundColor: colors.text }}
+              ></Button>
+              <p className="text-base font-semibold">Main Text</p>
+            </div>
+            {displayText ? (
+              <div className="absolute z-20 -mt-[21rem]">
+                <div
+                  className="fixed bottom-0 left-0 right-0 top-0"
+                  onClick={handleClose}
+                />
+                <SketchPicker
+                  disableAlpha
+                  color={text}
+                  onChange={handleTextColorChange}
+                  className="text-black"
+                />
+              </div>
+            ) : null}
+          </div>
+
           <div>
             <div className="flex w-full items-center gap-6">
               <Button
@@ -236,64 +288,12 @@ export function Color() {
           <div>
             <div className="flex w-full items-center gap-6">
               <Button
-                onClick={handleBackground}
-                size="icon"
-                className="h-8 w-12 rounded-sm border-2 border-foreground shadow-[0px_0px_2px_#808080]"
-                style={{ backgroundColor: colors.background }}
-              ></Button>
-              <p className="text-base font-semibold">Background</p>
-            </div>
-            {displayBackground ? (
-              <div className="absolute z-20 -mt-[21rem]">
-                <div
-                  className="fixed bottom-0 left-0 right-0 top-0"
-                  onClick={handleClose}
-                />
-                <SketchPicker
-                  disableAlpha
-                  color={background}
-                  onChange={handleBackgroundColorChange}
-                  className="text-black"
-                />
-              </div>
-            ) : null}
-          </div>
-
-          <div>
-            <div className="flex w-full items-center gap-6">
-              <Button
-                onClick={handleText}
-                size="icon"
-                className="h-8 w-12 rounded-sm border-2 border-foreground shadow-[0px_0px_2px_#808080]"
-                style={{ backgroundColor: colors.text }}
-              ></Button>
-              <p className="text-base font-semibold">Text</p>
-            </div>
-            {displayText ? (
-              <div className="absolute z-20 -mt-[21rem]">
-                <div
-                  className="fixed bottom-0 left-0 right-0 top-0"
-                  onClick={handleClose}
-                />
-                <SketchPicker
-                  disableAlpha
-                  color={text}
-                  onChange={handleTextColorChange}
-                  className="text-black"
-                />
-              </div>
-            ) : null}
-          </div>
-
-          <div>
-            <div className="flex w-full items-center gap-6">
-              <Button
                 onClick={handleButtonText}
                 size="icon"
                 className="h-8 w-12 rounded-sm border-2 border-foreground shadow-[0px_0px_2px_#808080]"
                 style={{ backgroundColor: colors.buttonText }}
               ></Button>
-              <p className="text-base font-semibold">Button Text</p>
+              <p className="text-base font-semibold">Button Icon</p>
             </div>
             {displayButtonText ? (
               <div className="absolute z-20 -mt-[21rem]">
@@ -441,7 +441,7 @@ export function Color() {
             ) : null}
           </div>
 
-          <div>
+          {/* <div>
             <div className="flex w-full items-center gap-6">
               <Button
                 onClick={handleFeatureSeparator}
@@ -465,7 +465,7 @@ export function Color() {
                 />
               </div>
             ) : null}
-          </div>
+          </div> */}
 
           <div>
             <div className="flex w-full items-center gap-6">

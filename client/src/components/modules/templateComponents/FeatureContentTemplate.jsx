@@ -1,12 +1,12 @@
 /* eslint-disable react/prop-types */
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Separator } from "@/components/ui/separator";
+// import { Separator } from "@/components/ui/separator";
 
 export function FeatureContentTemplate({
   sections,
   propText,
   propFeatureText,
-  propFeatureSeparator
+  // propFeatureSeparator
 }) {
   return (
     <>
@@ -20,8 +20,8 @@ export function FeatureContentTemplate({
               {section.sectionName}
             </CardTitle>
           </CardHeader>
-          <Separator style={{backgroundColor: propFeatureSeparator}} />
-          <CardContent className="p-0 pt-4">
+          {/* <Separator style={{backgroundColor: propFeatureSeparator}} /> */}
+          <CardContent className="p-0 pt-1">
             <div className="grid grid-cols-2 gap-4">
               {section.subSections.map((subSection) => (
                 <Card

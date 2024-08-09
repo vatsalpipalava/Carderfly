@@ -2,6 +2,7 @@ import ProfessionalSuiteImg from "@/assets/templates/simple.png";
 import CorporateEleganceImg from "@/assets/templates/modern.png";
 import ProfessionalEdgeImg from "@/assets/templates/professional-edge.png";
 import PrestigeConnectImg from "@/assets/templates/prestige-connect.png";
+import ExecutiveDesignImg from "@/assets/templates/executive-design.png";
 
 import ProfessionalSuite from "./Theme/ProfessionalSuite";
 import CorporateElegance from "./Theme/CorporateElegance";
@@ -67,6 +68,7 @@ const templates = [
   {
     id: "executive-design",
     name: "Executive Design",
+    imageUrl: ExecutiveDesignImg,
     templateComponents: ExecutiveDesign ,
   },
 ];

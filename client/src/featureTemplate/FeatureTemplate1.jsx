@@ -22,7 +22,7 @@ export function FeatureTemplate1({
           </CardHeader>
           {/* <Separator style={{ backgroundColor: propFeatureSeparator }} /> */}
           <CardContent className="p-0 pt-1">
-            <div className="grid grid-cols-3 gap-[10px]">
+            <div className="grid grid-cols-2 gap-[10px]">
               {section.subSections.map((subSection) => (
                 <Card
                   key={subSection._id}
@@ -33,7 +33,7 @@ export function FeatureTemplate1({
                     <img
                       src={subSection.image}
                       alt={subSection.heading}
-                      className="aspect-square h-[134px] w-full rounded-lg object-cover shadow-md"
+                      className="aspect-square h-full w-full rounded-lg object-cover shadow-md"
                     />
                     <CardContent className="px-2 absolute bottom-0 left-0 py-2 bg-[#ffffff10] backdrop-blur-md rounded-lg w-full">
                       <p className="font-bold text-base">{subSection.heading}</p>

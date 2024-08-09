@@ -1,6 +1,6 @@
 import { useEffect } from "react";
-
 import { Link } from "react-router-dom";
+import "@/App.css";
 
 import {
   Breadcrumb,
@@ -75,12 +75,15 @@ function CreateCard() {
               className="rounded-xl shadow-md hover:shadow-xl"
             >
               <CardContent className="p-0">
-                <ScrollArea className="h-96 w-auto rounded-t-xl border-none">
+                <ScrollArea className="relative h-96 w-auto rounded-t-xl border-none">
                   <img
                     src={template.imageUrl}
                     alt={template.name}
                     className="h-full w-full object-cover"
                   />
+                  <div className="absolute bottom-0 right-0">
+                    <div className="scroll"><span></span></div>
+                  </div>
                 </ScrollArea>
               </CardContent>
               <CardFooter className="flex items-center justify-between rounded-b-xl bg-muted p-4">
