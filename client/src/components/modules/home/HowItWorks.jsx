@@ -46,7 +46,7 @@ export function HowItWorks() {
                     <span className="text-xl font-bold text-white">1</span>
                   </div>
                   <p className="text-xl font-semibold">
-                    Create your profile in 2 minutes
+                    Create your profile in few minutes
                   </p>
                 </div>
               }
