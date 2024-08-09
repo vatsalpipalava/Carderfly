@@ -52,7 +52,7 @@ export function Footer() {
             <Button
               asChild
               variant="link"
-              className="text-base h-auto px-0 py-0 font-normal text-white hover:font-medium hover:text-primary sm:px-4"
+              className="h-auto px-0 py-0 text-base font-normal text-white hover:font-medium hover:text-primary sm:px-4"
             >
               <Link to="/">Home</Link>
             </Button>
@@ -60,7 +60,7 @@ export function Footer() {
             <Button
               asChild
               variant="link"
-              className="text-base h-auto px-0 py-0 font-normal text-white hover:font-medium hover:text-primary sm:px-4"
+              className="h-auto px-0 py-0 text-base font-normal text-white hover:font-medium hover:text-primary sm:px-4"
             >
               <Link to="/#how-it-works">How it works</Link>
             </Button>
@@ -68,7 +68,7 @@ export function Footer() {
             <Button
               asChild
               variant="link"
-              className="text-base h-auto px-0 py-0 font-normal text-white hover:font-medium hover:text-primary sm:px-4"
+              className="h-auto px-0 py-0 text-base font-normal text-white hover:font-medium hover:text-primary sm:px-4"
             >
               <Link to="/#feature">Feature</Link>
             </Button>
@@ -76,14 +76,14 @@ export function Footer() {
             <Button
               asChild
               variant="link"
-              className="text-base h-auto px-0 py-0 font-normal text-white hover:font-medium hover:text-primary sm:px-4"
+              className="h-auto px-0 py-0 text-base font-normal text-white hover:font-medium hover:text-primary sm:px-4"
             >
               <Link to="/#pricing">Pricing</Link>
             </Button>
             <Button
               asChild
               variant="link"
-              className="text-base h-auto px-0 py-0 font-normal text-white hover:font-medium hover:text-primary sm:px-4"
+              className="h-auto px-0 py-0 text-base font-normal text-white hover:font-medium hover:text-primary sm:px-4"
             >
               <Link to="/terms-of-service">Terms and condition</Link>
             </Button>
@@ -109,9 +109,9 @@ export function Footer() {
         </div>
         <Separator className="mt-4 bg-white" />
         <div className="px-6 pt-4">
-          <div className="grid grid-cols-2 items-center gap-10">
+          <div className="flex items-center gap-10">
             <div className="text-[12px] text-white">
-              Copyright © All rights reserved
+              Copyright © 2024 Carderfly | All Rights Reserved.
             </div>
 
             <div className="ml-auto">
