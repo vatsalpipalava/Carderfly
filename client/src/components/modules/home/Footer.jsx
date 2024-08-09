@@ -12,7 +12,7 @@ export function Footer() {
   return (
     <footer className="w-full px-4 pb-6 sm:px-6">
       <div className="mx-auto max-w-[1235px] rounded-2xl bg-foreground px-4 py-6 dark:bg-muted sm:px-6">
-        <div className="grid grid-cols-1 gap-6 px-6 sm:grid-cols-3">
+        <div className="grid grid-cols-1 gap-6 px-6 sm:grid-cols-2">
           <div className="">
             <Link to="/" className="flex items-center gap-4">
               <div className="group mb-4 flex h-10 w-10 shrink-0 items-center justify-center gap-2 rounded-xl border border-white bg-transparent text-lg font-semibold text-primary-foreground md:text-base">
@@ -80,9 +80,16 @@ export function Footer() {
             >
               <Link to="/#pricing">Pricing</Link>
             </Button>
+            <Button
+              asChild
+              variant="link"
+              className="text-base h-auto px-0 py-0 font-normal text-white hover:font-medium hover:text-primary sm:px-4"
+            >
+              <Link to="/terms-of-service">Terms and condition</Link>
+            </Button>
           </div>
 
-          <div className="flex flex-col items-start gap-3 sm:items-end">
+          {/* <div className="flex flex-col items-start gap-3 sm:items-end">
             <Button
               asChild
               variant="link"
@@ -98,7 +105,7 @@ export function Footer() {
             >
               <Link to="/">Privacy policy</Link>
             </Button>
-          </div>
+          </div> */}
         </div>
         <Separator className="mt-4 bg-white" />
         <div className="px-6 pt-4">

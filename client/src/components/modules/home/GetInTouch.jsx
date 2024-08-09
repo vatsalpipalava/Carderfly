@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -23,8 +25,11 @@ export function GetInTouch() {
             </p>
           </CardContent>
           <CardFooter className="w-full pb-6 md:w-auto md:px-10 md:pb-0">
-            <Button className="w-full rounded-full bg-black px-8 dark:bg-white dark:text-white md:w-auto">
-              Email
+            <Button
+              asChild
+              className="w-full rounded-full bg-black px-8 dark:bg-white dark:text-white md:w-auto"
+            >
+              <Link to="mailto:info@carderfly.com">Email</Link>
             </Button>
           </CardFooter>
         </Card>
