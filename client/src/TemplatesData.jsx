@@ -1,8 +1,13 @@
-import ProfessionalSuiteImg from "@/assets/templates/simple.png";
-import CorporateEleganceImg from "@/assets/templates/modern.png";
-import ProfessionalEdgeImg from "@/assets/templates/professional-edge.png";
-import PrestigeConnectImg from "@/assets/templates/prestige-connect.png";
-import ExecutiveDesignImg from "@/assets/templates/executive-design.png";
+import ProfessionalSuiteImg from "@/assets/templates/professional-suite.jpg";
+import CorporateEleganceImg from "@/assets/templates/corporate-elegance.jpg";
+import ExecutiveClassImg from "@/assets/templates/executive-class.jpg";
+import BusinessPrimeImg from "@/assets/templates/business-prime.jpg";
+import ProfessionalEdgeImg from "@/assets/templates/professional-edge.jpg";
+import PrestigeConnectImg from "@/assets/templates/prestige-connect.jpg";
+import EliteNetworkerImg from "@/assets/templates/elite-networker.jpg";
+import CorporateIdentityImg from "@/assets/templates/corporate-identity.jpg";
+import PrimeEssentialsImg from "@/assets/templates/prime-essentials.jpg";
+import ExecutiveDesignImg from "@/assets/templates/executive-design.jpg";
 
 import ProfessionalSuite from "./Theme/ProfessionalSuite";
 import CorporateElegance from "./Theme/CorporateElegance";
@@ -31,11 +36,13 @@ const templates = [
   {
     id: "executive-class",
     name: "Executive Class",
+    imageUrl: ExecutiveClassImg,
     templateComponents: ExecutiveClass,
   },
   {
     id: "business-prime",
     name: "BusinessPrime",
+    imageUrl: BusinessPrimeImg,
     templateComponents: BusinessPrime,
   },
   {
@@ -53,16 +60,19 @@ const templates = [
   {
     id: "elite-networker",
     name: "Elite Networker",
+    imageUrl: EliteNetworkerImg,
     templateComponents: EliteNetworker,
   },
   {
     id: "corporate-identity",
     name: "Corporate Identity",
+    imageUrl: CorporateIdentityImg,
     templateComponents: CorporateIdentity,
   },
   {
     id: "prime-essentials",
     name: "Prime Essentials",
+    imageUrl: PrimeEssentialsImg,
     templateComponents: PrimeEssentials,
   },
   {
