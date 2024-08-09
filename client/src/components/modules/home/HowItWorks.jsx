@@ -8,6 +8,8 @@ import { Badge } from "@/components/ui/badge";
 
 import { FadeText } from "@/components/magicui/fade-text";
 
+import Banner2 from "@/assets/images/banner2.jpg";
+
 export function HowItWorks() {
   return (
     <main className="h-full w-full bg-background">
@@ -24,7 +26,7 @@ export function HowItWorks() {
         <AspectRatio ratio={1 / 1}>
           <div className="flex h-full w-full items-center justify-center">
             <img
-              src="https://framerusercontent.com/images/SRcDXc99y09VSLMjzz8FAAHIYME.jpg?scale-down-to=512"
+              src={Banner2}
               className="h-auto w-full rounded-[2rem]"
             />
           </div>

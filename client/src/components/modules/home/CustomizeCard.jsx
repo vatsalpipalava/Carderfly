@@ -3,6 +3,11 @@ import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import "@/App.css";
 
+import Pro1 from "@/assets/images/product-1.jpg";
+import Pro2 from "@/assets/images/product-2.jpg";
+import Pro3 from "@/assets/images/product-3.jpg";
+import Pro4 from "@/assets/images/product-4.jpg";
+
 import { ChevronRightIcon } from "lucide-react";
 
 import { AspectRatio } from "@/components/ui/aspect-ratio";
@@ -38,7 +43,7 @@ export function CustomizeCard() {
                           translateZ="50"
                           className="pt-3 text-xl font-bold text-neutral-600 dark:text-white"
                         >
-                          Products
+                          Cards Theme
                         </CardItem>
                         <Separator className="mb-6 mt-4" />
                         <CardItem
@@ -47,19 +52,19 @@ export function CustomizeCard() {
                         >
                           <div className="rounded-xl border">
                             <img
-                              src="https://images.pexels.com/photos/90946/pexels-photo-90946.jpeg?cs=srgb&dl=pexels-madebymath-90946.jpg&fm=jpg"
-                              alt="product"
+                              src={Pro1}
+                              alt="product1"
                               className="h-60 w-full rounded-xl object-cover group-hover/card:shadow-xl"
                             />
-                            <p className="px-4 py-3 font-medium">Camera</p>
+                            <p className="px-4 py-3 font-medium">Professional Edge</p>
                           </div>
                           <div className="rounded-xl border">
                             <img
-                              src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8cHJvZHVjdHxlbnwwfHwwfHx8MA%3D%3D"
-                              alt="product"
+                              src={Pro2}
+                              alt="product2"
                               className="h-60 w-full rounded-xl object-cover group-hover/card:shadow-xl"
                             />
-                            <p className="px-4 py-3 font-medium">Watch</p>
+                            <p className="px-4 py-3 font-medium">Prestige Connect</p>
                           </div>
                         </CardItem>
                       </CardBody>
@@ -72,7 +77,7 @@ export function CustomizeCard() {
                           translateZ="50"
                           className="pt-3 text-xl font-bold text-neutral-600 dark:text-white"
                         >
-                          Shops
+                          Cards Theme
                         </CardItem>
                         <Separator className="mb-6 mt-4" />
                         <CardItem
@@ -81,19 +86,19 @@ export function CustomizeCard() {
                         >
                           <div className="rounded-xl border">
                             <img
-                              src="https://teetimeshop.in/cdn/shop/files/c2c9955c-e890-4c8e-8a08-a6a444aa8fe3.jpg?v=1702644878&width=1445"
-                              alt="shop"
+                              src={Pro3}
+                              alt="product3"
                               className="h-60 w-full rounded-xl object-cover group-hover/card:shadow-xl"
                             />
-                            <p className="px-4 py-3 font-medium">Price: $15</p>
+                            <p className="px-4 py-3 font-medium">Prime Essentials</p>
                           </div>
                           <div className="rounded-xl border">
                             <img
-                              src="https://www.mumkins.in/cdn/shop/products/jogger-for-boys-bl06143-dark_green-2_1800x1800.jpg?v=1659426127"
-                              alt="shop"
+                              src={Pro4}
+                              alt="product4"
                               className="h-60 w-full rounded-xl object-cover group-hover/card:shadow-xl"
                             />
-                            <p className="px-4 py-3 font-medium">Price: $20</p>
+                            <p className="px-4 py-3 font-medium">Executive Design</p>
                           </div>
                         </CardItem>
                       </CardBody>

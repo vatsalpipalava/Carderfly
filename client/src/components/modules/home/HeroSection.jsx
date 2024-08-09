@@ -13,7 +13,8 @@ import BlurFade from "@/components/magicui/blur-fade";
 import { FadeText } from "@/components/magicui/fade-text";
 import GradualSpacing from "@/components/magicui/gradual-spacing";
 
-import HomePageMobile from "@/assets/images/HomePageMobile.avif";
+import Background from "@/assets/images/background.avif";
+import HomePageMobile from "@/assets/images/banner1.png";
 
 export function HeroSection() {
   const parallaxRef = useRef(null);
@@ -124,7 +125,7 @@ export function HeroSection() {
                     >
                       <img
                         sizes="calc(min(100vw, 1280px) - 48px)"
-                        src="https://framerusercontent.com/images/LY9yRt1JUD7iYpPGvOwa82kINs.jpg?scale-down-to=1024"
+                        src={Background}
                         className="rounded-[2rem]"
                       />
                     </div>
