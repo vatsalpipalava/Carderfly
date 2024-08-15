@@ -1,12 +1,20 @@
 import mongoose from "mongoose";
 import { DB_NAME } from "../constants.js";
 
+// Define the username and password
+const USERNAME = process.env.DB_USER;
+const PASSWORD = process.env.DB_PASSWORD;
+const AUTHSOURCE = process.env.DB_AUTHSOURCE;
+
 const connectDB = async () => {
   try {
     const connectionInstance = await mongoose.connect(
-      `${process.env.MONGODB_URI}/${DB_NAME}`,
+      `mongodb://${USERNAME}:${PASSWORD}@127.0.0.1:27017/${DB_NAME}?authSource=${AUTHSOURCE}`
+      // `${process.env.MONGODB_URI}/${DB_NAME}`
     );
-    console.log(`\nMongoDB connected !!\nDB HOST: ${connectionInstance.connection.host}`);
+    console.log(
+      `\nMongoDB connected !!\nDB HOST: ${connectionInstance.connection.host}`
+    );
   } catch (error) {
     console.log("MONGODB connection FAILED:", error);
     process.exit(1);
@@ -14,7 +22,6 @@ const connectDB = async () => {
 };
 
 export default connectDB;
-      
 
 // import mongoose from "mongoose";
 // import { DB_NAME } from "../constants.js";

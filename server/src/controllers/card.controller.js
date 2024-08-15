@@ -6,22 +6,17 @@ import { ApiError } from "../utils/ApiError.js";
 import { ApiResponse } from "../utils/ApiResponse.js";
 import { asyncHandler } from "../utils/asyncHandler.js";
 import { Card } from "../models/card.model.js";
-import { deleteImagesFromCloudinary, uploadOnCloudinary } from "../utils/cloudinary.js";
+
+const baseURL = process.env.BACKEND_URL;
 
 // Middleware to handle base64 image conversion and storage
-const convertAndStoreImages = async (images, fieldName, publicLink) => {
-  const urls = [];
-  const publicIds = [];
-  for (const [index, base64Image] of images.entries()) {
-    const fileName = `${fieldName}-${Date.now()}-${index}.png`;
+const convertAndStoreImages = (images, fieldName, publicLink, storedFiles) => {
+  return images.map((base64Image, index) => {
+    const fileName = `${fieldName}-${Date.now()}-${index}.png`; // You can change the extension as needed
     const filePath = base64ToFile(base64Image, fileName, publicLink);
-    const uploadResponse = await uploadOnCloudinary(publicLink, filePath);
-    if (uploadResponse) {
-      urls.push(uploadResponse.url);
-      publicIds.push(uploadResponse.publicId);
-    }
-  }
-  return { urls, publicIds };
+    storedFiles.push(filePath); // Track the stored file
+    return `${baseURL}/${filePath.replace(/\\/g, "/")}`; // Convert backslashes to forward slashes for URL
+  });
 };
 
 const base64ToFile = (base64String, fileName, publicLink) => {
@@ -53,7 +48,25 @@ const isBase64Image = (str) => {
   );
 };
 
+const deleteStoredFiles = (filePaths) => {
+  filePaths.forEach((filePath) => {
+    try {
+      // Check if the file exists
+      if (fs.existsSync(filePath)) {
+        // Delete the file
+        fs.unlinkSync(filePath);
+        console.log(`File deleted: ${filePath}`);
+      } else {
+        console.log(`File not found: ${filePath}`);
+      }
+    } catch (error) {
+      console.error(`Error deleting file: ${filePath}`, error);
+    }
+  });
+};
+
 const createCard = async (req, res) => {
+  const storedFiles = [];
   const userId = req._id;
 
   try {
@@ -89,50 +102,50 @@ const createCard = async (req, res) => {
     }
 
     // Convert base64 images and store the file paths
-    const profileImgResult = isBase64Image(profileImg)
-      ? await convertAndStoreImages([profileImg], "profileImg", publicLink)
-      : { urls: [profileImg], publicIds: [] };
-    const backCoverImgResult = isBase64Image(backCoverImg)
-      ? await convertAndStoreImages([backCoverImg], "backCoverImg", publicLink)
-      : { urls: [backCoverImg], publicIds: [] };
-    const logoImgResult = isBase64Image(logoImg)
-      ? await convertAndStoreImages([logoImg], "logoImg", publicLink)
-      : { urls: [logoImg], publicIds: [] };
+    const profileImgPath = profileImg
+      ? convertAndStoreImages(
+          [profileImg],
+          "profileImg",
+          publicLink,
+          storedFiles
+        )[0]
+      : null;
+    const backCoverImgPath = backCoverImg
+      ? convertAndStoreImages(
+          [backCoverImg],
+          "backCoverImg",
+          publicLink,
+          storedFiles
+        )[0]
+      : null;
+    const logoImgPath = logoImg
+      ? convertAndStoreImages([logoImg], "logoImg", publicLink, storedFiles)[0]
+      : null;
 
     // Convert and store section images
-    const updatedSections = await Promise.all(
-      sections.map(async (section) => {
-        const updatedSubSections = await Promise.all(
-          section.subSections.map(async (subSection) => {
-            const subSectionImgResult = isBase64Image(subSection.image)
-              ? await convertAndStoreImages(
-                  [subSection.image],
-                  "subSectionImg",
-                  publicLink
-                )
-              : { urls: [subSection.image], publicIds: [] };
-            return {
-              ...subSection,
-              image: subSectionImgResult.urls[0],
-              imagePublicId: subSectionImgResult.publicIds[0],
-            };
-          })
-        );
-        return { ...section, subSections: updatedSubSections };
-      })
-    );
+    const updatedSections = sections.map((section) => {
+      const updatedSubSections = section.subSections.map((subSection) => {
+        const subSectionImgPath = subSection.image
+          ? convertAndStoreImages(
+              [subSection.image],
+              "subSectionImg",
+              publicLink,
+              storedFiles
+            )[0]
+          : null;
+        return { ...subSection, image: subSectionImgPath };
+      });
+      return { ...section, subSections: updatedSubSections };
+    });
 
     // Create the card document
     const newCard = new Card({
       userId,
       templateId,
       publicLink,
-      profileImg: profileImgResult.urls[0],
-      profileImgPublicId: profileImgResult.publicIds[0],
-      backCoverImg: backCoverImgResult.urls[0],
-      backCoverImgPublicId: backCoverImgResult.publicIds[0],
-      logoImg: logoImgResult.urls[0],
-      logoImgPublicId: logoImgResult.publicIds[0],
+      profileImg: profileImgPath,
+      backCoverImg: backCoverImgPath,
+      logoImg: logoImgPath,
       firstName,
       lastName,
       jobTitle,
@@ -145,6 +158,7 @@ const createCard = async (req, res) => {
       colors,
     });
 
+    // Save the card to the database
     await newCard.save();
 
     return res
@@ -154,6 +168,8 @@ const createCard = async (req, res) => {
       );
   } catch (error) {
     console.error("Error creating card:", error);
+    // Clean up stored files
+    deleteStoredFiles(storedFiles);
     res
       .status(500)
       .json(new ApiError(500, "Server error. Could not create card."));
@@ -274,6 +290,8 @@ const getNotSubscribedCard = asyncHandler(async (req, res) => {
 });
 
 const editCard = async (req, res) => {
+  const storedFiles = [];
+
   const userId = req._id;
   const { cardId } = req.params;
 
@@ -329,63 +347,77 @@ const editCard = async (req, res) => {
       }
     }
 
-    const oldProfileImgPublicId = existingCard.profileImgPublicId;
-    const oldBackCoverImgPublicId = existingCard.backCoverImgPublicId;
-    const oldLogoImgPublicId = existingCard.logoImgPublicId;
+    // Extract file paths from URLs
+    const extractFilePath = (url) => {
+      if (url) {
+        const urlParts = url.split(`${baseURL}/`);
+        return urlParts.length > 1
+          ? urlParts[1].replace(/\//g, path.sep)
+          : null;
+      }
+      return null;
+    };
+
+    // Track old image paths
+    const oldProfileImgPath = extractFilePath(existingCard.profileImg);
+    const oldBackCoverImgPath = extractFilePath(existingCard.backCoverImg);
+    const oldLogoImgPath = extractFilePath(existingCard.logoImg);
+    const oldSectionImages = existingCard.sections
+      .map((section) =>
+        section.subSections.map((subSection) =>
+          extractFilePath(subSection.image)
+        )
+      )
+      .flat()
+      .filter(Boolean); // Remove null values
 
     // Convert base64 images and store the file paths only if the image data is in base64 format
-    const profileImgResult = isBase64Image(profileImg)
-      ? await convertAndStoreImages([profileImg], "profileImg", publicLink)
-      : { urls: [profileImg], publicIds: [] };
-    const backCoverImgResult = isBase64Image(backCoverImg)
-      ? await convertAndStoreImages([backCoverImg], "backCoverImg", publicLink)
-      : { urls: [backCoverImg], publicIds: [] };
-    const logoImgResult = isBase64Image(logoImg)
-      ? await convertAndStoreImages([logoImg], "logoImg", publicLink)
-      : { urls: [logoImg], publicIds: [] };
+    const profileImgPath = isBase64Image(profileImg)
+      ? convertAndStoreImages(
+          [profileImg],
+          "profileImg",
+          publicLink,
+          storedFiles
+        )[0]
+      : profileImg || existingCard.profileImg;
+    const backCoverImgPath = isBase64Image(backCoverImg)
+      ? convertAndStoreImages(
+          [backCoverImg],
+          "backCoverImg",
+          publicLink,
+          storedFiles
+        )[0]
+      : backCoverImg || existingCard.backCoverImg;
+    const logoImgPath = isBase64Image(logoImg)
+      ? convertAndStoreImages([logoImg], "logoImg", publicLink, storedFiles)[0]
+      : logoImg || existingCard.logoImg;
 
     // Convert and store section images only if the image data is in base64 format
-    const updatedSections = await Promise.all(
-      sections.map(async (section) => {
-        const updatedSubSections = await Promise.all(
-          section.subSections.map(async (subSection) => {
-            const oldSubSectionImgPublicId = subSection.imagePublicId;
-            const subSectionImgResult = isBase64Image(subSection.image)
-              ? await convertAndStoreImages(
-                  [subSection.image],
-                  "subSectionImg",
-                  publicLink
-                )
-              : { urls: [subSection.image], publicIds: [] };
-            if (
-              subSectionImgResult.publicIds.length > 0 &&
-              oldSubSectionImgPublicId
-            ) {
-              await deleteImagesFromCloudinary([oldSubSectionImgPublicId]);
-            }
-            return {
-              ...subSection,
-              image: subSectionImgResult.urls[0],
-              imagePublicId: subSectionImgResult.publicIds[0],
-            };
-          })
-        );
-        return { ...section, subSections: updatedSubSections };
-      })
-    );
+    const updatedSections = sections.map((section, sectionIndex) => {
+      const updatedSubSections = section.subSections.map(
+        (subSection, subSectionIndex) => {
+          const subSectionImgPath = isBase64Image(subSection.image)
+            ? convertAndStoreImages(
+                [subSection.image],
+                "subSectionImg",
+                publicLink,
+                storedFiles
+              )[0]
+            : subSection.image ||
+              existingCard.sections[sectionIndex].subSections[subSectionIndex]
+                .image;
+          return { ...subSection, image: subSectionImgPath };
+        }
+      );
+      return { ...section, subSections: updatedSubSections };
+    });
 
     // Update the card document
     existingCard.templateId = templateId;
     existingCard.publicLink = publicLink;
-    existingCard.profileImg = profileImgResult.urls[0] || profileImg;
-    existingCard.profileImgPublicId =
-      profileImgResult.publicIds[0] || oldProfileImgPublicId;
-    existingCard.backCoverImg = backCoverImgResult.urls[0] || backCoverImg;
-    existingCard.backCoverImgPublicId =
-      backCoverImgResult.publicIds[0] || oldBackCoverImgPublicId;
-    existingCard.logoImg = logoImgResult.urls[0] || logoImg;
-    existingCard.logoImgPublicId =
-      logoImgResult.publicIds[0] || oldLogoImgPublicId;
+    existingCard.profileImg = profileImgPath;
+    existingCard.backCoverImg = backCoverImgPath;
+    existingCard.logoImg = logoImgPath;
     existingCard.firstName = firstName;
     existingCard.lastName = lastName;
     existingCard.jobTitle = jobTitle;
@@ -400,15 +432,28 @@ const editCard = async (req, res) => {
     // Save the updated card to the database
     await existingCard.save();
 
-    if (profileImgResult.publicIds.length > 0 && oldProfileImgPublicId) {
-      await deleteImagesFromCloudinary([oldProfileImgPublicId]);
-    }
-    if (backCoverImgResult.publicIds.length > 0 && oldBackCoverImgPublicId) {
-      await deleteImagesFromCloudinary([oldBackCoverImgPublicId]);
-    }
-    if (logoImgResult.publicIds.length > 0 && oldLogoImgPublicId) {
-      await deleteImagesFromCloudinary([oldLogoImgPublicId]);
-    }
+    // Delete old images if new images were uploaded
+    if (isBase64Image(profileImg) && oldProfileImgPath)
+      deleteStoredFiles([oldProfileImgPath]);
+    if (isBase64Image(backCoverImg) && oldBackCoverImgPath)
+      deleteStoredFiles([oldBackCoverImgPath]);
+    if (isBase64Image(logoImg) && oldLogoImgPath)
+      deleteStoredFiles([oldLogoImgPath]);
+    // Improved logic to delete old section images
+    const newSectionImages = updatedSections
+      .map((section) =>
+        section.subSections.map((subSection) =>
+          extractFilePath(subSection.image)
+        )
+      )
+      .flat()
+      .filter(Boolean); // Remove null values
+
+    oldSectionImages.forEach((oldImagePath) => {
+      if (!newSectionImages.includes(oldImagePath)) {
+        deleteStoredFiles([oldImagePath]);
+      }
+    });
 
     return res
       .status(200)
@@ -421,6 +466,8 @@ const editCard = async (req, res) => {
       );
   } catch (error) {
     console.error("Error updating card:", error);
+    // Clean up stored files
+    deleteStoredFiles(storedFiles);
     res
       .status(500)
       .json(new ApiError(500, "Server error. Could not update card."));
