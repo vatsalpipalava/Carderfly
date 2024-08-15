@@ -271,6 +271,7 @@ import userRoutes from "./routes/user.routes.js";
 import cardRoutes from "./routes/card.routes.js";
 import subscribeRoutes from "./routes/subscribe.routes.js";
 import invoiceRoutes from "./routes/invoice.routes.js";
+import backupRoutes from "./routes/backup.routes.js";
 
 import { Subscribe } from "./models/subscribe.model.js";
 import { Card } from "./models/card.model.js";
@@ -282,6 +283,7 @@ app.use("/api/v1/user", userRoutes);
 app.use("/api/v1/card", cardRoutes);
 app.use("/api/v1/subscribe", subscribeRoutes);
 app.use("/api/v1/invoice", invoiceRoutes);
+app.use("/api/v1/backup", backupRoutes);
 
 app.all("*", (req, res) => {
   res.status(404);

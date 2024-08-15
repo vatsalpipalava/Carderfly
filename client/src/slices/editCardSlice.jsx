@@ -187,9 +187,9 @@ export const editCardSlice = createSlice({
     reFeatureText: (state, action) => {
       state.card.colors.featureText = action.payload;
     },
-    reFeatureSeparator: (state, action) => {
-      state.card.colors.featureSeparator = action.payload;
-    },
+    // reFeatureSeparator: (state, action) => {
+    //   state.card.colors.featureSeparator = action.payload;
+    // },
     reFooterBg: (state, action) => {
       state.card.colors.footerBg = action.payload;
     },
@@ -235,7 +235,7 @@ export const {
   // reCardSeparator,
   reCardIcon,
   reFeatureText,
-  reFeatureSeparator,
+  // reFeatureSeparator,
   reFooterBg,
   reFooterIcon,
   reQrCode,

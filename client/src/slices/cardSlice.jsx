@@ -50,7 +50,7 @@ const initialState = {
     // cardSeparator: undefined,
     cardIcon: undefined,
     featureText: undefined,
-    featureSeparator: undefined,
+    // featureSeparator: undefined,
     footerBg: undefined,
     footerIcon: undefined,
     qrCode: undefined,
@@ -240,9 +240,9 @@ export const cardSlice = createSlice({
     reFeatureText: (state, action) => {
       state.colors.featureText = action.payload;
     },
-    reFeatureSeparator: (state, action) => {
-      state.colors.featureSeparator = action.payload;
-    },
+    // reFeatureSeparator: (state, action) => {
+    //   state.colors.featureSeparator = action.payload;
+    // },
     reFooterBg: (state, action) => {
       state.colors.footerBg = action.payload;
     },
@@ -288,7 +288,7 @@ export const {
   // reCardSeparator,
   reCardIcon,
   reFeatureText,
-  reFeatureSeparator,
+  // reFeatureSeparator,
   reFooterBg,
   reFooterIcon,
   reQrCode,

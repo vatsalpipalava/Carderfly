@@ -33,7 +33,7 @@ import {
   // reCardSeparator,
   reCardIcon,
   reFeatureText,
-  reFeatureSeparator,
+  // reFeatureSeparator,
   reFooterBg,
   reFooterIcon,
   reQrCode,
@@ -78,7 +78,7 @@ function ExecutiveDesign({ cardData }) {
     // dispatch(reCardSeparator("#E5E5E5"));
     dispatch(reCardIcon("#000000"));
     dispatch(reFeatureText("#5A5A5A"));
-    dispatch(reFeatureSeparator("#E5E5E5"));
+    // dispatch(reFeatureSeparator("#E5E5E5"));
     dispatch(reFooterBg("#F7F7F7"));
     dispatch(reFooterIcon("#494949"));
     dispatch(reQrCode("#102C57"));

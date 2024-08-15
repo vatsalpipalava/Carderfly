@@ -39,7 +39,7 @@ import {
   // reCardSeparator,
   reCardIcon,
   reFeatureText,
-  reFeatureSeparator,
+  // reFeatureSeparator,
   reFooterBg,
   reFooterIcon,
   reQrCode,
@@ -84,12 +84,11 @@ function PrestigeConnect({ cardData }) {
     // dispatch(reCardSeparator("#E5E5E5"));
     dispatch(reCardIcon("#FFFFFF"));
     dispatch(reFeatureText("#FFFFFF"));
-    dispatch(reFeatureSeparator("#E5E5E5"));
+    // dispatch(reFeatureSeparator("#E5E5E5"));
     dispatch(reFooterBg("#FFFFFF"));
     dispatch(reFooterIcon("#000000"));
     dispatch(reQrCode("#2AA9A9"));
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [dispatch]);
 
   return (
     <div

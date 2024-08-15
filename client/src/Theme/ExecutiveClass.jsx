@@ -38,7 +38,7 @@ import {
   // reCardSeparator,
   reCardIcon,
   reFeatureText,
-  reFeatureSeparator,
+  // reFeatureSeparator,
   reFooterBg,
   reFooterIcon,
   reQrCode,
@@ -76,7 +76,7 @@ function ExecutiveClass({ cardData }) {
     // dispatch(reCardSeparator("#E5E5E5"));
     dispatch(reCardIcon("#737373"));
     dispatch(reFeatureText("#000000"));
-    dispatch(reFeatureSeparator("#E5E5E5"));
+    // dispatch(reFeatureSeparator("#E5E5E5"));
     dispatch(reFooterBg("#F5F5F5"));
     dispatch(reFooterIcon("#737373"));
     dispatch(reQrCode("#4E4E4E"));

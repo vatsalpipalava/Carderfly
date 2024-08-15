@@ -29,7 +29,7 @@ import {
   // reCardSeparator,
   reCardIcon,
   reFeatureText,
-  reFeatureSeparator,
+  // reFeatureSeparator,
   reFooterBg,
   reFooterIcon,
   reQrCode,
@@ -73,7 +73,7 @@ function CorporateIdentity({ cardData }) {
     // dispatch(reCardSeparator("#E5E5E5"));
     dispatch(reCardIcon("#76C2FF"));
     dispatch(reFeatureText("#000000"));
-    dispatch(reFeatureSeparator("#E5E5E5"));
+    // dispatch(reFeatureSeparator("#E5E5E5"));
     dispatch(reFooterBg("#3B82F6"));
     dispatch(reFooterIcon("#FFFFFF"));
     dispatch(reQrCode("#3B82F6"));

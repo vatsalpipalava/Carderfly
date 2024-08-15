@@ -12,3 +12,6 @@ connectDB()
   }).catch((err) => {
     console.log("MongoDB connection failed !!! ", err);
   });
+
+
+// Node - 18.17.0

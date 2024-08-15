@@ -32,7 +32,7 @@ import {
   // reCardSeparator,
   reCardIcon,
   reFeatureText,
-  reFeatureSeparator,
+  // reFeatureSeparator,
   reFooterBg,
   reFooterIcon,
   reQrCode,
@@ -75,7 +75,7 @@ function CorporateElegance({ cardData }) {
     // dispatch(reCardSeparator("#E5E5E5"));
     dispatch(reCardIcon("#FFFFFF"));
     dispatch(reFeatureText("#000000"));
-    dispatch(reFeatureSeparator("#E5E5E5"));
+    // dispatch(reFeatureSeparator("#E5E5E5"));
     dispatch(reFooterBg("#0294ff"));
     dispatch(reFooterIcon("#FFFFFF"));
     dispatch(reQrCode("#4E4E4E"));

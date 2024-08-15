@@ -30,7 +30,7 @@ import {
   // reCardSeparator,
   reCardIcon,
   reFeatureText,
-  reFeatureSeparator,
+  // reFeatureSeparator,
   reFooterBg,
   reFooterIcon,
   reQrCode,
@@ -78,7 +78,7 @@ function ProfessionalEdge({ cardData }) {
     // dispatch(reCardSeparator("#E5E5E5"));
     dispatch(reCardIcon("#F46E49"));
     dispatch(reFeatureText("#FFFFFF"));
-    dispatch(reFeatureSeparator("#E5E5E5"));
+    // dispatch(reFeatureSeparator("#E5E5E5"));
     dispatch(reFooterBg("#F5F5F5"));
     dispatch(reFooterIcon("#494949"));
     dispatch(reQrCode("#4E4E4E"));

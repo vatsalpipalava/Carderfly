@@ -38,7 +38,7 @@ import {
   // reCardSeparator,
   reCardIcon,
   reFeatureText,
-  reFeatureSeparator,
+  // reFeatureSeparator,
   reFooterBg,
   reFooterIcon,
   reQrCode,
@@ -83,7 +83,7 @@ function PrimeEssentials({ cardData }) {
     // dispatch(reCardSeparator("#E5E5E5"));
     dispatch(reCardIcon("#023535"));
     dispatch(reFeatureText("#5A5A5A"));
-    dispatch(reFeatureSeparator("#E5E5E5"));
+    // dispatch(reFeatureSeparator("#E5E5E5"));
     dispatch(reFooterBg("#FFFFFF"));
     dispatch(reFooterIcon("#000000"));
     dispatch(reQrCode("#023535"));

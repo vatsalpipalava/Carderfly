@@ -28,7 +28,7 @@ import {
   // reCardSeparator,
   reCardIcon,
   reFeatureText,
-  reFeatureSeparator,
+  // reFeatureSeparator,
   reFooterBg,
   reFooterIcon,
   reQrCode,
@@ -76,7 +76,7 @@ function BusinessPrime({ cardData }) {
     // dispatch(reCardSeparator("#E5E5E5"));
     dispatch(reCardIcon("#6b7280"));
     dispatch(reFeatureText("#000000"));
-    dispatch(reFeatureSeparator("#E5E5E5"));
+    // dispatch(reFeatureSeparator("#E5E5E5"));
     dispatch(reFooterBg("#F8FAFC"));
     dispatch(reFooterIcon("#6b7280"));
     dispatch(reQrCode("#232323"));

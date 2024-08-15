@@ -32,7 +32,7 @@ import {
   // reCardSeparator,
   reCardIcon,
   reFeatureText,
-  reFeatureSeparator,
+  // reFeatureSeparator,
   reFooterBg,
   reFooterIcon,
   reQrCode,
@@ -71,7 +71,7 @@ function ProfessionalSuite({ cardData }) {
     // dispatch(reCardSeparator("#E5E5E5"));
     dispatch(reCardIcon("#000000"));
     dispatch(reFeatureText("#000000"));
-    dispatch(reFeatureSeparator("#E5E5E5"));
+    // dispatch(reFeatureSeparator("#E5E5E5"));
     dispatch(reFooterBg("#4E4E4E"));
     dispatch(reFooterIcon("#E1E1E1"));
     dispatch(reQrCode("#4E4E4E"));
