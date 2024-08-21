@@ -185,7 +185,6 @@ export function Transactions() {
   const [startDateSort, setStartDateSort] = useState("desc");
   const [endDateSort, setEndDateSort] = useState("desc");
   const [statusIds, setStatusIds] = useState(["inProgress", "expired"]);
-  console.log("🚀 ~ Transactions ~ statusIds:", statusIds);
 
   const [invoices, setInvoices] = useState([]);
   const [loading, setLoading] = useState(false);

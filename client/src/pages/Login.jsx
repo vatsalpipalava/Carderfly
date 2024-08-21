@@ -116,7 +116,6 @@ export function LoginForm() {
         <div className="flex h-14 items-center lg:h-[60px]">
           <Link
             to="/"
-            end
             className="group flex items-center gap-2 font-semibold"
           >
             <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary">

@@ -12,4 +12,10 @@ router.route("^/$|/index(.html)?").get((req, res) => {
   res.sendFile(path.join(__dirname, "..", "views", "index.html"));
 });
 
+router.route("/favicon.ico").get((req, res) => {
+  res.sendFile(
+    path.join(__dirname, "..", "..", "public", "temp", "favicon.ico")
+  );
+});
+
 export default router;

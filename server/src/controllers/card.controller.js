@@ -532,7 +532,7 @@ function generateVCard(card) {
   vCard.note = card?.businessDescription;
 
   vCard.logo.attachFromUrl(`${card?.logoImg}`, "JPEG");
-  vCard.socialUrls["carderfly"] = `https://carderfly.com/${card?.publicLink}`;
+  vCard.socialUrls["carderfly"] = `${process.env.FIS_FRONTEND_URL}/${card?.publicLink}`;
 
   return vCard.getFormattedString();
 }

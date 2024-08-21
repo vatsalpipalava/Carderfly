@@ -1,7 +1,6 @@
 import { useEffect } from "react";
 import { Routes, Route, useLocation } from "react-router-dom";
 import "./App.css";
-import { ModeToggle } from "./components/dark-mode/mode-toggle";
 
 // <--------------- Layout ---------------->
 import Layout from "./components/layouts/Layout";
@@ -70,7 +69,6 @@ function App() {
             <Route index element={<Home />} />
             <Route path="register" element={<RegisterForm />} />
             <Route path="login" element={<LoginForm />} />
-            <Route path="theme" element={<ModeToggle />} />
 
             <Route element={<RequireAuth />}>
               <Route path="view-card/:cardId" element={<MyCardById />} />

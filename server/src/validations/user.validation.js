@@ -1,5 +1,4 @@
 import { body } from "express-validator";
-import mongoose from "mongoose";
 
 const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
 

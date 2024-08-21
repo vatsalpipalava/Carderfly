@@ -209,6 +209,8 @@ app.post(
 
         card.isPublic = false;
         card.subscribeId = null;
+        card.isBlocked = false;
+        card.blockedDate = null;
         await card.save();
 
         return response.status(200).json({
@@ -271,6 +273,8 @@ import userRoutes from "./routes/user.routes.js";
 import cardRoutes from "./routes/card.routes.js";
 import subscribeRoutes from "./routes/subscribe.routes.js";
 import invoiceRoutes from "./routes/invoice.routes.js";
+import adminUserRoutes from "./routes/adminUser.routes.js";
+import adminDataRoutes from "./routes/adminData.routes.js";
 import backupRoutes from "./routes/backup.routes.js";
 
 import { Subscribe } from "./models/subscribe.model.js";
@@ -283,6 +287,8 @@ app.use("/api/v1/user", userRoutes);
 app.use("/api/v1/card", cardRoutes);
 app.use("/api/v1/subscribe", subscribeRoutes);
 app.use("/api/v1/invoice", invoiceRoutes);
+app.use("/api/v1/admin", adminUserRoutes);
+app.use("/api/v1/admin-data", adminDataRoutes);
 app.use("/api/v1/backup", backupRoutes);
 
 app.all("*", (req, res) => {

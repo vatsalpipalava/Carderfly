@@ -260,7 +260,7 @@ function PrimeEssentials({ cardData }) {
                 className="h-6 p-0"
                 style={{ color: cardData?.colors?.text }}
               >
-                <Link to="https://carderfly.com" target="_blank">
+                <Link to={import.meta.env.VITE_FRONTEND_URL} target="_blank">
                   Carderfly
                 </Link>
               </Button>
