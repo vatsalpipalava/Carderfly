@@ -1,6 +1,6 @@
 import { Link, useLocation } from "react-router-dom";
 
-import { ChevronRight, Home, IdCard, Menu, Users } from "lucide-react";
+import { ChevronRight, CloudDownload, Home, IdCard, Menu, Users } from "lucide-react";
 import Carderfly from "@/assets/svgs/carderfly";
 
 import {
@@ -58,28 +58,28 @@ function SheetDashboard() {
               </AccordionTrigger>
               <AccordionContent className="pb-0">
                 <Link
-                  to="/"
+                  to="/cards/subscription"
                   className={`mx-[-0.65rem] flex items-center gap-4 rounded-xl px-3 py-2 text-base ${isActiveRoute("/cards/subscription") ? "bg-muted text-primary" : "text-muted-foreground hover:text-primary"}`}
                 >
                   <ChevronRight className="h-5 w-5" />
                   Subscription
                 </Link>
                 <Link
-                  to="/"
+                  to="/cards/all"
                   className={`mx-[-0.65rem] flex items-center gap-4 rounded-xl px-3 py-2 text-base ${isActiveRoute("/cards/all") ? "bg-muted text-primary" : "text-muted-foreground hover:text-primary"}`}
                 >
                   <ChevronRight className="h-5 w-5" />
                   All
                 </Link>
                 <Link
-                  to="/"
+                  to="/cards/inactive"
                   className={`mx-[-0.65rem] flex items-center gap-4 rounded-xl px-3 py-2 text-base ${isActiveRoute("/cards/inactive") ? "bg-muted text-primary" : "text-muted-foreground hover:text-primary"}`}
                 >
                   <ChevronRight className="h-5 w-5" />
                   Inactive
                 </Link>
                 <Link
-                  to="/"
+                  to="/cards/blocked"
                   className={`mx-[-0.65rem] flex items-center gap-4 rounded-xl px-3 py-2 text-base ${isActiveRoute("/cards/blocked") ? "bg-muted text-primary" : "text-muted-foreground hover:text-primary"}`}
                 >
                   <ChevronRight className="h-5 w-5" />
@@ -94,6 +94,13 @@ function SheetDashboard() {
           >
             <Users className="h-5 w-5" />
             Customers
+          </Link>
+          <Link
+            to="/backup"
+            className={`mx-[-0.65rem] flex items-center gap-4 rounded-xl px-3 py-2 ${isActiveRoute("/backup") ? "bg-muted text-primary" : "text-muted-foreground hover:text-primary"}`}
+          >
+            <CloudDownload className="h-5 w-5" />
+            Backup
           </Link>
         </nav>
       </SheetContent>

@@ -1,8 +1,14 @@
 import { Router } from "express";
-import { exportAllBackups } from "../controllers/backup.controller.js";
+import {
+  exportAllDbs,
+  exportAllImages,
+} from "../controllers/backup.controller.js";
+import { verifyAdminJWT } from "../middlewares/auth.middleware.js";
 
 const router = Router();
 
-router.route("/export/all-collections").get(exportAllBackups);
+router.route("/export/db").get(verifyAdminJWT, exportAllDbs);
+
+router.route("/export/images").get(verifyAdminJWT, exportAllImages);
 
 export default router;

@@ -18,6 +18,7 @@ import { AllCards } from "@/pages/AllCards";
 import { InactiveCards } from "@/pages/InactiveCards";
 import { BlockedCard } from "@/pages/BlockedCard";
 import NotFound from "@/pages/NotFound";
+import { Backup } from "@/pages/Backup";
 
 function App() {
   return (
@@ -36,6 +37,7 @@ function App() {
               <Route path="cards/all" element={<AllCards />} />
               <Route path="cards/inactive" element={<InactiveCards />} />
               <Route path="cards/blocked" element={<BlockedCard />} />
+              <Route path="backup" element={<Backup />} />
             </Route>
           </Route>
         </Route>

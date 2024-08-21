@@ -1,6 +1,6 @@
 import { NavLink, useLocation, Outlet } from "react-router-dom";
 
-import { ChevronRight, Home, IdCard, Users } from "lucide-react";
+import { ChevronRight, CloudDownload, Home, IdCard, Users } from "lucide-react";
 import Carderfly from "@/assets/svgs/carderfly";
 
 import {
@@ -123,6 +123,19 @@ const DashboardLayout = () => {
               >
                 <Users className="h-4 w-4 transition-all group-hover:scale-110" />
                 Customers
+              </NavLink>
+              <NavLink
+                to="/backup"
+                className={({ isActive }) =>
+                  `group flex items-center gap-3 rounded-md px-3 py-2 transition-all ${
+                    isActive
+                      ? "bg-primary text-white"
+                      : "text-muted-foreground hover:text-primary"
+                  }`
+                }
+              >
+                <CloudDownload className="h-4 w-4 transition-all group-hover:scale-110" />
+                Backup
               </NavLink>
             </nav>
           </div>
