@@ -97,6 +97,7 @@ const checkoutSession = asyncHandler(async (req, res) => {
       {
         price: priceId,
         quantity: 1,
+        tax_rates: ["txr_1PqV3TSFtTo05V1cCrNCPZwL"],
       },
     ],
     metadata: {
@@ -105,10 +106,13 @@ const checkoutSession = asyncHandler(async (req, res) => {
     },
     success_url: `${process.env.SEC_FRONTEND_URL}/checkout/payment/success/subscribe/card/${cardId}/{CHECKOUT_SESSION_ID}`,
     cancel_url: `${process.env.SEC_FRONTEND_URL}/dashboard/my-cards`,
-    // automatic_tax: { enabled: true },
+    // automatic_tax: {
+    //   enabled: true,
+    // },
     tax_id_collection: {
       enabled: true,
     },
+    allow_promotion_codes: true,
     phone_number_collection: {
       enabled: true,
     },

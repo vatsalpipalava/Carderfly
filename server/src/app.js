@@ -85,7 +85,7 @@ app.post(
       const customerId = checkoutSessionCompleted.customer;
       const subscriptionId = checkoutSessionCompleted.subscription;
       const invoiceId = checkoutSessionCompleted.invoice;
-      const stripeAmount = checkoutSessionCompleted.amount_total;
+      const stripeAmount = checkoutSessionCompleted.amount_subtotal;
       const creates_at = checkoutSessionCompleted.created;
 
       const userIdString = checkoutSessionCompleted.metadata.userId;

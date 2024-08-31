@@ -156,7 +156,7 @@ export function Backup() {
           {imageLoading ? (
             <Button
               disabled
-              className="bg-blue-500 text-white hover:bg-blue-600"
+              className="bg-green-500 text-white hover:bg-green-600"
             >
               <Loader2 className="mr-2 h-5 w-5 animate-spin" />
               Please wait
