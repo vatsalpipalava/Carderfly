@@ -2,8 +2,16 @@ import { useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
+import { Helmet } from "react-helmet";
 
-import { AlertCircle, Loader2, MailIcon, PhoneIcon } from "lucide-react";
+import {
+  AlertCircle,
+  DollarSign,
+  IndianRupee,
+  Loader2,
+  MailIcon,
+  PhoneIcon,
+} from "lucide-react";
 import CarderflyLogo from "../assets/images/Carderflylogo.png";
 
 import { Alert, AlertDescription } from "@/components/ui/alert";
@@ -19,13 +27,14 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useToast } from "@/components/ui/use-toast";
 
-import { planSchema } from "@/schemas/cardSchema";
+import { inrPlanSchema, usdPlanSchema } from "@/schemas/cardSchema";
 import useAxiosPrivate from "@/hooks/useAxiosPrivate";
 import NotFound from "./NotFound";
-import { Helmet } from "react-helmet";
+import { getUserLocation } from "@/api/userLocation";
 
 export function Checkout() {
   const { cardId } = useParams();
@@ -40,11 +49,20 @@ export function Checkout() {
   const [loading, setLoading] = useState(false);
   // const [success, setSuccess] = useState(null);
   const [errMsg, setErrMsg] = useState("");
+  const [defaultCurrency, setDefaultCurrency] = useState("USD");
 
-  const form = useForm({
-    resolver: zodResolver(planSchema),
+  const inrForm = useForm({
+    resolver: zodResolver(inrPlanSchema),
     defaultValues: {
       type: "standard",
+      terms: false,
+    },
+  });
+
+  const usdForm = useForm({
+    resolver: zodResolver(usdPlanSchema),
+    defaultValues: {
+      type: "usd_standard",
       terms: false,
     },
   });
@@ -58,7 +76,6 @@ export function Checkout() {
         );
         setValidLoading(false);
         setCard(response?.data?.data);
-        console.log(cardId);
       } catch (err) {
         setValidLoading(false);
         if (!err?.response) {
@@ -79,6 +96,19 @@ export function Checkout() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  useEffect(() => {
+    const setCurrencyBasedOnLocation = async () => {
+      const country = await getUserLocation();
+      if (country === "IN") {
+        setDefaultCurrency("INR");
+      } else {
+        setDefaultCurrency("USD");
+      }
+    };
+
+    setCurrencyBasedOnLocation();
+  }, []);
+
   if (notFound) {
     return <NotFound />;
   }
@@ -91,18 +121,16 @@ export function Checkout() {
     navigate(`/${cardId}`);
   }
 
-  const termsChecked = form.watch("terms");
+  const termsCheckedINR = inrForm.watch("terms");
+  const termsCheckedUSD = usdForm.watch("terms");
 
   const onSubmit = async (data) => {
-    // console.log(data);
-    // setAlreadySubscribed(true);
     setLoading(true);
     try {
       const response = await axiosPrivate.post(
         `/subscribe/checkout/subscription/card/${cardId}`,
         { subscriptionPlanId: data.type }
       );
-      console.log(response.data.data.url);
       setLoading(false);
       setErrMsg("");
       window.location.href = response.data.data.url;
@@ -209,136 +237,301 @@ export function Checkout() {
               </p>
             </div>
 
-            <Form {...form}>
-              <form onSubmit={form.handleSubmit(onSubmit)}>
-                <div className="space-y-4">
-                  <FormField
-                    control={form.control}
-                    name="type"
-                    render={({ field }) => (
-                      <FormItem className="space-y-3">
-                        <FormControl>
-                          <RadioGroup
-                            onValueChange={field.onChange}
-                            defaultValue={field.value}
-                          >
-                            <div className="grid gap-2">
-                              {/* Starter */}
-                              <FormItem>
-                                <FormLabel className="border-accent*40 flex cursor-pointer items-center justify-between gap-4 rounded-md border-2 bg-popover p-4 hover:border-accent hover:bg-accent hover:text-accent-foreground peer-data-[state=checked]:border-primary [&:has([data-state=checked])]:border-primary">
-                                  <div className="grid gap-1">
-                                    <div className="font-semibold">Starter</div>
-                                    <div className="text-4xl font-bold">
-                                      ₹399
-                                    </div>
-                                    <p className="text-sm text-muted-foreground">
-                                      Quarterly (3 Months), save 20%
-                                    </p>
-                                  </div>
-                                  <FormControl>
-                                    <RadioGroupItem value="starter" />
-                                  </FormControl>
-                                </FormLabel>
-                              </FormItem>
+            <Tabs
+              value={defaultCurrency}
+              onValueChange={setDefaultCurrency}
+              className="h-full w-full"
+            >
+              <TabsList className="grid h-auto w-full grid-cols-2">
+                <TabsTrigger value="INR" className="group gap-3">
+                  <div className="flex h-8 w-8 items-center justify-center rounded-full border-2 border-primary group-data-[state=active]:border-transparent group-data-[state=active]:bg-primary">
+                    <IndianRupee className="h-4 w-4 text-primary group-data-[state=active]:text-white" />
+                  </div>
+                  <p className="text-lg">INR</p>
+                </TabsTrigger>
+                <TabsTrigger value="USD" className="group gap-3">
+                  <div className="flex h-8 w-8 items-center justify-center rounded-full border-2 border-primary group-data-[state=active]:border-transparent group-data-[state=active]:bg-primary">
+                    <DollarSign className="h-4 w-4 text-primary group-data-[state=active]:text-white" />
+                  </div>
+                  <p className="text-lg">USD</p>
+                </TabsTrigger>
+              </TabsList>
+              <TabsContent value="INR">
+                {/* INR */}
 
-                              {/* 6 Month */}
-                              <FormItem>
-                                <FormLabel className="border-accent*40 flex cursor-pointer items-center justify-between gap-4 rounded-md border-2 bg-popover p-4 hover:border-accent hover:bg-accent hover:text-accent-foreground peer-data-[state=checked]:border-primary [&:has([data-state=checked])]:border-primary">
-                                  <div className="grid gap-1">
-                                    <div className="font-semibold">
-                                      Standard
-                                    </div>
-                                    <div className="text-4xl font-bold">
-                                      ₹599
-                                    </div>
-                                    <p className="text-sm text-muted-foreground">
-                                      Billed Bi-annually (6 Months), save 25%
-                                    </p>
-                                  </div>
-                                  <FormControl>
-                                    <RadioGroupItem value="standard" />
-                                  </FormControl>
-                                </FormLabel>
-                              </FormItem>
-                              {/* 12 Month */}
-                              <FormItem>
-                                <FormLabel className="border-accent*40 flex cursor-pointer items-center justify-between gap-4 rounded-md border-2 bg-popover p-4 hover:border-accent hover:bg-accent hover:text-accent-foreground peer-data-[state=checked]:border-primary [&:has([data-state=checked])]:border-primary">
-                                  <div className="grid gap-1">
-                                    <div className="font-semibold">Premium</div>
-                                    <div className="text-4xl font-bold">
-                                      ₹999
-                                    </div>
-                                    <p className="text-sm text-muted-foreground">
-                                      Annually (12 Months), save 30%
-                                    </p>
-                                  </div>
-                                  <FormControl>
-                                    <RadioGroupItem value="premium" />
-                                  </FormControl>
-                                </FormLabel>
-                              </FormItem>
+                <Form {...inrForm}>
+                  <form onSubmit={inrForm.handleSubmit(onSubmit)}>
+                    <div className="space-y-4">
+                      <FormField
+                        control={inrForm.control}
+                        name="type"
+                        render={({ field }) => (
+                          <FormItem className="space-y-3">
+                            <FormControl>
+                              <RadioGroup
+                                onValueChange={field.onChange}
+                                defaultValue={field.value}
+                              >
+                                <div className="grid gap-2">
+                                  {/* Starter */}
+                                  <FormItem>
+                                    <FormLabel className="border-accent*40 flex cursor-pointer items-center justify-between gap-4 rounded-md border-2 bg-popover p-4 hover:border-accent hover:bg-accent hover:text-accent-foreground peer-data-[state=checked]:border-primary [&:has([data-state=checked])]:border-primary">
+                                      <div className="grid gap-1">
+                                        <div className="font-semibold">
+                                          Starter
+                                        </div>
+                                        <div className="text-4xl font-bold">
+                                          ₹399
+                                        </div>
+                                        <p className="text-sm text-muted-foreground">
+                                          Quarterly (3 Months)
+                                        </p>
+                                      </div>
+                                      <FormControl>
+                                        <RadioGroupItem value="starter" />
+                                      </FormControl>
+                                    </FormLabel>
+                                  </FormItem>
+
+                                  {/* 6 Month */}
+                                  <FormItem>
+                                    <FormLabel className="border-accent*40 flex cursor-pointer items-center justify-between gap-4 rounded-md border-2 bg-popover p-4 hover:border-accent hover:bg-accent hover:text-accent-foreground peer-data-[state=checked]:border-primary [&:has([data-state=checked])]:border-primary">
+                                      <div className="grid gap-1">
+                                        <div className="font-semibold">
+                                          Standard
+                                        </div>
+                                        <div className="text-4xl font-bold">
+                                          ₹599
+                                        </div>
+                                        <p className="text-sm text-muted-foreground">
+                                          Bi-annually (6 Months)
+                                        </p>
+                                      </div>
+                                      <FormControl>
+                                        <RadioGroupItem value="standard" />
+                                      </FormControl>
+                                    </FormLabel>
+                                  </FormItem>
+                                  {/* 12 Month */}
+                                  <FormItem>
+                                    <FormLabel className="border-accent*40 flex cursor-pointer items-center justify-between gap-4 rounded-md border-2 bg-popover p-4 hover:border-accent hover:bg-accent hover:text-accent-foreground peer-data-[state=checked]:border-primary [&:has([data-state=checked])]:border-primary">
+                                      <div className="grid gap-1">
+                                        <div className="font-semibold">
+                                          Premium
+                                        </div>
+                                        <div className="text-4xl font-bold">
+                                          ₹999
+                                        </div>
+                                        <p className="text-sm text-muted-foreground">
+                                          Annually (12 Months)
+                                        </p>
+                                      </div>
+                                      <FormControl>
+                                        <RadioGroupItem value="premium" />
+                                      </FormControl>
+                                    </FormLabel>
+                                  </FormItem>
+                                </div>
+                              </RadioGroup>
+                            </FormControl>
+                            <FormMessage />
+                          </FormItem>
+                        )}
+                      />
+
+                      {/* Terms */}
+                      <FormField
+                        control={inrForm.control}
+                        name="terms"
+                        render={({ field }) => (
+                          <FormItem className="space-y-3">
+                            <div className="flex items-center space-x-2">
+                              <FormControl>
+                                <Checkbox
+                                  checked={field.value}
+                                  onCheckedChange={field.onChange}
+                                />
+                              </FormControl>
+                              <FormLabel className="!mt-0">
+                                I agree to the{" "}
+                                <Link
+                                  to="#"
+                                  className="underline underline-offset-2"
+                                >
+                                  terms and conditions
+                                </Link>
+                              </FormLabel>
                             </div>
-                          </RadioGroup>
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
+                            <FormMessage />
+                          </FormItem>
+                        )}
+                      />
 
-                  {/* Terms */}
-                  <FormField
-                    control={form.control}
-                    name="terms"
-                    render={({ field }) => (
-                      <FormItem className="space-y-3">
-                        <div className="flex items-center space-x-2">
-                          <FormControl>
-                            <Checkbox
-                              checked={field.value}
-                              onCheckedChange={field.onChange}
-                            />
-                          </FormControl>
-                          <FormLabel className="!mt-0">
-                            I agree to the{" "}
-                            <Link
-                              to="#"
-                              className="underline underline-offset-2"
-                            >
-                              terms and conditions
-                            </Link>
-                          </FormLabel>
-                        </div>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
+                      {/* Error Message */}
+                      {errMsg ? (
+                        <Alert variant="destructive" className="mb-4">
+                          <AlertCircle className="h-4 w-4" />
+                          <AlertDescription>{errMsg}</AlertDescription>
+                        </Alert>
+                      ) : null}
 
-                  {/* Error Message */}
-                  {errMsg ? (
-                    <Alert variant="destructive" className="mb-4">
-                      <AlertCircle className="h-4 w-4" />
-                      <AlertDescription>{errMsg}</AlertDescription>
-                    </Alert>
-                  ) : null}
+                      {/* Submit Button */}
+                      {loading ? (
+                        <Button disabled className="w-full">
+                          <Loader2 className="mr-2 h-5 w-5 animate-spin" />
+                          Please wait
+                        </Button>
+                      ) : (
+                        <Button
+                          type="submit"
+                          disabled={!termsCheckedINR}
+                          className="w-full"
+                        >
+                          Complete Purchase
+                        </Button>
+                      )}
+                    </div>
+                  </form>
+                </Form>
+              </TabsContent>
+              <TabsContent value="USD">
+                <Form {...usdForm}>
+                  <form onSubmit={usdForm.handleSubmit(onSubmit)}>
+                    <div className="space-y-4">
+                      {/* USD */}
+                      <FormField
+                        control={usdForm.control}
+                        name="type"
+                        render={({ field }) => (
+                          <FormItem className="space-y-3">
+                            <FormControl>
+                              <RadioGroup
+                                onValueChange={field.onChange}
+                                defaultValue={field.value}
+                              >
+                                <div className="grid gap-2">
+                                  {/* Starter */}
+                                  <FormItem>
+                                    <FormLabel className="border-accent*40 flex cursor-pointer items-center justify-between gap-4 rounded-md border-2 bg-popover p-4 hover:border-accent hover:bg-accent hover:text-accent-foreground peer-data-[state=checked]:border-primary [&:has([data-state=checked])]:border-primary">
+                                      <div className="grid gap-1">
+                                        <div className="font-semibold">
+                                          Starter
+                                        </div>
+                                        <div className="text-4xl font-bold">
+                                          $7
+                                        </div>
+                                        <p className="text-sm text-muted-foreground">
+                                          Quarterly (3 Months)
+                                        </p>
+                                      </div>
+                                      <FormControl>
+                                        <RadioGroupItem value="usd_starter" />
+                                      </FormControl>
+                                    </FormLabel>
+                                  </FormItem>
 
-                  {/* Submit Button */}
-                  {loading ? (
-                    <Button disabled className="w-full">
-                      <Loader2 className="mr-2 h-5 w-5 animate-spin" />
-                      Please wait
-                    </Button>
-                  ) : (
-                    <Button
-                      type="submit"
-                      disabled={!termsChecked}
-                      className="w-full"
-                    >
-                      Complete Purchase
-                    </Button>
-                  )}
-                </div>
-              </form>
-            </Form>
+                                  {/* 6 Month */}
+                                  <FormItem>
+                                    <FormLabel className="border-accent*40 flex cursor-pointer items-center justify-between gap-4 rounded-md border-2 bg-popover p-4 hover:border-accent hover:bg-accent hover:text-accent-foreground peer-data-[state=checked]:border-primary [&:has([data-state=checked])]:border-primary">
+                                      <div className="grid gap-1">
+                                        <div className="font-semibold">
+                                          Standard
+                                        </div>
+                                        <div className="text-4xl font-bold">
+                                          $10
+                                        </div>
+                                        <p className="text-sm text-muted-foreground">
+                                          Bi-annually (6 Months)
+                                        </p>
+                                      </div>
+                                      <FormControl>
+                                        <RadioGroupItem value="usd_standard" />
+                                      </FormControl>
+                                    </FormLabel>
+                                  </FormItem>
+                                  {/* 12 Month */}
+                                  <FormItem>
+                                    <FormLabel className="border-accent*40 flex cursor-pointer items-center justify-between gap-4 rounded-md border-2 bg-popover p-4 hover:border-accent hover:bg-accent hover:text-accent-foreground peer-data-[state=checked]:border-primary [&:has([data-state=checked])]:border-primary">
+                                      <div className="grid gap-1">
+                                        <div className="font-semibold">
+                                          Premium
+                                        </div>
+                                        <div className="text-4xl font-bold">
+                                          $15
+                                        </div>
+                                        <p className="text-sm text-muted-foreground">
+                                          Annually (12 Months)
+                                        </p>
+                                      </div>
+                                      <FormControl>
+                                        <RadioGroupItem value="usd_premium" />
+                                      </FormControl>
+                                    </FormLabel>
+                                  </FormItem>
+                                </div>
+                              </RadioGroup>
+                            </FormControl>
+                            <FormMessage />
+                          </FormItem>
+                        )}
+                      />
+
+                      {/* Terms */}
+                      <FormField
+                        control={usdForm.control}
+                        name="terms"
+                        render={({ field }) => (
+                          <FormItem className="space-y-3">
+                            <div className="flex items-center space-x-2">
+                              <FormControl>
+                                <Checkbox
+                                  checked={field.value}
+                                  onCheckedChange={field.onChange}
+                                />
+                              </FormControl>
+                              <FormLabel className="!mt-0">
+                                I agree to the{" "}
+                                <Link
+                                  to="#"
+                                  className="underline underline-offset-2"
+                                >
+                                  terms and conditions
+                                </Link>
+                              </FormLabel>
+                            </div>
+                            <FormMessage />
+                          </FormItem>
+                        )}
+                      />
+
+                      {/* Error Message */}
+                      {errMsg ? (
+                        <Alert variant="destructive" className="mb-4">
+                          <AlertCircle className="h-4 w-4" />
+                          <AlertDescription>{errMsg}</AlertDescription>
+                        </Alert>
+                      ) : null}
+
+                      {/* Submit Button */}
+                      {loading ? (
+                        <Button disabled className="w-full">
+                          <Loader2 className="mr-2 h-5 w-5 animate-spin" />
+                          Please wait
+                        </Button>
+                      ) : (
+                        <Button
+                          type="submit"
+                          disabled={!termsCheckedUSD}
+                          className="w-full"
+                        >
+                          Complete Purchase
+                        </Button>
+                      )}
+                    </div>
+                  </form>
+                </Form>
+              </TabsContent>
+            </Tabs>
           </div>
           <div className="flex flex-col items-center rounded-lg bg-muted p-6">
             <div className="mb-4 space-y-4">

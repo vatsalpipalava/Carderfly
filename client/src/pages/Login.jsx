@@ -87,23 +87,6 @@ export function LoginForm() {
   };
 
   const handleGoogleLogin = async () => {
-    // try {
-    //   const response = await axios.get("/user/google");
-    //   console.log("🚀 ~ handleGoogleLogin ~ response:", response)
-    //   const accessToken = response?.data?.accessToken;
-    //   setAuth({ accessToken });
-    //   navigate(from, { replace: true });
-    // } catch (err) {
-    //   if (!err?.response) {
-    //     setErrMsg("No server response.");
-    //   } else if (err.response?.status === 404) {
-    //     setErrMsg("User does not exist.");
-    //   } else if (err.response?.status === 400) {
-    //     setErrMsg(err.response?.data?.message);
-    //   } else {
-    //     setErrMsg("Login Failed.");
-    //   }
-    // }
     window.location.href = `${import.meta.env.VITE_BACKEND_URL}/user/google`;
   };
 
@@ -114,10 +97,7 @@ export function LoginForm() {
       </Helmet>
       <div className="flex min-h-screen flex-col items-center justify-center gap-1 p-4">
         <div className="flex h-14 items-center lg:h-[60px]">
-          <Link
-            to="/"
-            className="group flex items-center gap-2 font-semibold"
-          >
+          <Link to="/" className="group flex items-center gap-2 font-semibold">
             <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary">
               <Carderfly className="h-[26px] w-[26px] fill-white" />
             </div>

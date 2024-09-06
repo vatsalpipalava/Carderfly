@@ -115,7 +115,6 @@ function Dashboard() {
           }
         );
         if (isMounted) {
-          console.log(response?.data?.data);
           setSubscriptionList(response?.data?.data);
           setLoading(false);
           setErrMsg("");
@@ -123,7 +122,6 @@ function Dashboard() {
       } catch (err) {
         setLoading(false);
         if (!err?.response) {
-          // console.error("Error fetching cards:", err);
           setErrMsg("No Server Response.");
         } else {
           setErrMsg("Recent active card retrieved failed.");

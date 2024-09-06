@@ -61,6 +61,27 @@ const subscriptionDetails = [
     stripeAmount: 99900,
     month: 12,
   },
+  {
+    planId: "usd_starter",
+    amount: "$7",
+    duration: "3 Months",
+    stripeAmount: 700,
+    month: 3,
+  },
+  {
+    planId: "usd_standard",
+    amount: "$10",
+    duration: "6 Months",
+    stripeAmount: 1000,
+    month: 6,
+  },
+  {
+    planId: "usd_premium",
+    amount: "$15",
+    duration: "12 Months",
+    stripeAmount: 1500,
+    month: 12,
+  },
 ];
 
 app.post(

@@ -119,7 +119,6 @@ export function Customers() {
       } catch (err) {
         setLoading(false);
         if (!err?.response) {
-          // console.error("Error fetching cards:", err);
           setErrMsg("No Server Response.");
         } else {
           setErrMsg("Invoices retrieved failed.");

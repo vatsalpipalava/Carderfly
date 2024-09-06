@@ -10,7 +10,7 @@ export async function HandleShareTemplate(cardPublicLink) {
       navigator
         .share(shareData)
         .then(() => {
-          console.error("Thanks for sharing!");
+          console.log("Thanks for sharing!");
         })
         .catch((err) => {
           console.error("Error while using Web share API:", err);

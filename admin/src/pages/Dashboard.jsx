@@ -120,7 +120,6 @@ export function Dashboard() {
           }
         );
         if (isMounted) {
-          console.log(response?.data?.data);
           setRecentSubscriptionList(response?.data?.data);
           setLoading(false);
           setErrMsg("");

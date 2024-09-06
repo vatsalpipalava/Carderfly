@@ -301,8 +301,6 @@ export function BlockedCard() {
         );
         if (isMounted) {
           setBlockedCards(response?.data?.data?.blockedCards);
-          console.log(response?.data?.data?.blockedCards);
-
           setTotalPages(response?.data?.data?.totalPages);
           setLoading(false);
           setErrMsg("");

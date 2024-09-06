@@ -181,7 +181,14 @@ export function Transactions() {
   });
   const [search, setSearch] = useState("");
   const debouncedSearch = useDebounce(search);
-  const [planIds, setPlanIds] = useState(["starter", "standard", "premium"]);
+  const [planIds, setPlanIds] = useState([
+    "starter",
+    "standard",
+    "premium",
+    "usd_starter",
+    "usd_standard",
+    "usd_premium",
+  ]);
   const [startDateSort, setStartDateSort] = useState("desc");
   const [endDateSort, setEndDateSort] = useState("desc");
   const [statusIds, setStatusIds] = useState(["inProgress", "expired"]);
@@ -218,7 +225,6 @@ export function Transactions() {
           }
         );
         if (isMounted) {
-          console.log(response?.data?.data);
           setInvoices(response?.data?.data);
           setLoading(false);
           setErrMsg("");
@@ -226,7 +232,6 @@ export function Transactions() {
       } catch (err) {
         setLoading(false);
         if (!err?.response) {
-          // console.error("Error fetching cards:", err);
           setErrMsg("No Server Response.");
         } else {
           setErrMsg("Invoices retrieved failed.");
@@ -384,25 +389,25 @@ export function Transactions() {
                     <DropdownMenuSeparator />
                     <DropdownMenuGroup>
                       <DropdownMenuCheckboxItem
-                        checked={planIds.includes("starter")}
+                        checked={planIds.includes("starter", "usd_starter")}
                         onCheckedChange={() =>
-                          handlePlanFilterChange("starter")
+                          handlePlanFilterChange("starter", "usd_starter")
                         }
                       >
                         Starter
                       </DropdownMenuCheckboxItem>
                       <DropdownMenuCheckboxItem
-                        checked={planIds.includes("standard")}
+                        checked={planIds.includes("standard", "usd_standard")}
                         onCheckedChange={() =>
-                          handlePlanFilterChange("standard")
+                          handlePlanFilterChange("standard", "usd_standard")
                         }
                       >
                         Standard
                       </DropdownMenuCheckboxItem>
                       <DropdownMenuCheckboxItem
-                        checked={planIds.includes("premium")}
+                        checked={planIds.includes("premium", "usd_premium")}
                         onCheckedChange={() =>
-                          handlePlanFilterChange("premium")
+                          handlePlanFilterChange("premium", "usd_premium")
                         }
                       >
                         Premium

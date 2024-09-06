@@ -11,6 +11,9 @@ const stripePriceId = {
   starter: process.env.STRIPE_PRICE_STARTER_ID,
   standard: process.env.STRIPE_PRICE_STANDARD_ID,
   premium: process.env.STRIPE_PRICE_PREMIUM_ID,
+  usd_starter: process.env.STRIPE_PRICE_USD_STARTER_ID,
+  usd_standard: process.env.STRIPE_PRICE_USD_STANDARD_ID,
+  usd_premium: process.env.STRIPE_PRICE_USD_PREMIUM_ID,
 };
 
 const checkValidSubscription = asyncHandler(async (req, res) => {
@@ -97,7 +100,7 @@ const checkoutSession = asyncHandler(async (req, res) => {
       {
         price: priceId,
         quantity: 1,
-        tax_rates: ["txr_1PqV3TSFtTo05V1cCrNCPZwL"],
+        tax_rates: [`${process.env.STRIPE_TAX_RATE_ID}`],
       },
     ],
     metadata: {

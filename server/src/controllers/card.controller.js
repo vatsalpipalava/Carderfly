@@ -6,6 +6,7 @@ import { ApiError } from "../utils/ApiError.js";
 import { ApiResponse } from "../utils/ApiResponse.js";
 import { asyncHandler } from "../utils/asyncHandler.js";
 import { Card } from "../models/card.model.js";
+import logger from "../utils/logger.js";
 
 const baseURL = process.env.BACKEND_URL;
 
@@ -55,9 +56,9 @@ const deleteStoredFiles = (filePaths) => {
       if (fs.existsSync(filePath)) {
         // Delete the file
         fs.unlinkSync(filePath);
-        console.log(`File deleted: ${filePath}`);
+        logger.info(`File deleted: ${filePath}`);
       } else {
-        console.log(`File not found: ${filePath}`);
+        logger.info(`File not found: ${filePath}`);
       }
     } catch (error) {
       console.error(`Error deleting file: ${filePath}`, error);
@@ -167,7 +168,6 @@ const createCard = async (req, res) => {
         new ApiResponse(201, { card: newCard }, "Card created successfully!")
       );
   } catch (error) {
-    console.error("Error creating card:", error);
     // Clean up stored files
     deleteStoredFiles(storedFiles);
     res
@@ -465,7 +465,6 @@ const editCard = async (req, res) => {
         )
       );
   } catch (error) {
-    console.error("Error updating card:", error);
     // Clean up stored files
     deleteStoredFiles(storedFiles);
     res
@@ -532,7 +531,8 @@ function generateVCard(card) {
   vCard.note = card?.businessDescription;
 
   vCard.logo.attachFromUrl(`${card?.logoImg}`, "JPEG");
-  vCard.socialUrls["carderfly"] = `${process.env.FIS_FRONTEND_URL}/${card?.publicLink}`;
+  vCard.socialUrls["carderfly"] =
+    `${process.env.FIS_FRONTEND_URL}/${card?.publicLink}`;
 
   return vCard.getFormattedString();
 }

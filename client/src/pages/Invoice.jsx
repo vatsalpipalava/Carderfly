@@ -67,6 +67,8 @@ export default function Invoice() {
         );
         if (isMounted) {
           setInvoice(response?.data?.data);
+          console.log(response?.data?.data);
+
           setNotFound(false);
           setErrMsg("");
           setLoading(false);
@@ -99,13 +101,37 @@ export default function Invoice() {
     return <NotFound />;
   }
 
+  // Helper function to return the currency symbol
+  const getCurrencySymbol = () => {
+    switch (invoice?.currency) {
+      case "inr":
+        return "₹";
+      case "usd":
+        return "$";
+      default:
+        return ""; // Handle other currencies as needed
+    }
+  };
+
   const create = new Date(invoice?.created * 1000);
   const options = { year: "numeric", month: "long", day: "numeric" };
   const formattedCreateDate = create.toLocaleDateString("en-US", options);
 
+  const renderTaxIDs = () => {
+    if (!invoice?.customer_tax_ids) return null;
+
+    return invoice?.customer_tax_ids.map((taxId, index) => (
+      <div key={index}>
+        <p className="text-md font-semibold text-gray-700">
+          {taxId.type}: {taxId.value}
+        </p>
+      </div>
+    ));
+  };
+
   return (
     <>
-    <Helmet>
+      <Helmet>
         <title>Invoice</title>
       </Helmet>
       <header className="sticky top-0 z-30 flex h-14 items-center gap-4 border-b bg-background px-4 py-3 sm:h-auto">
@@ -191,6 +217,7 @@ export default function Invoice() {
               </p>
               <p>Phone: {invoice?.customer_phone}</p>
               <p>Email: {invoice?.customer_email}</p>
+              {renderTaxIDs()}
             </div>
             <Table>
               <TableHeader className="bg-muted text-muted-foreground">
@@ -198,7 +225,8 @@ export default function Invoice() {
                   <TableHead className="p-2 text-left">Item</TableHead>
                   <TableHead className="p-2 text-right">Qty</TableHead>
                   <TableHead className="p-2 text-right">Unit Price</TableHead>
-                  <TableHead className="p-2 text-right">Total</TableHead>
+                  <TableHead className="p-2 text-right">Tax</TableHead>
+                  <TableHead className="p-2 text-right">Amount</TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>
@@ -210,37 +238,93 @@ export default function Invoice() {
                     {invoice?.lines?.data[0]?.quantity}
                   </TableCell>
                   <TableCell className="p-2 text-right">
-                    ₹{invoice?.lines.data[0]?.price?.unit_amount / 100}.00
+                    {getCurrencySymbol()}
+                    {(invoice?.lines.data[0]?.price?.unit_amount / 100).toFixed(
+                      2
+                    )}
                   </TableCell>
                   <TableCell className="p-2 text-right">
-                    ₹{invoice?.lines.data[0]?.amount / 100}.00
+                    18% incl. (on {getCurrencySymbol()}
+                    {(invoice?.total_excluding_tax / 100).toFixed(2)})
+                  </TableCell>
+                  <TableCell className="p-2 text-right">
+                    {getCurrencySymbol()}
+                    {(invoice?.lines.data[0]?.amount / 100).toFixed(2)}
                   </TableCell>
                 </TableRow>
               </TableBody>
             </Table>
             <Separator />
-            <div className="mb-8 mt-6 grid grid-cols-2 gap-4">
-              <div className="text-right">
-                <p className="text-muted-foreground">CGST (9%):</p>
-                <p className="font-bold">$9.00</p>
-                <p className="text-muted-foreground">SGST (9%):</p>
-                <p className="font-bold">$9.00</p>
+            <div className="my-6 w-full">
+              <div className="grid grid-cols-2 gap-4">
+                <p className="text-right text-muted-foreground">Subtotal:</p>
+                <p className="text-right font-bold">
+                  {getCurrencySymbol()}
+                  {(invoice?.subtotal / 100).toFixed(2)}
+                </p>
               </div>
-              <div className="text-right">
-                <p className="text-muted-foreground">Subtotal:</p>
-                <p className="font-bold">₹{invoice?.subtotal / 100}</p>
-                <p className="text-muted-foreground">Round off:</p>
-                <p className="font-bold">$0.06</p>
-                <p className="text-muted-foreground">Total:</p>
-                <p className="text-2xl font-bold">₹{invoice?.total / 100}.00</p>
+              <Separator className="my-2" />
+              <div className="grid grid-cols-2 gap-4">
+                <p className="text-right text-muted-foreground">
+                  {invoice?.discount?.coupon?.name} (
+                  {invoice?.discount?.coupon?.percent_off}% off):
+                </p>
+                <p className="text-right font-bold">
+                  -{getCurrencySymbol()}
+                  {invoice?.total_discount_amounts
+                    ? (
+                        invoice.total_discount_amounts.reduce(
+                          (acc, curr) => acc + curr.amount,
+                          0
+                        ) / 100
+                      ).toFixed(2)
+                    : "0.00"}
+                </p>
               </div>
-            </div>
-            <Separator />
-            <div className="mb-8 mt-6 grid grid-cols-1 text-right">
-              <p className="text-muted-foreground">Amount paid:</p>
-              <p className="font-bold">₹{invoice?.amount_paid / 100}.00</p>
-              <p className="text-muted-foreground">Amount due:</p>
-              <p className="font-bold">₹0.00</p>
+              <Separator className="my-2" />
+              <div className="grid grid-cols-2 gap-4">
+                <p className="text-right text-muted-foreground">
+                  Total excluding tax:
+                </p>
+                <p className="text-right font-bold">
+                  {getCurrencySymbol()}
+                  {(invoice?.total_excluding_tax / 100).toFixed(2)}
+                </p>
+              </div>
+              <Separator className="my-2" />
+              <div className="grid grid-cols-2 gap-4">
+                <p className="text-right text-muted-foreground">
+                  GST - IN (18% incl. on {getCurrencySymbol()}
+                  {(invoice?.total_excluding_tax / 100).toFixed(2)}):
+                </p>
+                <p className="text-right font-bold">
+                  {getCurrencySymbol()}
+                  {invoice?.tax / 100}
+                </p>
+              </div>
+              <Separator className="my-2" />
+              <div className="grid grid-cols-2 gap-4">
+                <p className="text-right text-muted-foreground">Total:</p>
+                <p className="text-right font-bold">
+                  {getCurrencySymbol()}
+                  {(invoice?.total / 100).toFixed(2)}
+                </p>
+              </div>
+              <Separator className="my-2" />
+              <div className="grid grid-cols-2 gap-4">
+                <p className="text-right text-muted-foreground">Amount paid:</p>
+                <p className="text-right font-bold">
+                  {getCurrencySymbol()}
+                  {(invoice?.amount_paid / 100).toFixed(2)}
+                </p>
+              </div>
+              <Separator className="my-2" />
+              <div className="grid grid-cols-2 gap-4">
+                <p className="text-right text-muted-foreground">Amount due:</p>
+                <p className="text-right font-bold">
+                  {getCurrencySymbol()}0.00
+                </p>
+              </div>
             </div>
           </Card>
         </>

@@ -146,7 +146,6 @@ export function Settings() {
   }
 
   const onChangePassword = async (values) => {
-    console.log("🚀 ~ onPasswordChange ~ values:", values);
     setChangePwdLoading(true);
     try {
       await axiosPrivate.post("/user/change-password", {
@@ -176,8 +175,6 @@ export function Settings() {
   const handleDialogOpen = () => {
     setIsDialogOpen(true);
   };
-
-  console.log(user);
 
   return (
     <>

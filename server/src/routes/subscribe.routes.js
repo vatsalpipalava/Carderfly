@@ -18,7 +18,7 @@ router
 
 router
   .route("/checkout/subscription/card/:cardId")
-  .post(validateInput(checkoutSessionValidation()), verifyJWT, checkoutSession);
+  .post(verifyJWT, validateInput(checkoutSessionValidation()), checkoutSession);
 
 router
   .route("/payment/success/card/:cardId/:sessionId")

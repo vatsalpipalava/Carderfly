@@ -5,7 +5,14 @@ const checkoutSessionValidation = () => {
     body("subscriptionPlanId")
       .notEmpty()
       .withMessage("Subscription Plan ID is required")
-      .isIn(["starter", "standard", "premium"])
+      .isIn([
+        "starter",
+        "standard",
+        "premium",
+        "usd_starter",
+        "usd_standard",
+        "usd_premium",
+      ])
       .withMessage("Invalid subscription plan ID"),
   ];
 };
