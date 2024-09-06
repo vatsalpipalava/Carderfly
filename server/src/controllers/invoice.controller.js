@@ -10,9 +10,6 @@ const getInvoices = asyncHandler(async (req, res) => {
   const userId = req._id;
   const { search, planId, status, startDateSort, endDateSort } = req.query;
 
-  console.log(req.query);
-  
-
   let searchCriteria = {};
   if (search) {
     const searchRegex = new RegExp(search, "i");
