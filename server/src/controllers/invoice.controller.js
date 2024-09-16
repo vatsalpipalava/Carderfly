@@ -258,7 +258,7 @@ const invoicePdfDownload = asyncHandler(async (req, res) => {
       }
     );
   } catch (error) {
-    throw new ApiError(500, "Error generating PDF");
+    throw new ApiError(500, `Error generating PDF: ${error}`);
   }
 });
 
