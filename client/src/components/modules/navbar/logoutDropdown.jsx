@@ -56,9 +56,11 @@ const LogoutDropdown = () => {
               Settings
             </DropdownMenuItem>
           </Link>
-          <DropdownMenuItem className="cursor-pointer">
-            Support
-          </DropdownMenuItem>
+          <Link to="/dashboard/support">
+            <DropdownMenuItem className="cursor-pointer">
+              Support
+            </DropdownMenuItem>
+          </Link>
           <DropdownMenuSeparator />
           <DropdownMenuItem
             onClick={signOut}

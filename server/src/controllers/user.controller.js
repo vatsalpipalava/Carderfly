@@ -729,6 +729,26 @@ const changePassword = asyncHandler(async (req, res) => {
     .json(new ApiResponse(200, {}, "Password changed successfully."));
 });
 
+const editNames = asyncHandler(async (req, res) => {
+  const userId = req._id;
+  const { firstName, lastName } = req.body;  
+
+  const user = await User.findById(userId);
+
+  if (!user) {
+    throw new ApiError(404, "User not found.");
+  }
+
+  user.firstName = firstName;
+  user.lastName = lastName;
+
+  user.save();
+
+  return res
+    .status(200)
+    .json(new ApiResponse(200, user, "User edit successfully."));
+});
+
 export {
   registerUser,
   verifyTokenAndGetUser,
@@ -743,4 +763,5 @@ export {
   resetPassword,
   changePassword,
   handleSocialLogin,
+  editNames,
 };

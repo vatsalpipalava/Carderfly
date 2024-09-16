@@ -15,7 +15,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { Helmet } from "react-helmet";
 
 export function Success() {
-  const { cardId, sessionId } = useParams();
+  const { cardId, razorpayPaymentId } = useParams();
   const axiosPrivate = useAxiosPrivate();
   const [card, setCard] = useState();
   const [loading, setLoading] = useState(false);
@@ -27,7 +27,7 @@ export function Success() {
       setLoading(true);
       try {
         const response = await axiosPrivate.get(
-          `/subscribe/payment/success/card/${cardId}/${sessionId}`
+          `/subscribe/payment/success/card/${cardId}/${razorpayPaymentId}`
         );
         setLoading(false);
         setCard(response?.data?.data);

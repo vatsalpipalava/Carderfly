@@ -14,7 +14,7 @@ const getLocalIPAddress = () => {
       }
     }
   }
-  return "localhost"; // Fallback to localhost if no IP found
+  return "localhost";
 };
 
 connectDB()
@@ -25,9 +25,9 @@ connectDB()
       console.log(`🌐 Local URL: http://localhost:${process.env.PORT}`);
       console.log(`🌐 Network URL: http://${localIP}:${process.env.PORT}`);
     });
-  }).catch((err) => {
+  })
+  .catch((err) => {
     console.log("MongoDB connection failed !!! ", err);
   });
-
 
 // Node - 18.17.0

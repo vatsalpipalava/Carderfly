@@ -68,6 +68,10 @@ export function Settings() {
   const [changePwdLoading, setChangePwdLoading] = useState(false);
   const [changePwdErrMsg, setChangePwdErrMsg] = useState("");
 
+  const [namesEditLoading, setNamesEditLoading] = useState(false);
+  const [namesEditErrMsg, setNamesEditErrMsg] = useState("");
+  const [nameUpdateRefresh, setNameUpdateRefresh] = useState(false);
+
   useEffect(() => {
     setStyle({
       iconSidebarDisplay: "lg:hidden",
@@ -105,7 +109,7 @@ export function Settings() {
       controller.abort();
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [nameUpdateRefresh]);
 
   const nameForm = useForm({
     resolver: zodResolver(settingsNameSchema),
@@ -141,8 +145,30 @@ export function Settings() {
     }
   }, [user, nameForm]);
 
-  function onSubmit(values) {
-    console.log(values);
+  async function onSubmit(values) {
+    setNamesEditLoading(true);
+    setNameUpdateRefresh(false);
+    try {
+      await axiosPrivate.put("/user/names-edit", {
+        firstName: values.firstName,
+        lastName: values?.lastName,
+      });
+      setNamesEditLoading(false);
+      toast({
+        title: "Grate! Success.",
+        description: "Name update successfully.",
+      });
+      setNameUpdateRefresh(true);
+    } catch (err) {
+      setNamesEditLoading(false);
+      if (!err?.response) {
+        setNamesEditErrMsg("No server response.");
+      } else if (err.response?.status === 404) {
+        setNamesEditErrMsg("User not found.");
+      } else {
+        setNamesEditErrMsg("Name update failed.");
+      }
+    }
   }
 
   const onChangePassword = async (values) => {
@@ -223,6 +249,15 @@ export function Settings() {
                   <CardHeader>
                     <CardTitle>Name</CardTitle>
                   </CardHeader>
+                  {namesEditErrMsg ? (
+                    <div className="p-6">
+                      <Alert variant="destructive">
+                        <AlertCircle className="h-4 w-4" />
+                        <AlertDescription>{namesEditErrMsg}</AlertDescription>
+                      </Alert>
+                    </div>
+                  ) : null}
+
                   <CardContent>
                     <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
                       {/* First Name */}
@@ -258,7 +293,14 @@ export function Settings() {
                   </CardContent>
                   <CardFooter className="border-t px-6 py-4">
                     {/* <Button>Save</Button> */}
-                    <Button type="submit">Save</Button>
+                    {namesEditLoading ? (
+                      <Button disabled>
+                        <Loader2 className="mr-2 h-5 w-5 animate-spin" />
+                        Please wait
+                      </Button>
+                    ) : (
+                      <Button type="submit">Save</Button>
+                    )}
                   </CardFooter>
                 </Card>
               </form>

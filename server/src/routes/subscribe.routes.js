@@ -1,13 +1,13 @@
 import { Router } from "express";
 import {
+  calculateAmount,
   checkValidSubscription,
   checkoutSession,
+  paymentVerification,
   subscribedCard,
   subscribedCardListDashboard,
   successPayment,
 } from "../controllers/subscribe.controller.js";
-import { validateInput } from "../middlewares/expressValidator.middleware.js";
-import { checkoutSessionValidation } from "../validations/subscribe.validation.js";
 import { verifyJWT } from "../middlewares/auth.middleware.js";
 
 const router = Router();
@@ -17,11 +17,17 @@ router
   .get(verifyJWT, checkValidSubscription);
 
 router
-  .route("/checkout/subscription/card/:cardId")
-  .post(verifyJWT, validateInput(checkoutSessionValidation()), checkoutSession);
+  .route("/final-amount/card/:cardId/:planId")
+  .get(verifyJWT, calculateAmount);
 
 router
-  .route("/payment/success/card/:cardId/:sessionId")
+  .route("/checkout/subscription/card/:cardId")
+  .post(verifyJWT, checkoutSession);
+
+router.route("/payment-verification/:cardId/:userId").post(paymentVerification);
+
+router
+  .route("/payment/success/card/:cardId/:razorpayPaymentId")
   .get(verifyJWT, successPayment);
 
 router.route("/subscribed/card/:publicLink").get(subscribedCard);

@@ -121,6 +121,17 @@ function SubscriptionCardsRow({ cards, visibleColumns, triggerRefresh }) {
     }
   };
 
+  const getCurrencySymbol = () => {
+    switch (cards?.subscriptionCurrency) {
+      case "INR":
+        return "₹";
+      case "USD":
+        return "$";
+      default:
+        return "";
+    }
+  };
+
   return (
     <>
       <TableRow>
@@ -185,7 +196,8 @@ function SubscriptionCardsRow({ cards, visibleColumns, triggerRefresh }) {
         )}
         {visibleColumns.amount && (
           <TableCell className="text-right">
-            {cards.subscriptionAmount}
+            {getCurrencySymbol()}
+            {(cards.subscriptionAmount / 100).toFixed(2)}
           </TableCell>
         )}
         <TableCell className="text-right">
@@ -291,7 +303,14 @@ export function SubscriptionCards() {
   });
   const [search, setSearch] = useState("");
   const debouncedSearch = useDebounce(search);
-  const [planIds, setPlanIds] = useState(["starter", "standard", "premium"]);
+  const [planIds, setPlanIds] = useState([
+    "inr_starter",
+    "inr_standard",
+    "inr_premium",
+    "usd_starter",
+    "usd_standard",
+    "usd_premium",
+  ]);
   const [startDateSort, setStartDateSort] = useState("desc");
   const [endDateSort, setEndDateSort] = useState("desc");
   // const [statusIds, setStatusIds] = useState(["inProgress"]);
@@ -303,8 +322,6 @@ export function SubscriptionCards() {
   const [errMsg, setErrMsg] = useState("");
   const [notFound, setNotFound] = useState(false);
   const [refreshKey, setRefreshKey] = useState(0);
-
-  // &status=${statusIds.join(",")}
 
   const toggleColumn = (column) => {
     setVisibleColumns((prev) => ({ ...prev, [column]: !prev[column] }));
@@ -579,25 +596,28 @@ export function SubscriptionCards() {
                     <DropdownMenuSeparator />
                     <DropdownMenuGroup>
                       <DropdownMenuCheckboxItem
-                        checked={planIds.includes("starter")}
+                        checked={planIds.includes("inr_starter", "usd_starter")}
                         onCheckedChange={() =>
-                          handlePlanFilterChange("starter")
+                          handlePlanFilterChange("inr_starter", "usd_starter")
                         }
                       >
                         Starter
                       </DropdownMenuCheckboxItem>
                       <DropdownMenuCheckboxItem
-                        checked={planIds.includes("standard")}
+                        checked={planIds.includes(
+                          "inr_standard",
+                          "usd_standard"
+                        )}
                         onCheckedChange={() =>
-                          handlePlanFilterChange("standard")
+                          handlePlanFilterChange("inr_standard", "usd_standard")
                         }
                       >
                         Standard
                       </DropdownMenuCheckboxItem>
                       <DropdownMenuCheckboxItem
-                        checked={planIds.includes("premium")}
+                        checked={planIds.includes("inr_premium", "usd_premium")}
                         onCheckedChange={() =>
-                          handlePlanFilterChange("premium")
+                          handlePlanFilterChange("inr_premium", "usd_premium")
                         }
                       >
                         Premium

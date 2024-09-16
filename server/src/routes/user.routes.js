@@ -14,6 +14,7 @@ import {
   resetPassword,
   changePassword,
   handleSocialLogin,
+  editNames,
 } from "../controllers/user.controller.js";
 import { validateInput } from "../middlewares/expressValidator.middleware.js";
 import "../passport/index.js";
@@ -24,6 +25,7 @@ import {
   forgotPasswordValidation,
   resetPasswordValidation,
   changePasswordValidation,
+  nameValidation,
 } from "../validations/user.validation.js";
 import { verifyJWT } from "../middlewares/auth.middleware.js";
 
@@ -85,5 +87,9 @@ router.route("/google/callback").get(
   }),
   handleSocialLogin
 );
+
+router
+  .route("/names-edit")
+  .put(verifyJWT, validateInput(nameValidation()), editNames);
 
 export default router;

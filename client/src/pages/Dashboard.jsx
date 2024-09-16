@@ -36,11 +36,31 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 import { Helmet } from "react-helmet";
+import { Link } from "react-router-dom";
 
 function TransactionRow({ cardList }) {
   const start = new Date(cardList.startDate);
   const options = { year: "numeric", month: "long", day: "numeric" };
   const formattedStartDate = start.toLocaleDateString("en-US", options);
+
+  const getPlanName = () => {
+    switch (cardList.subscriptionPlanId) {
+      case "inr_premium":
+        return "Premium";
+      case "usd_premium":
+        return "Premium";
+      case "inr_standard":
+        return "Standard";
+      case "usd_standard":
+        return "Standard";
+      case "inr_starter":
+        return "Starter";
+      case "usd_starter":
+        return "Starter";
+      default:
+        break;
+    }
+  };
 
   return (
     <TableRow className="h-24">
@@ -72,7 +92,7 @@ function TransactionRow({ cardList }) {
 
       <TableCell>
         <Badge className="rounded-md text-xs" variant="outline">
-          {cardList.subscriptionPlanId}
+          {getPlanName()}
         </Badge>
       </TableCell>
       <TableCell>
@@ -148,7 +168,7 @@ function Dashboard() {
 
   return (
     <>
-    <Helmet>
+      <Helmet>
         <title>Dashboard</title>
       </Helmet>
       <header className="sticky top-0 z-30 flex h-14 items-center gap-4 border-b bg-background px-4 py-3 sm:h-auto">
@@ -170,14 +190,16 @@ function Dashboard() {
           <div className="grid gap-4 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-2 xl:grid-cols-4">
             <Card className="sm:col-span-2" x-chunk="dashboard-05-chunk-0">
               <CardHeader className="pb-3">
-                <CardTitle>Your Cards</CardTitle>
+                <CardTitle>Create Cards</CardTitle>
                 <CardDescription className="max-w-lg text-balance leading-relaxed">
-                  Introducing Our Dynamic Carderfly Dashboard for Seamless
-                  Management and Insightful Analysis.
+                  Introducing Our Dynamic cards for Seamless Management and
+                  Insightful Analysis.
                 </CardDescription>
               </CardHeader>
               <CardFooter>
-                <Button>Create new card</Button>
+                <Button asChild>
+                  <Link to="/dashboard/create-card">Create new card</Link>
+                </Button>
               </CardFooter>
             </Card>
           </div>

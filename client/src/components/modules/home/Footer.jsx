@@ -85,27 +85,16 @@ export function Footer() {
               variant="link"
               className="h-auto px-0 py-0 text-base font-normal text-white hover:font-medium hover:text-primary sm:px-4"
             >
-              <Link to="/terms-of-service">Terms and condition</Link>
+              <Link to="/terms-conditions">Terms and Conditions</Link>
+            </Button>
+            <Button
+              asChild
+              variant="link"
+              className="h-auto px-0 py-0 text-base font-normal text-white hover:font-medium hover:text-primary sm:px-4"
+            >
+              <Link to="/privacy-policy">Privacy Policy</Link>
             </Button>
           </div>
-
-          {/* <div className="flex flex-col items-start gap-3 sm:items-end">
-            <Button
-              asChild
-              variant="link"
-              className="text-base h-auto px-0 py-0 font-normal text-white hover:font-medium hover:text-primary sm:px-4"
-            >
-              <Link to="/terms-of-service">Terms and condition</Link>
-            </Button>
-
-            <Button
-              asChild
-              variant="link"
-              className="text-base h-auto px-0 py-0 font-normal text-white hover:font-medium hover:text-primary sm:px-4"
-            >
-              <Link to="/">Privacy policy</Link>
-            </Button>
-          </div> */}
         </div>
         <Separator className="mt-4 bg-white" />
         <div className="px-6 pt-4">

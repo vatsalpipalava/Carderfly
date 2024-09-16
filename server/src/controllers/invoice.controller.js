@@ -1,10 +1,16 @@
 import mongoose from "mongoose";
+import pdf from "pdf-creator-node";
+import fs from "fs";
+import path from "path";
 import { Subscribe } from "../models/subscribe.model.js";
 import { asyncHandler } from "../utils/asyncHandler.js";
 import { ApiResponse } from "../utils/ApiResponse.js";
 import { ApiError } from "../utils/ApiError.js";
-import Stripe from "stripe";
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
+import { Invoice } from "../models/invoice.model.js";
+import { fileURLToPath } from "url";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const getInvoices = asyncHandler(async (req, res) => {
   const userId = req._id;
@@ -95,6 +101,7 @@ const getInvoices = asyncHandler(async (req, res) => {
         subscriptionPlanId: 1,
         subscriptionStatus: 1,
         subscriptionAmount: 1,
+        subscriptionCurrency: 1,
         startDate: 1,
         endDate: 1,
         "card.profileImg": 1,
@@ -129,11 +136,130 @@ const invoice = asyncHandler(async (req, res) => {
     throw new ApiError(404, "Subscription not found.");
   }
 
-  const invoice = await stripe.invoices.retrieve(subscribe.stripeInvoiceId);
+  const invoice = await Invoice.findOne({
+    "invoice.id": subscribe.razorpayPaymentId,
+  });
+
+  // const payment = await razorpay.orders.fetchPayments(subscribe.razorpayOrderId);
+  // console.log("🚀 ~ invoice ~ payment:", payment)
+  // console.log("🚀 ~ invoice ~ payment:", payment.items[0].card)
 
   return res
     .status(200)
     .json(new ApiResponse(200, invoice, "Invoice retrieved successfully!"));
 });
 
-export { getInvoices, invoice };
+const invoicePdfDownload = asyncHandler(async (req, res) => {
+  const invoiceId = req.params.invoiceId;
+  const invoice = await Invoice.findById(invoiceId);
+
+  if (!invoice) {
+    throw new ApiError(404, "Invoice not found");
+  }
+
+  const html = fs.readFileSync(
+    path.join(__dirname, "../views/invoice.html"),
+    "utf-8"
+  );
+  const filename = Math.random() + "_doc" + ".pdf";
+
+  const create = new Date(invoice.invoice.created_at * 1000);
+  const options = { year: "numeric", month: "long", day: "numeric" };
+  const formattedCreateDate = create.toLocaleDateString("en-US", options);
+
+  const getCurrencySymbol = () => {
+    switch (invoice.invoice.currency) {
+      case "INR":
+        return "₹";
+      case "USD":
+        return "$";
+      default:
+        return "";
+    }
+  };
+
+  const getPlanName = () => {
+    switch (invoice.invoice.notes?.planId) {
+      case "inr_premium":
+        return "Premium";
+      case "usd_premium":
+        return "Premium";
+      case "inr_standard":
+        return "Standard";
+      case "usd_standard":
+        return "Standard";
+      case "inr_starter":
+        return "Starter";
+      case "usd_starter":
+        return "Starter";
+      default:
+        break;
+    }
+  };
+
+  const obj = {
+    invoiceNumber: invoice.invoiceNumber,
+    invoiceDate: formattedCreateDate,
+    customerName: invoice.invoice.notes.name,
+    customerBusinessName: invoice.invoice.notes?.businessName,
+    customerAddress1: invoice.invoice.notes?.addressLine1,
+    customerAddress2: invoice.invoice.notes?.addressLine2,
+    customerCountry: invoice.invoice.notes.country,
+    customerState: invoice.invoice.notes.state,
+    customerPhone: invoice.invoice.contact,
+    customerEmail: invoice.invoice?.email,
+    customerTaxNo: invoice.invoice.notes?.taxNo,
+    plan: getPlanName(),
+    currency: getCurrencySymbol(),
+    subTotal: (invoice.invoice.notes?.subTotal / 100).toFixed(2),
+    couponCode: invoice.invoice.notes?.coupon,
+    couponDiscount: invoice.invoice.notes?.couponDiscount,
+    discount: (invoice.invoice.notes?.discount / 100).toFixed(2),
+    totalExcludingTax: (invoice.invoice.notes.totalExcludingTax / 100).toFixed(
+      2
+    ),
+    cgstPercentage: invoice.invoice.notes?.cgstPercentage,
+    cgst: (invoice.invoice.notes?.cgst / 100).toFixed(2),
+    sgstPercentage: invoice.invoice.notes?.sgstPercentage,
+    sgst: (invoice.invoice.notes?.sgst / 100).toFixed(2),
+    igstPercentage: invoice.invoice.notes?.igstPercentage,
+    igst: (invoice.invoice.notes?.igst / 100).toFixed(2),
+    total: (invoice.invoice.notes.total / 100).toFixed(2),
+  };
+
+  const optionPdf = {
+    formate: "A4",
+    orientation: "portrait",
+  };
+
+  const document = {
+    html: html,
+    data: obj,
+    path: path.join(__dirname, "../../public/temp/", filename),
+  };
+
+  try {
+    await pdf.create(document, optionPdf);
+    res.download(
+      document.path,
+      `invoice_${invoice.invoiceNumber}.pdf`,
+      (err) => {
+        if (err) {
+          throw new ApiError(500, "Failed to download VCF file.");
+        }
+        fs.unlink(document.path, (unlinkErr) => {
+          if (unlinkErr) {
+            throw new ApiError(
+              500,
+              `Failed to delete temp PDF file: ${unlinkErr}`
+            );
+          }
+        });
+      }
+    );
+  } catch (error) {
+    throw new ApiError(500, "Error generating PDF");
+  }
+});
+
+export { getInvoices, invoice, invoicePdfDownload };

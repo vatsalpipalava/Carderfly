@@ -14,9 +14,12 @@ const linkSchema = z.object({
 });
 
 const inrPlanSchema = z.object({
-  type: z.enum(["starter", "standard", "premium"], {
+  type: z.enum(["inr_starter", "inr_standard", "inr_premium"], {
     required_error: "You need to select a plan type.",
   }),
+  // type: z.string().nonempty({
+  //   message: "Plan type is required.",
+  // }),
   terms: z.boolean().refine((inrVal) => inrVal === true, {
     message: "You must accept the terms and conditions",
   }),
@@ -26,6 +29,9 @@ const usdPlanSchema = z.object({
   type: z.enum(["usd_starter", "usd_standard", "usd_premium"], {
     required_error: "You need to select a plan type.",
   }),
+  // type: z.string().nonempty({
+  //   message: "Plan type is required.",
+  // }),
   terms: z.boolean().refine((usdVal) => usdVal === true, {
     message: "You must accept the terms and conditions",
   }),

@@ -262,6 +262,7 @@ const getSubscriptionCards = asyncHandler(async (req, res) => {
         subscriptionPlanId: 1,
         subscriptionStatus: 1,
         subscriptionAmount: 1,
+        subscriptionCurrency: 1,
         startDate: 1,
         endDate: 1,
         "card.publicLink": 1,

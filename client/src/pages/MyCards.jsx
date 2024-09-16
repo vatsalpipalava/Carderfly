@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { Helmet } from "react-helmet";
+
 import {
   AlertCircle,
   Check,
@@ -8,11 +10,24 @@ import {
   Eye,
   LinkIcon,
   ListFilter,
+  Loader2,
   PencilLine,
   Search,
+  Trash2,
+  TriangleAlert,
 } from "lucide-react";
 
 import { Alert, AlertDescription } from "@/components/ui/alert";
+import {
+  AlertDialog,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+} from "@/components/ui/alert-dialog";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import {
@@ -48,17 +63,16 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
+import { useToast } from "@/components/ui/use-toast";
 
 import useStyle from "@/hooks/useStyle";
 import SheetDashboard from "@/components/modules/navbar/sheetDashboard";
 import LogoutDropdown from "@/components/modules/navbar/logoutDropdown";
-
 import useAxiosPrivate from "@/hooks/useAxiosPrivate";
 import { useDebounce } from "@/hooks/useDebounce";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Helmet } from "react-helmet";
 
 function MyCards() {
+  const { toast } = useToast();
   const { setStyle } = useStyle();
   const axiosPrivate = useAxiosPrivate();
 
@@ -69,6 +83,11 @@ function MyCards() {
   const [errMsg, setErrMsg] = useState("");
   const [notFound, setNotFound] = useState(false);
   const [copiedStates, setCopiedStates] = useState({});
+
+  const [isOpen, setIsOpen] = useState(false);
+  const [deleteLoading, setDeleteLoading] = useState(false);
+  const [deleteErrMsg, setDeleteErrMsg] = useState("");
+  const [deleteRefresh, setDeleteRefresh] = useState(false);
 
   const [filters, setFilters] = useState({
     active: true,
@@ -126,7 +145,7 @@ function MyCards() {
       controller.abort();
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [debouncedSearch, filters]);
+  }, [debouncedSearch, filters, deleteRefresh]);
 
   const handleSearchChange = (event) => {
     setSearch(event.target.value);
@@ -148,9 +167,33 @@ function MyCards() {
     }, 3000); // Reset copied state after 3000 milliseconds
   };
 
+  const handleDelete = async (cardId) => {
+    setDeleteLoading(true);
+    setDeleteErrMsg("");
+    setDeleteRefresh(false);
+    try {
+      await axiosPrivate.delete(`/card/delete-card/${cardId}`);
+      setDeleteLoading(false);
+      toast({
+        description: "Card Deleted Successfully.",
+      });
+      setIsOpen(false);
+      setDeleteRefresh(true);
+    } catch (err) {
+      setDeleteLoading(false);
+      if (!err?.response) {
+        setDeleteErrMsg("No server response.");
+      } else if (err.response?.status === 400) {
+        setDeleteErrMsg(err.response?.data?.message);
+      } else {
+        setDeleteErrMsg("Delete Card Failed.");
+      }
+    }
+  };
+
   return (
     <>
-    <Helmet>
+      <Helmet>
         <title>My Cards</title>
       </Helmet>
       <header className="sticky top-0 z-30 flex h-14 items-center gap-4 border-b bg-background px-4 py-3 sm:h-auto">
@@ -311,6 +354,20 @@ function MyCards() {
                               <span>View</span>
                             </DropdownMenuItem>
                           </Link>
+
+                          {!card?.isPublic && !card?.isBlocked ? (
+                            <DropdownMenuItem
+                              className="cursor-pointer focus:bg-red-200"
+                              onClick={() => {
+                                setIsOpen(true);
+                              }}
+                            >
+                              <div className="flex items-center">
+                                <Trash2 className="mr-2 h-4 w-4 text-muted-foreground" />
+                                <div>Delete</div>
+                              </div>
+                            </DropdownMenuItem>
+                          ) : null}
                         </DropdownMenuGroup>
                       </DropdownMenuContent>
                     </DropdownMenu>
@@ -337,6 +394,47 @@ function MyCards() {
                     </div>
                   </div>
                 </CardHeader>
+
+                {/* Delete Alert */}
+                <AlertDialog open={isOpen} onOpenChange={setIsOpen}>
+                  <AlertDialogContent>
+                    {/* Error Message */}
+                    {deleteErrMsg ? (
+                      <Alert variant="destructive" className="w-full">
+                        <AlertCircle className="h-4 w-4" />
+                        <AlertDescription>{deleteErrMsg}</AlertDescription>
+                      </Alert>
+                    ) : null}
+
+                    <AlertDialogHeader className="items-center">
+                      <TriangleAlert className="h-10 w-10 text-destructive" />
+                      <AlertDialogTitle>Confirm Card Delete</AlertDialogTitle>
+                      <AlertDialogDescription>
+                        Are you sure you want to delete this card?
+                      </AlertDialogDescription>
+                    </AlertDialogHeader>
+                    <AlertDialogFooter className="!justify-center">
+                      <AlertDialogCancel className="w-full">
+                        Cancel
+                      </AlertDialogCancel>
+                      {deleteLoading ? (
+                        <Button disabled className="w-full">
+                          <Loader2 className="mr-2 h-5 w-5 animate-spin" />
+                          Please wait
+                        </Button>
+                      ) : (
+                        <Button
+                          className="w-full"
+                          variant="destructive"
+                          onClick={() => handleDelete(card?._id)}
+                        >
+                          Delete Card
+                        </Button>
+                      )}
+                    </AlertDialogFooter>
+                  </AlertDialogContent>
+                </AlertDialog>
+
                 <CardContent className="w-full p-4">
                   <h3 className="mb-1 scroll-m-20 text-center text-2xl font-semibold tracking-tight">
                     {card?.firstName} {card?.lastName}

@@ -30,7 +30,10 @@ import Invoice from "./pages/Invoice";
 import { ForgotPassword } from "./pages/ForgotPassword";
 import { ResetPassword } from "./pages/ResetPassword";
 import Dashboard from "./pages/Dashboard";
-import { TermsOfService } from "./pages/TermsOfService";
+import { TermsAndConditions } from "./pages/TermsAndConditions";
+import { Payment } from "./pages/Payment";
+import { Support } from "./pages/Support";
+import { PrivacyPolicy } from "./pages/PrivacyPolicy";
 
 const ScrollToSection = () => {
   const { hash } = useLocation();
@@ -63,7 +66,8 @@ function App() {
             path="reset-password/:forgotPasswordToken"
             element={<ResetPassword />}
           />
-          <Route path="terms-of-service" element={<TermsOfService />} />
+          <Route path="terms-conditions" element={<TermsAndConditions />} />
+          <Route path="privacy-policy" element={<PrivacyPolicy />} />
 
           <Route element={<PersistLogin />}>
             <Route index element={<Home />} />
@@ -84,6 +88,7 @@ function App() {
                 <Route path="transactions" element={<Transactions />} />
                 <Route path="invoice/:subscribeId" element={<Invoice />} />
                 <Route path="settings" element={<Settings />} />
+                <Route path="support" element={<Support />} />
               </Route>
 
               <Route
@@ -91,7 +96,11 @@ function App() {
                 element={<Checkout />}
               />
               <Route
-                path="checkout/payment/success/subscribe/card/:cardId/:sessionId"
+                path="checkout/card/subscribe/:cardId/:planId"
+                element={<Payment />}
+              />
+              <Route
+                path="checkout/payment/success/subscribe/card/:cardId/:razorpayPaymentId"
                 element={<Success />}
               />
             </Route>

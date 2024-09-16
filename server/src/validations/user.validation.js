@@ -13,7 +13,7 @@ const registerValidation = () => {
       .isLength({ min: 2, max: 20 })
       .withMessage("Enter valid first name.")
       .notEmpty()
-      .withMessage("Email is required."),
+      .withMessage("First name is required."),
     body("password")
       .matches(PWD_REGEX)
       .withMessage(
@@ -80,6 +80,16 @@ const changePasswordValidation = () => {
   ];
 };
 
+const nameValidation = () => {
+  return [
+    body("firstName")
+      .isLength({ min: 2, max: 20 })
+      .withMessage("Enter valid first name.")
+      .notEmpty()
+      .withMessage("First Name is required."),
+  ];
+};
+
 export {
   registerValidation,
   otpValidation,
@@ -87,4 +97,5 @@ export {
   forgotPasswordValidation,
   resetPasswordValidation,
   changePasswordValidation,
+  nameValidation,
 };

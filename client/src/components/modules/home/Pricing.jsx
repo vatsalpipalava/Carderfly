@@ -75,9 +75,6 @@ export function Pricing() {
                 className="z-20 cursor-pointer flex-col items-start justify-center shadow-2xl"
                 gradientColor={theme === "dark" ? "#262626" : "#D9D9D955"}
               >
-                <CardHeader className="px-4 pb-0 pt-6 text-xl font-semibold sm:px-6">
-                  <Badge className="w-[4.5rem]">Quarterly</Badge>
-                </CardHeader>
                 <CardHeader className="p-4 text-xl font-semibold sm:p-6">
                   Starter Plan
                 </CardHeader>
@@ -112,9 +109,6 @@ export function Pricing() {
                 className="z-10 cursor-pointer flex-col items-start justify-center shadow-2xl"
                 gradientColor={theme === "dark" ? "#262626" : "#D9D9D955"}
               >
-                <CardHeader className="px-4 pb-0 pt-6 text-xl font-semibold sm:px-6">
-                  <Badge className="w-[5.2rem]">Bi-annually</Badge>
-                </CardHeader>
                 <CardHeader className="p-4 text-xl font-semibold sm:p-6">
                   Standard Plan
                 </CardHeader>
@@ -147,9 +141,6 @@ export function Pricing() {
                 className="z-10 cursor-pointer flex-col items-start justify-center shadow-2xl"
                 gradientColor={theme === "dark" ? "#262626" : "#D9D9D955"}
               >
-                <CardHeader className="px-4 pb-0 pt-6 text-xl font-semibold sm:px-6">
-                  <Badge className="w-[4.4rem]">Annually</Badge>
-                </CardHeader>
                 <CardHeader className="p-4 text-xl font-semibold sm:p-6">
                   Premium Plan
                 </CardHeader>
@@ -185,9 +176,6 @@ export function Pricing() {
                 className="z-20 cursor-pointer flex-col items-start justify-center shadow-2xl"
                 gradientColor={theme === "dark" ? "#262626" : "#D9D9D955"}
               >
-                <CardHeader className="px-4 pb-0 pt-6 text-xl font-semibold sm:px-6">
-                  <Badge className="w-[4.5rem]">Quarterly</Badge>
-                </CardHeader>
                 <CardHeader className="p-4 text-xl font-semibold sm:p-6">
                   Starter Plan
                 </CardHeader>
@@ -222,9 +210,6 @@ export function Pricing() {
                 className="z-10 cursor-pointer flex-col items-start justify-center shadow-2xl"
                 gradientColor={theme === "dark" ? "#262626" : "#D9D9D955"}
               >
-                <CardHeader className="px-4 pb-0 pt-6 text-xl font-semibold sm:px-6">
-                  <Badge className="w-[5.2rem]">Bi-annually</Badge>
-                </CardHeader>
                 <CardHeader className="p-4 text-xl font-semibold sm:p-6">
                   Standard Plan
                 </CardHeader>
@@ -257,9 +242,6 @@ export function Pricing() {
                 className="z-10 cursor-pointer flex-col items-start justify-center shadow-2xl"
                 gradientColor={theme === "dark" ? "#262626" : "#D9D9D955"}
               >
-                <CardHeader className="px-4 pb-0 pt-6 text-xl font-semibold sm:px-6">
-                  <Badge className="w-[4.4rem]">Annually</Badge>
-                </CardHeader>
                 <CardHeader className="p-4 text-xl font-semibold sm:p-6">
                   Premium Plan
                 </CardHeader>

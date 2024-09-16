@@ -1,6 +1,7 @@
 import { Router } from "express";
 import {
   createCard,
+  deleteCard,
   downloadVcf,
   editCard,
   existingCard,
@@ -25,6 +26,8 @@ router.route("/get-cards").get(verifyJWT, getCards);
 router.route("/view-card/:cardId").get(verifyJWT, getNotSubscribedCard);
 
 router.route("/edit-card/:cardId").put(upload.none(), verifyJWT, editCard);
+
+router.route("/delete-card/:cardId").delete(verifyJWT, deleteCard);
 
 router.route("/vcf-download/:cardId").get(downloadVcf);
 

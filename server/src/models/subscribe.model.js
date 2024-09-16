@@ -20,21 +20,22 @@ const subscribeSchema = new Schema(
       enum: ["inProgress", "expired"],
     },
     subscriptionAmount: {
+      type: Number,
+    },
+    subscriptionCurrency: {
       type: String,
+      enum: ["INR", "USD"],
     },
     subscriptionDuration: {
       type: String,
     },
-    stripeSessionId: {
+    razorpayOrderId: {
       type: String,
     },
-    stripeCustomerId: {
+    razorpayPaymentId: {
       type: String,
     },
-    stripeSubscriptionId: {
-      type: String,
-    },
-    stripeInvoiceId: {
+    razorpaySignature: {
       type: String,
     },
     startDate: {

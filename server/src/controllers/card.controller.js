@@ -6,6 +6,7 @@ import { ApiError } from "../utils/ApiError.js";
 import { ApiResponse } from "../utils/ApiResponse.js";
 import { asyncHandler } from "../utils/asyncHandler.js";
 import { Card } from "../models/card.model.js";
+import { Subscribe } from "../models/subscribe.model.js";
 import logger from "../utils/logger.js";
 
 const baseURL = process.env.BACKEND_URL;
@@ -473,6 +474,38 @@ const editCard = async (req, res) => {
   }
 };
 
+const deleteCard = asyncHandler(async (req, res) => {
+  const userId = req._id;
+  const { cardId } = req.params;
+
+  const existingSubscription = await Subscribe.findOne({
+    userId: userId,
+    cardId: cardId,
+    endDate: { $gt: new Date() }, // Subscription end date is in the future
+  });
+
+  if (existingSubscription) {
+    throw new ApiError(
+      400,
+      `User has an active subscription for this card. Cannot delete.\nExpiration Date: ${existingSubscription.endDate}.`
+    );
+  }
+
+  const deleteCard = await Card.findOneAndDelete({
+    _id: cardId,
+    userId: userId,
+    isPublic: false,
+  });
+
+  if (!deleteCard) {
+    throw new ApiError(400, "Card deletion failed.");
+  }
+
+  return res
+    .status(200)
+    .json(new ApiResponse(200, {}, "Card deleted successfully!"));
+});
+
 const downloadVcf = asyncHandler(async (req, res) => {
   const cardId = req.params.cardId;
 
@@ -543,5 +576,6 @@ export {
   getCards,
   getNotSubscribedCard,
   editCard,
+  deleteCard,
   downloadVcf,
 };

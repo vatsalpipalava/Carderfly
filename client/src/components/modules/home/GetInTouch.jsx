@@ -21,13 +21,13 @@ export function GetInTouch() {
             </CardHeader>
             <p className="max-w-[700px] text-xl text-muted-foreground">
               If you don&apos;t find an answer to your question, contact us, and
-              our team will get in touch with you.
+              our team will get in touch with you. Email: info@carderfly.com
             </p>
           </CardContent>
           <CardFooter className="w-full pb-6 md:w-auto md:px-10 md:pb-0">
             <Button
               asChild
-              className="w-full rounded-full bg-black px-8 dark:bg-white dark:text-white md:w-auto"
+              className="w-full rounded-full bg-black px-8 dark:bg-white dark:text-black hover:dark:bg-primary hover:dark:text-white md:w-auto"
             >
               <Link to="mailto:info@carderfly.com">Email</Link>
             </Button>

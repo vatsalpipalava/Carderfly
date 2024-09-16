@@ -8,7 +8,6 @@ import {
   AlertCircle,
   DollarSign,
   IndianRupee,
-  Loader2,
   MailIcon,
   PhoneIcon,
 } from "lucide-react";
@@ -46,15 +45,12 @@ export function Checkout() {
   const [validError, setValidError] = useState("");
   const [notFound, setNotFound] = useState(false);
   const [alreadySubscribed, setAlreadySubscribed] = useState(false);
-  const [loading, setLoading] = useState(false);
-  // const [success, setSuccess] = useState(null);
-  const [errMsg, setErrMsg] = useState("");
   const [defaultCurrency, setDefaultCurrency] = useState("USD");
 
   const inrForm = useForm({
     resolver: zodResolver(inrPlanSchema),
     defaultValues: {
-      type: "standard",
+      type: "inr_standard",
       terms: false,
     },
   });
@@ -125,27 +121,7 @@ export function Checkout() {
   const termsCheckedUSD = usdForm.watch("terms");
 
   const onSubmit = async (data) => {
-    setLoading(true);
-    try {
-      const response = await axiosPrivate.post(
-        `/subscribe/checkout/subscription/card/${cardId}`,
-        { subscriptionPlanId: data.type }
-      );
-      setLoading(false);
-      setErrMsg("");
-      window.location.href = response.data.data.url;
-    } catch (err) {
-      setLoading(false);
-      if (!err?.response) {
-        setErrMsg("No Server Response");
-      } else if (err.response?.status === 400 || err.response?.status === 404) {
-        setErrMsg("Cards not found.");
-      } else if (err.response?.status === 409) {
-        setErrMsg("Already Subscribed.");
-      } else {
-        setErrMsg("Subscription creation failed.");
-      }
-    }
+    navigate(`/checkout/card/subscribe/${cardId}/${data.type}`);
   };
 
   const firstNameInitial = card?.firstName
@@ -258,7 +234,6 @@ export function Checkout() {
               </TabsList>
               <TabsContent value="INR">
                 {/* INR */}
-
                 <Form {...inrForm}>
                   <form onSubmit={inrForm.handleSubmit(onSubmit)}>
                     <div className="space-y-4">
@@ -284,11 +259,11 @@ export function Checkout() {
                                           ₹399
                                         </div>
                                         <p className="text-sm text-muted-foreground">
-                                          Quarterly (3 Months)
+                                          3 Months
                                         </p>
                                       </div>
                                       <FormControl>
-                                        <RadioGroupItem value="starter" />
+                                        <RadioGroupItem value="inr_starter" />
                                       </FormControl>
                                     </FormLabel>
                                   </FormItem>
@@ -304,14 +279,15 @@ export function Checkout() {
                                           ₹599
                                         </div>
                                         <p className="text-sm text-muted-foreground">
-                                          Bi-annually (6 Months)
+                                          6 Months
                                         </p>
                                       </div>
                                       <FormControl>
-                                        <RadioGroupItem value="standard" />
+                                        <RadioGroupItem value="inr_standard" />
                                       </FormControl>
                                     </FormLabel>
                                   </FormItem>
+
                                   {/* 12 Month */}
                                   <FormItem>
                                     <FormLabel className="border-accent*40 flex cursor-pointer items-center justify-between gap-4 rounded-md border-2 bg-popover p-4 hover:border-accent hover:bg-accent hover:text-accent-foreground peer-data-[state=checked]:border-primary [&:has([data-state=checked])]:border-primary">
@@ -323,11 +299,11 @@ export function Checkout() {
                                           ₹999
                                         </div>
                                         <p className="text-sm text-muted-foreground">
-                                          Annually (12 Months)
+                                          12 Months
                                         </p>
                                       </div>
                                       <FormControl>
-                                        <RadioGroupItem value="premium" />
+                                        <RadioGroupItem value="inr_premium" />
                                       </FormControl>
                                     </FormLabel>
                                   </FormItem>
@@ -367,29 +343,13 @@ export function Checkout() {
                         )}
                       />
 
-                      {/* Error Message */}
-                      {errMsg ? (
-                        <Alert variant="destructive" className="mb-4">
-                          <AlertCircle className="h-4 w-4" />
-                          <AlertDescription>{errMsg}</AlertDescription>
-                        </Alert>
-                      ) : null}
-
-                      {/* Submit Button */}
-                      {loading ? (
-                        <Button disabled className="w-full">
-                          <Loader2 className="mr-2 h-5 w-5 animate-spin" />
-                          Please wait
-                        </Button>
-                      ) : (
-                        <Button
-                          type="submit"
-                          disabled={!termsCheckedINR}
-                          className="w-full"
-                        >
-                          Complete Purchase
-                        </Button>
-                      )}
+                      <Button
+                        type="submit"
+                        disabled={!termsCheckedINR}
+                        className="w-full"
+                      >
+                        Next
+                      </Button>
                     </div>
                   </form>
                 </Form>
@@ -421,7 +381,7 @@ export function Checkout() {
                                           $7
                                         </div>
                                         <p className="text-sm text-muted-foreground">
-                                          Quarterly (3 Months)
+                                          3 Months
                                         </p>
                                       </div>
                                       <FormControl>
@@ -441,7 +401,7 @@ export function Checkout() {
                                           $10
                                         </div>
                                         <p className="text-sm text-muted-foreground">
-                                          Bi-annually (6 Months)
+                                          6 Months
                                         </p>
                                       </div>
                                       <FormControl>
@@ -460,7 +420,7 @@ export function Checkout() {
                                           $15
                                         </div>
                                         <p className="text-sm text-muted-foreground">
-                                          Annually (12 Months)
+                                          12 Months
                                         </p>
                                       </div>
                                       <FormControl>
@@ -504,29 +464,13 @@ export function Checkout() {
                         )}
                       />
 
-                      {/* Error Message */}
-                      {errMsg ? (
-                        <Alert variant="destructive" className="mb-4">
-                          <AlertCircle className="h-4 w-4" />
-                          <AlertDescription>{errMsg}</AlertDescription>
-                        </Alert>
-                      ) : null}
-
-                      {/* Submit Button */}
-                      {loading ? (
-                        <Button disabled className="w-full">
-                          <Loader2 className="mr-2 h-5 w-5 animate-spin" />
-                          Please wait
-                        </Button>
-                      ) : (
-                        <Button
-                          type="submit"
-                          disabled={!termsCheckedUSD}
-                          className="w-full"
-                        >
-                          Complete Purchase
-                        </Button>
-                      )}
+                      <Button
+                        type="submit"
+                        disabled={!termsCheckedUSD}
+                        className="w-full"
+                      >
+                        Complete Purchase
+                      </Button>
                     </div>
                   </form>
                 </Form>
@@ -562,22 +506,6 @@ export function Checkout() {
                   <MailIcon className="mr-2 inline h-4 w-4" />
                   {card?.email}
                 </div>
-              </div>
-            </div>
-            <div className="mt-6 flex flex-col items-center">
-              <h3 className="text-lg font-semibold">Additional Information</h3>
-              <div className="mt-2 text-center text-muted-foreground">
-                <p>
-                  By purchasing this subscription, you&apos;ll gain access to
-                  our premium features and exclusive content. You can cancel
-                  your subscription at any time, and we offer a 30-day
-                  money-back guarantee if you\&apos;re not satisfied.
-                </p>
-                <p className="mt-2">
-                  If you have any questions or need assistance, please
-                  don\&apos;t hesitate to contact our support team at{" "}
-                  <a href="#">support@example.com</a>.
-                </p>
               </div>
             </div>
           </div>

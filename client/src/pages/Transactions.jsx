@@ -1,6 +1,24 @@
 /* eslint-disable react/prop-types */
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import { Helmet } from "react-helmet";
+
+import {
+  AlertCircle,
+  ArrowDown,
+  ArrowUp,
+  CirclePlus,
+  // Download,
+  Ellipsis,
+  EyeOff,
+  NotebookText,
+  Settings2,
+  Timer,
+} from "lucide-react";
+
+import { Alert, AlertDescription } from "@/components/ui/alert";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Badge } from "@/components/ui/badge";
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -9,6 +27,7 @@ import {
   BreadcrumbPage,
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
+import { Button } from "@/components/ui/button";
 import {
   Card,
   CardContent,
@@ -17,6 +36,18 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import {
+  DropdownMenu,
+  DropdownMenuCheckboxItem,
+  DropdownMenuContent,
+  DropdownMenuGroup,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import { Input } from "@/components/ui/input";
+import { Skeleton } from "@/components/ui/skeleton";
+import {
   Table,
   TableBody,
   TableCell,
@@ -24,62 +55,49 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+
 import useStyle from "@/hooks/useStyle";
 import SheetDashboard from "@/components/modules/navbar/sheetDashboard";
 import LogoutDropdown from "@/components/modules/navbar/logoutDropdown";
-import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
-import {
-  DropdownMenu,
-  DropdownMenuCheckboxItem,
-  DropdownMenuContent,
-  DropdownMenuGroup,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  // DropdownMenuRadioGroup,
-  // DropdownMenuRadioItem,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-import {
-  AlertCircle,
-  ArrowDown,
-  ArrowUp,
-  CirclePlus,
-  Download,
-  Ellipsis,
-  EyeOff,
-  NotebookText,
-  Settings2,
-  Timer,
-} from "lucide-react";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Badge } from "@/components/ui/badge";
 import { useDebounce } from "@/hooks/useDebounce";
 import useAxiosPrivate from "@/hooks/useAxiosPrivate";
-import { Skeleton } from "@/components/ui/skeleton";
-import { Alert, AlertDescription } from "@/components/ui/alert";
-import { Helmet } from "react-helmet";
 
 function TransactionRow({ transaction, visibleColumns }) {
-  // const [status, setStatus] = useState("");
-
-  // useEffect(() => {
-  //   const now = new Date();
-  //   const endDate = new Date(transaction.endDate);
-
-  //   if (endDate >= now) {
-  //     setStatus("In Progress");
-  //   } else {
-  //     setStatus("Expired");
-  //   }
-  // }, [transaction.endDate]);
-
   const start = new Date(transaction.startDate);
   const end = new Date(transaction.endDate);
   const options = { year: "numeric", month: "long", day: "numeric" };
   const formattedStartDate = start.toLocaleDateString("en-US", options);
   const formattedEndDate = end.toLocaleDateString("en-US", options);
+
+  const getCurrencySymbol = () => {
+    switch (transaction?.subscriptionCurrency) {
+      case "INR":
+        return "₹";
+      case "USD":
+        return "$";
+      default:
+        return "";
+    }
+  };
+
+  const getPlanName = () => {
+    switch (transaction.subscriptionPlanId) {
+      case "inr_premium":
+        return "Premium";
+      case "usd_premium":
+        return "Premium";
+      case "inr_standard":
+        return "Standard";
+      case "usd_standard":
+        return "Standard";
+      case "inr_starter":
+        return "Starter";
+      case "usd_starter":
+        return "Starter";
+      default:
+        break;
+    }
+  };
 
   return (
     <TableRow>
@@ -111,7 +129,7 @@ function TransactionRow({ transaction, visibleColumns }) {
       {visibleColumns.plan && (
         <TableCell>
           <Badge className="rounded-md text-xs" variant="outline">
-            {transaction.subscriptionPlanId}
+            {getPlanName()}
           </Badge>
         </TableCell>
       )}
@@ -135,7 +153,8 @@ function TransactionRow({ transaction, visibleColumns }) {
       )}
       {visibleColumns.amount && (
         <TableCell className="text-right">
-          {transaction.subscriptionAmount}
+          {getCurrencySymbol()}
+          {(transaction.subscriptionAmount / 100).toFixed(2)}
         </TableCell>
       )}
       <TableCell className="text-right">
@@ -156,12 +175,12 @@ function TransactionRow({ transaction, visibleColumns }) {
                 </div>
               </DropdownMenuItem>
             </Link>
-            <DropdownMenuItem>
+            {/* <DropdownMenuItem>
               <div className="flex items-center">
                 <Download className="mr-2 h-4 w-4 text-muted-foreground" />
                 <div>Download Invoice</div>
               </div>
-            </DropdownMenuItem>
+            </DropdownMenuItem> */}
           </DropdownMenuContent>
         </DropdownMenu>
       </TableCell>
@@ -182,9 +201,9 @@ export function Transactions() {
   const [search, setSearch] = useState("");
   const debouncedSearch = useDebounce(search);
   const [planIds, setPlanIds] = useState([
-    "starter",
-    "standard",
-    "premium",
+    "inr_starter",
+    "inr_standard",
+    "inr_premium",
     "usd_starter",
     "usd_standard",
     "usd_premium",
@@ -389,25 +408,28 @@ export function Transactions() {
                     <DropdownMenuSeparator />
                     <DropdownMenuGroup>
                       <DropdownMenuCheckboxItem
-                        checked={planIds.includes("starter", "usd_starter")}
+                        checked={planIds.includes("inr_starter", "usd_starter")}
                         onCheckedChange={() =>
-                          handlePlanFilterChange("starter", "usd_starter")
+                          handlePlanFilterChange("inr_starter", "usd_starter")
                         }
                       >
                         Starter
                       </DropdownMenuCheckboxItem>
                       <DropdownMenuCheckboxItem
-                        checked={planIds.includes("standard", "usd_standard")}
+                        checked={planIds.includes(
+                          "inr_standard",
+                          "usd_standard"
+                        )}
                         onCheckedChange={() =>
-                          handlePlanFilterChange("standard", "usd_standard")
+                          handlePlanFilterChange("inr_standard", "usd_standard")
                         }
                       >
                         Standard
                       </DropdownMenuCheckboxItem>
                       <DropdownMenuCheckboxItem
-                        checked={planIds.includes("premium", "usd_premium")}
+                        checked={planIds.includes("inr_premium", "usd_premium")}
                         onCheckedChange={() =>
-                          handlePlanFilterChange("premium", "usd_premium")
+                          handlePlanFilterChange("inr_premium", "usd_premium")
                         }
                       >
                         Premium
