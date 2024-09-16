@@ -329,12 +329,19 @@ export function Checkout() {
                                 />
                               </FormControl>
                               <FormLabel className="!mt-0">
-                                I agree to the{" "}
+                                I agree to the&nbsp;
                                 <Link
-                                  to="#"
+                                  to="/terms-conditions"
                                   className="underline underline-offset-2"
                                 >
-                                  terms and conditions
+                                  Terms and Conditions
+                                </Link>
+                                &nbsp;&&nbsp;
+                                <Link
+                                  to="/privacy-policy"
+                                  className="underline underline-offset-2"
+                                >
+                                  Privacy Policy
                                 </Link>
                               </FormLabel>
                             </div>
@@ -450,12 +457,19 @@ export function Checkout() {
                                 />
                               </FormControl>
                               <FormLabel className="!mt-0">
-                                I agree to the{" "}
+                                I agree to the&nbsp;
                                 <Link
-                                  to="#"
+                                  to="/terms-conditions"
                                   className="underline underline-offset-2"
                                 >
-                                  terms and conditions
+                                  Terms and Conditions
+                                </Link>
+                                &nbsp;&&nbsp;
+                                <Link
+                                  to="/privacy-policy"
+                                  className="underline underline-offset-2"
+                                >
+                                  Privacy Policy
                                 </Link>
                               </FormLabel>
                             </div>

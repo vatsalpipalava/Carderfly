@@ -575,6 +575,23 @@ export function Payment() {
                   Checkout
                 </Button>
               )}
+              <p className="mt-2 text-sm text-muted-foreground">
+                By completing this purchase, you agree to Carderfly&apos;s{" "}
+                <Link
+                  to="/terms-conditions"
+                  className="underline underline-offset-2"
+                >
+                  Terms and Conditions
+                </Link>
+                &nbsp;&&nbsp;
+                <Link
+                  to="/privacy-policy"
+                  className="underline underline-offset-2"
+                >
+                  Privacy Policy
+                </Link>
+                .
+              </p>
             </form>
           </Form>
         </div>
