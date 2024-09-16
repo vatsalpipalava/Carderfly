@@ -26,7 +26,6 @@
     "express": "^4.19.2",
     "express-session": "^1.18.0",
     "express-validator": "^7.1.0",
-    "form-data": "^4.0.0",
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.5.1",
     "mongoose-aggregate-paginate-v2": "^1.0.7",
@@ -38,7 +37,6 @@
     "passport-google-oauth20": "^2.0.0",
     "pdf-creator-node": "^2.3.5",
     "razorpay": "^2.9.4",
-    "stripe": "^16.2.0",
     "vcards-js": "^2.10.0",
     "winston": "^3.13.0"
   }
