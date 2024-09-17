@@ -233,7 +233,7 @@ const invoicePdfDownload = asyncHandler(async (req, res) => {
     throw new ApiError(404, "Invoice not found");
   }
 
-  const browser = await puppeteer.launch();
+  const browser = await puppeteer.launch({ args: ["--no-sandbox"] });
   const page = await browser.newPage();
   await page.goto(
     `${process.env.BACKEND_URL}/api/v1/invoice/e-invoice/${invoiceId}`,
