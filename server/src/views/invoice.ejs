@@ -1,0 +1,249 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tax Invoice</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    .invoice-container {
+      position: relative;
+      width: 210mm;
+      height: 277mm;
+      min-height: 277mm;
+      max-height: 277mm;
+      margin: 0 auto;
+      padding: 50px;
+    }
+
+    .invoice-header {
+      width: 100%;
+      border-bottom: 2px solid #000;
+      margin-bottom: 20px;
+    }
+
+    .company-details h2,
+    .invoice-details h2 {
+      margin: 0;
+    }
+
+    .company-details p,
+    .invoice-details p {
+      line-height: 1.3rem;
+    }
+
+    .invoice-details {
+      text-align: right;
+    }
+
+    .invoice-body {
+      width: 100%;
+      margin-bottom: 30px;
+    }
+
+    .invoice-body p {
+      border-bottom: 2px solid #000;
+      line-height: 1.3rem;
+      padding-bottom: 20px;
+      margin-bottom: 20px;
+    }
+
+    .invoice-body table {
+      margin-top: 30px;
+    }
+
+    .logo img {
+      max-width: 150px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    table,
+    th,
+    td {
+      border: 1px solid #ddd;
+    }
+
+    th,
+    td {
+      padding: 8px;
+      text-align: left;
+    }
+
+    .amount {
+      text-align: right;
+    }
+
+    th {
+      background-color: #f2f2f2;
+    }
+
+    .totals {
+      margin-top: 20px;
+      width: 100%;
+    }
+
+    .totals td {
+      text-align: right;
+    }
+
+    .total {
+      font-weight: bold;
+    }
+
+    .terms {
+      position: absolute;
+      bottom: 0;
+      font-size: 9px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="invoice-container">
+    <div class="invoice-header">
+      <div class="invoice-details">
+        <h2>Tax Invoice</h2>
+        <p>Invoice #: <%= invoiceNumber %><br />Date: <%= invoiceDate %>
+        </p>
+      </div>
+      <div class="company-details">
+        <div class="logo">
+          <img src="https://api.carderfly.com/public/temp/CarderflyHorizontal.png" alt="Company Logo" />
+        </div>
+        <!-- <p>Carderfly</p> -->
+        <p>
+          GST No.: 24AKJPP3360K1ZY<br />Montech Design<br />A-422, Yash
+          Plaza,<br />Varachha Road, Surat, India.<br />Email:
+          info@carderfly.com
+        </p>
+      </div>
+    </div>
+
+    <div class="invoice-body">
+      <p>
+        <strong>Billed To:</strong><br />
+
+        <% if (customerName) { %>
+        <%= customerName %><br />
+        <% } %>
+
+        <% if (customerBusinessName) { %>
+        <%= customerBusinessName %><br />
+        <% } %>
+
+        <% if (customerAddress1) { %>
+        <%= customerAddress1 %><br />
+        <% } %>
+
+        <% if (customerAddress2) { %>
+        <%= customerAddress2 %><br />
+        <% } %>
+
+        <% if (customerState || customerCountry) { %>
+        <%= customerState %>, <%= customerCountry %><br />
+        <% } %>
+
+        <% if (customerPhone) { %>
+        Phone: <%= customerPhone %><br />
+        <% } %>
+
+        <% if (customerTaxNo) { %>
+        GST/Tax No.: <%= customerTaxNo %>
+        <% } %>
+      </p>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Description</th>
+            <th class="amount">Amount</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <%= plan %>
+            </td>
+            <td class="amount">
+              <%= currency %><%= subTotal %>
+            </td>
+          </tr>
+        </tbody>
+        <% if (couponCode) { %>
+        <tbody>
+          <tr>
+            <td class="amount">
+              <%= couponCode %> (<%= couponDiscount %>% off):
+            </td>
+            <td class="amount">-<%= currency %><%= discount %>
+            </td>
+          </tr>
+        </tbody>
+        <% } %>
+        <tbody>
+          <tr class="total">
+            <td class="amount">Total including tax:</td>
+            <td class="amount">
+              <%= currency %><%= total %>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <table class="totals">
+      <tr>
+        <td>Total excluding tax:</td>
+        <td>
+          <%= currency %><%= totalExcludingTax %>
+        </td>
+      </tr>
+      <% if (cgstPercentage && cgst) { %>
+      <tr>
+        <td>CGST (<%= cgstPercentage %>%):</td>
+        <td>
+          <%= currency %><%= cgst %>
+        </td>
+      </tr>
+      <% } %>
+      <% if (sgstPercentage && sgst) { %>
+      <tr>
+        <td>SGST (<%= sgstPercentage %>%):</td>
+        <td>
+          <%= currency %><%= sgst %>
+        </td>
+      </tr>
+      <% } %>
+      <% if (igstPercentage && igst) { %>
+      <tr>
+        <td>IGST (<%= igstPercentage %>%):</td>
+        <td>
+          <%= currency %><%= igst %>
+        </td>
+      </tr>
+      <% } %>
+      <tr>
+        <td>Total:</td>
+        <td><%= currency %><%= total %></td>
+      </tr>
+    </table>
+    <p class="terms">
+      Terms: This invoice is valid only after payment credited in our account.
+      Payment for this invoice is non refundable or/and non transferable in
+      any circumstances.
+    </p>
+  </div>
+</body>
+
+</html>

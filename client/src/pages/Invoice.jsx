@@ -32,7 +32,6 @@ import {
 import useStyle from "@/hooks/useStyle";
 import useAxiosPrivate from "@/hooks/useAxiosPrivate";
 import NotFound from "./NotFound";
-import { DownloadInvoicePdf } from "@/lib/DownloadInvoicePdf";
 
 export default function Invoice() {
   const { subscribeId } = useParams();
@@ -173,11 +172,13 @@ export default function Invoice() {
       ) : (
         <>
           <div className="mx-auto mt-4 flex w-full max-w-[8.27in] justify-end sm:mt-0">
-            <Button
-              onClick={() => DownloadInvoicePdf(invoiceId, invoiceNumber)}
-            >
-              <Download className="mr-2 h-4 w-4" />
-              Download invoice
+            <Button asChild>
+              <Link
+                to={`${import.meta.env.VITE_BACKEND_URL}/invoice/pdf/${invoiceId}`}
+              >
+                <Download className="mr-2 h-4 w-4" />
+                Download invoice
+              </Link>
             </Button>
           </div>
           <Card

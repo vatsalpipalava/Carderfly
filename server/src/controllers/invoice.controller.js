@@ -1,13 +1,14 @@
 import mongoose from "mongoose";
-import pdf from "pdf-creator-node";
 import fs from "fs";
 import path from "path";
+import puppeteer from "puppeteer";
 import { Subscribe } from "../models/subscribe.model.js";
 import { asyncHandler } from "../utils/asyncHandler.js";
 import { ApiResponse } from "../utils/ApiResponse.js";
 import { ApiError } from "../utils/ApiError.js";
 import { Invoice } from "../models/invoice.model.js";
 import { fileURLToPath } from "url";
+import logger from "../utils/logger.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -149,19 +150,13 @@ const invoice = asyncHandler(async (req, res) => {
     .json(new ApiResponse(200, invoice, "Invoice retrieved successfully!"));
 });
 
-const invoicePdfDownload = asyncHandler(async (req, res) => {
+const getEInvoice = asyncHandler(async (req, res) => {
   const invoiceId = req.params.invoiceId;
   const invoice = await Invoice.findById(invoiceId);
 
   if (!invoice) {
     throw new ApiError(404, "Invoice not found");
   }
-
-  const html = fs.readFileSync(
-    path.join(__dirname, "../views/invoice.html"),
-    "utf-8"
-  );
-  const filename = Math.random() + "_doc" + ".pdf";
 
   const create = new Date(invoice.invoice.created_at * 1000);
   const options = { year: "numeric", month: "long", day: "numeric" };
@@ -226,40 +221,58 @@ const invoicePdfDownload = asyncHandler(async (req, res) => {
     igst: (invoice.invoice.notes?.igst / 100).toFixed(2),
     total: (invoice.invoice.notes.total / 100).toFixed(2),
   };
-
-  const optionPdf = {
-    formate: "A4",
-    orientation: "portrait",
-  };
-
-  const document = {
-    html: html,
-    data: obj,
-    path: path.join(__dirname, "../../public/temp/", filename),
-  };
-
-  try {
-    await pdf.create(document, optionPdf);
-    res.download(
-      document.path,
-      `invoice_${invoice.invoiceNumber}.pdf`,
-      (err) => {
-        if (err) {
-          throw new ApiError(500, "Failed to download VCF file.");
-        }
-        fs.unlink(document.path, (unlinkErr) => {
-          if (unlinkErr) {
-            throw new ApiError(
-              500,
-              `Failed to delete temp PDF file: ${unlinkErr}`
-            );
-          }
-        });
-      }
-    );
-  } catch (error) {
-    throw new ApiError(500, `Error generating PDF: ${error}`);
-  }
+  res.render("invoice", obj);
 });
 
-export { getInvoices, invoice, invoicePdfDownload };
+const invoicePdfDownload = asyncHandler(async (req, res) => {
+  const invoiceId = req.params.invoiceId;
+
+  const invoice = await Invoice.findById(invoiceId);
+
+  if (!invoice) {
+    throw new ApiError(404, "Invoice not found");
+  }
+
+  const browser = await puppeteer.launch();
+  const page = await browser.newPage();
+  await page.goto(
+    `${process.env.BACKEND_URL}/api/v1/invoice/e-invoice/${invoiceId}`,
+    {
+      waitUntil: "networkidle2",
+    }
+  );
+
+  const pdfUrl = path.join(
+    __dirname,
+    "../../public/temp",
+    `Invoice_${invoice.invoiceNumber}` + ".pdf"
+  );
+
+  await page.pdf({
+    path: pdfUrl,
+    format: "A4",
+  });
+
+  await browser.close();
+
+  res.set({
+    "Content-Type": "application/pdf",
+    "Content-Disposition": `attachment; filename=Invoice_${invoice.invoiceNumber}.pdf`,
+  });
+
+  res.sendFile(pdfUrl, (err) => {
+    if (err) {
+      logger.error(`Error downloading the PDF", ${err}`);
+    } else {
+      fs.unlink(pdfUrl, (err) => {
+        if (err) {
+          logger.error(`File deleted successfully:", ${err}`);
+        } else {
+          logger.info(`File deleted successfully:", ${pdfUrl}`);
+        }
+      });
+    }
+  });
+});
+
+export { getInvoices, invoice, getEInvoice, invoicePdfDownload };
