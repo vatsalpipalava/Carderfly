@@ -558,25 +558,28 @@ export function Transactions() {
                     <DropdownMenuSeparator />
                     <DropdownMenuGroup>
                       <DropdownMenuCheckboxItem
-                        checked={planIds.includes("inr_starter, usd_starter")}
+                        checked={planIds.includes("inr_starter", "usd_starter")}
                         onCheckedChange={() =>
-                          handlePlanFilterChange("inr_starter, usd_starter")
+                          handlePlanFilterChange("inr_starter", "usd_starter")
                         }
                       >
                         Starter
                       </DropdownMenuCheckboxItem>
                       <DropdownMenuCheckboxItem
-                        checked={planIds.includes("inr_standard, usd_standard")}
+                        checked={planIds.includes(
+                          "inr_standard",
+                          "usd_standard"
+                        )}
                         onCheckedChange={() =>
-                          handlePlanFilterChange("inr_standard, usd_standard")
+                          handlePlanFilterChange("inr_standard", "usd_standard")
                         }
                       >
                         Standard
                       </DropdownMenuCheckboxItem>
                       <DropdownMenuCheckboxItem
-                        checked={planIds.includes("inr_premium, usd_premium")}
+                        checked={planIds.includes("inr_premium", "usd_premium")}
                         onCheckedChange={() =>
-                          handlePlanFilterChange("inr_premium, usd_premium")
+                          handlePlanFilterChange("inr_premium", "usd_premium")
                         }
                       >
                         Premium
