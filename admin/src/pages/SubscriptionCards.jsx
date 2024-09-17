@@ -740,25 +740,25 @@ export function SubscriptionCards() {
                     <DropdownMenuSeparator />
                     <DropdownMenuGroup>
                       <DropdownMenuCheckboxItem
-                        checked={planIds.includes("starter")}
+                        checked={planIds.includes("inr_starter, usd_starter")}
                         onCheckedChange={() =>
-                          handlePlanFilterChange("starter")
+                          handlePlanFilterChange("inr_starter, usd_starter")
                         }
                       >
                         Starter
                       </DropdownMenuCheckboxItem>
                       <DropdownMenuCheckboxItem
-                        checked={planIds.includes("standard")}
+                        checked={planIds.includes("inr_standard, usd_standard")}
                         onCheckedChange={() =>
-                          handlePlanFilterChange("standard")
+                          handlePlanFilterChange("inr_standard, usd_standard")
                         }
                       >
                         Standard
                       </DropdownMenuCheckboxItem>
                       <DropdownMenuCheckboxItem
-                        checked={planIds.includes("premium")}
+                        checked={planIds.includes("inr_premium, usd_premium")}
                         onCheckedChange={() =>
-                          handlePlanFilterChange("premium")
+                          handlePlanFilterChange("inr_premium, usd_premium")
                         }
                       >
                         Premium
