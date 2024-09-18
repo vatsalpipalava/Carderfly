@@ -6,7 +6,7 @@ import { cn } from "@/lib/utils";
 import { Building2, ChevronRightIcon, Earth } from "lucide-react";
 
 import { AspectRatio } from "@radix-ui/react-aspect-ratio";
-import { Button } from "@/components/ui/button";
+// import { Button } from "@/components/ui/button";
 
 import AnimatedGridPattern from "@/components/magicui/animated-grid-pattern";
 import BlurFade from "@/components/magicui/blur-fade";
@@ -98,9 +98,9 @@ export function HeroSection() {
                     </motion.span>
                   </motion.button>
                 </Link>
-                <Button variant="outline" className="rounded-full">
+                {/* <Button variant="outline" className="rounded-full">
                   Watch Video
-                </Button>
+                </Button> */}
               </div>
             </BlurFade>
           </div>
