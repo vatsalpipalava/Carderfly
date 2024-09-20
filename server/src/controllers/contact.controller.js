@@ -51,21 +51,84 @@ const contactForm = asyncHandler(async (req, res) => {
     message: message,
   });
 
+  // const transporter = nodemailer.createTransport({
+  //   host: process.env.SMTP_CONTACT_EMAIL_HOST,
+  //   port: process.env.SMTP_CONTACT_EMAIL_PORT,
+  //   secure: true,
+  //   auth: {
+  //     user: process.env.SMTP_CONTACT_AUTH_EMAIL,
+  //     pass: """,
+  //   },
+  // });
+
   const transporter = nodemailer.createTransport({
-    host: process.env.SMTP_CONTACT_EMAIL_HOST,
-    port: process.env.SMTP_CONTACT_EMAIL_PORT,
+    service: process.env.SMTP_EMAIL_SERVICE,
+    host: process.env.SMTP_EMAIL_HOST,
+    port: process.env.SMTP_EMAIL_PORT,
     secure: true,
     auth: {
-      user: process.env.SMTP_CONTACT_AUTH_EMAIL,
-      pass: "szvM.lNFJj7(#gM",
+      user: process.env.SMTP_AUTH_EMAIL,
+      pass: process.env.SMTP_AUTH_EMAIL_PASSWORD,
     },
   });
 
   const mailOptions = {
-    from: `"${name}" info@carderfly.com`,
-    to: "info@carderfly.com",
+    from: `"${name}" <${process.env.SMTP_AUTH_EMAIL}>`,
+    to: process.env.SMTP_AUTH_EMAIL,
     replyTo: email,
-    subject: "New message from Carderfly website",
+    subject: "General Enquiry",
+    html: htmlContent,
+  };
+
+  transporter.sendMail(mailOptions, (error, info) => {
+    if (error) {
+      logger.error(`Error sending contact email: ${error}`);
+      throw new ApiError(500, "Failed to send contact email");
+    }
+    logger.info(`Contact Email sent: ${info.response}`);
+    return res
+      .status(200)
+      .json(new ApiResponse(200, {}, `Email sent successfully`));
+  });
+});
+
+const supportForm = asyncHandler(async (req, res) => {
+  const email = req.email;
+  const firstName = req.firstName;
+  const lastName = req.lastName;
+  const { message } = req.body;
+
+  // req.body - recaptchaToken
+  // const isRecaptchaValid = await verifyRecaptcha(recaptchaToken);
+  // if (!isRecaptchaValid) {
+  //   throw new ApiError(400, "reCAPTCHA verification failed");
+  // }
+
+  const templatePath = path.join(__dirname, "..", "mails", "contactForm.html");
+  const template = fs.readFileSync(templatePath, "utf-8");
+
+  const htmlContent = replacePlaceholders(template, {
+    name: `${firstName} ${lastName}`,
+    email: email.toLowerCase(),
+    message: message,
+  });
+
+  const transporter = nodemailer.createTransport({
+    service: process.env.SMTP_EMAIL_SERVICE,
+    host: process.env.SMTP_EMAIL_HOST,
+    port: process.env.SMTP_EMAIL_PORT,
+    secure: true,
+    auth: {
+      user: process.env.SMTP_AUTH_EMAIL,
+      pass: process.env.SMTP_AUTH_EMAIL_PASSWORD,
+    },
+  });
+
+  const mailOptions = {
+    from: `"${firstName} ${lastName}" <${process.env.SMTP_AUTH_EMAIL}>`,
+    to: process.env.SMTP_AUTH_EMAIL,
+    replyTo: email,
+    subject: "Support",
     html: htmlContent,
   };
 
@@ -85,11 +148,11 @@ const contactForm = asyncHandler(async (req, res) => {
     const thankyouTemplate = fs.readFileSync(thankyouTemplatePath, "utf-8");
 
     const thankyouHtmlContent = replacePlaceholders(thankyouTemplate, {
-      name: name,
+      name: `${firstName} ${lastName}`,
     });
 
     const thankYouMailOptions = {
-      from: `"Carderfly" <info@carderfly.com>`,
+      from: `"Carderfly" <${process.env.SMTP_AUTH_EMAIL}>`,
       to: email,
       subject: "Thank you for your message",
       html: thankyouHtmlContent,
@@ -109,4 +172,4 @@ const contactForm = asyncHandler(async (req, res) => {
   });
 });
 
-export { contactForm };
+export { contactForm, supportForm };

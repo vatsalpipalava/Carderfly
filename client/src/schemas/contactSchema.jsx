@@ -8,4 +8,10 @@ const contactSchema = z.object({
     .min(10, { message: "Message must be at least 10 characters." }),
 });
 
-export { contactSchema };
+const supportSchema = z.object({
+  message: z
+    .string()
+    .min(10, { message: "Message must be at least 10 characters." }),
+});
+
+export { contactSchema, supportSchema };
