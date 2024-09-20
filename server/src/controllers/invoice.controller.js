@@ -141,10 +141,6 @@ const invoice = asyncHandler(async (req, res) => {
     "invoice.id": subscribe.razorpayPaymentId,
   });
 
-  // const payment = await razorpay.orders.fetchPayments(subscribe.razorpayOrderId);
-  // console.log("🚀 ~ invoice ~ payment:", payment)
-  // console.log("🚀 ~ invoice ~ payment:", payment.items[0].card)
-
   return res
     .status(200)
     .json(new ApiResponse(200, invoice, "Invoice retrieved successfully!"));

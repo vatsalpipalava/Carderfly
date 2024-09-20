@@ -52,8 +52,8 @@ app.use("/public", express.static(path.join(__dirname, "..", "public")));
 app.use("/uploads", express.static(path.join(__dirname, "..", "uploads")));
 
 // Set EJS as the view engine
-app.set('view engine', 'ejs');
-app.set('views', path.join(__dirname, 'views'));
+app.set("view engine", "ejs");
+app.set("views", path.join(__dirname, "views"));
 
 app.use(cookieParser());
 
@@ -78,6 +78,7 @@ import invoiceRoutes from "./routes/invoice.routes.js";
 import adminUserRoutes from "./routes/adminUser.routes.js";
 import adminDataRoutes from "./routes/adminData.routes.js";
 import backupRoutes from "./routes/backup.routes.js";
+import contactRoutes from "./routes/contact.routes.js";
 
 // routes declaration
 app.use("/", rootRoutes);
@@ -89,6 +90,7 @@ app.use("/api/v1/invoice", invoiceRoutes);
 app.use("/api/v1/admin", adminUserRoutes);
 app.use("/api/v1/admin-data", adminDataRoutes);
 app.use("/api/v1/backup", backupRoutes);
+app.use("/api/v1/contact", contactRoutes);
 
 app.all("*", (req, res) => {
   res.status(404);

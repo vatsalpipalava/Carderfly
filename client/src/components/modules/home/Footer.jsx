@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 import { Facebook, Instagram } from "lucide-react";
 
@@ -9,6 +9,7 @@ import Carderfly from "@/assets/svgs/carderfly";
 import { ModeToggle } from "@/components/dark-mode/mode-toggle";
 
 export function Footer() {
+  const location = useLocation();
   return (
     <footer className="w-full px-4 pb-6 sm:px-6">
       <div className="mx-auto max-w-[1235px] rounded-2xl bg-foreground px-4 py-6 dark:bg-muted sm:px-6">
@@ -23,10 +24,15 @@ export function Footer() {
             </Link>
 
             <div className="text-sm text-white/70">
-              Modernize networking with dynamic digital business cards. Elevate
-              brand presence, streamline connections, and gain insights for
-              strategic growth. Transforming business cards into indispensable
-              tools.
+              {location.pathname === "/contact" ? (
+                <>
+                  Office: A-422, Yash Plaza, Varachha Road, Surat.
+                  <br />
+                  Email: info@carderfly.com
+                </>
+              ) : (
+                "Modernize networking with dynamic digital business cards. Elevate brand presence, streamline connections, and gain insights for strategic growth. Transforming business cards into indispensable tools."
+              )}
             </div>
 
             <div className="mt-6 flex items-center gap-3">
@@ -79,6 +85,13 @@ export function Footer() {
               className="h-auto px-0 py-0 text-base font-normal text-white hover:font-medium hover:text-primary sm:px-4"
             >
               <Link to="/#pricing">Pricing</Link>
+            </Button>
+            <Button
+              asChild
+              variant="link"
+              className="h-auto px-0 py-0 text-base font-normal text-white hover:font-medium hover:text-primary sm:px-4"
+            >
+              <Link to="/contact">Contact</Link>
             </Button>
             <Button
               asChild

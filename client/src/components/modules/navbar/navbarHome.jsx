@@ -10,8 +10,9 @@ import Carderfly from "@/assets/svgs/carderfly";
 
 export function Navbar() {
   const { auth } = useAuth();
+
   return (
-    <div className="sticky top-0 h-full w-full z-50 bg-background/95 backdrop-blur-[0.5px] supports-[backdrop-filter]:bg-background/60">
+    <div className="sticky top-0 z-50 h-full w-full bg-background/95 backdrop-blur-[0.5px] supports-[backdrop-filter]:bg-background/60">
       <header className="mx-auto flex h-auto max-w-[1440px] items-center justify-between gap-4 px-4 py-4 sm:px-6">
         <nav className="hidden items-center gap-6 font-medium md:flex">
           <Link
@@ -113,7 +114,7 @@ export function Navbar() {
         </nav>
 
         <div className="flex gap-4">
-          {auth.accessToken ? (
+          {auth?.accessToken ? (
             <>
               <div className="ml-auto hidden flex-initial md:block"></div>
               <Button

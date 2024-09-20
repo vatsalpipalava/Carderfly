@@ -43,12 +43,13 @@ export function Support() {
 
         <LogoutDropdown />
       </header>
-      <main className="flex h-32 w-full items-center justify-center p-4">
+      <main className="flex flex-col h-32 w-full items-center justify-center p-4">
+        <p>If you have any questions, feel free to send an email.</p>
         <Link
-          to="mailto:carderfly@gmail.com"
-          className="font-bold hover:text-primary"
+          to="mailto:info@carderfly.com"
+          className="font-bold hover:text-primary mt-2"
         >
-          Email: carderfly@gmail.com
+          Email: info@carderfly.com
         </Link>
       </main>
     </>

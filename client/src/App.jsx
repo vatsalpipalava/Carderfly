@@ -34,6 +34,7 @@ import { TermsAndConditions } from "./pages/TermsAndConditions";
 import { Payment } from "./pages/Payment";
 import { Support } from "./pages/Support";
 import { PrivacyPolicy } from "./pages/PrivacyPolicy";
+import { Contact } from "./pages/Contact";
 
 const ScrollToSection = () => {
   const { hash } = useLocation();
@@ -73,6 +74,7 @@ function App() {
             <Route index element={<Home />} />
             <Route path="register" element={<RegisterForm />} />
             <Route path="login" element={<LoginForm />} />
+            <Route path="contact" element={<Contact />} />
 
             <Route element={<RequireAuth />}>
               <Route path="view-card/:cardId" element={<MyCardById />} />

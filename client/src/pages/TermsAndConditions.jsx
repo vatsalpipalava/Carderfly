@@ -50,7 +50,7 @@ export function TermsAndConditions() {
             period. Once purchased, a subscription remains active for its full
             term, after which it will be automatically canceled. Please note
             that subscription fees are non-refundable. All Fees and Product Fees
-            are non-refundable and non-transferable.{" "}
+            are non-refundable and non-transferable.
           </p>
           <h6 className="mt-4 scroll-m-20 text-base font-semibold tracking-tight first:mt-0">
             Introduction
@@ -64,7 +64,7 @@ export function TermsAndConditions() {
             If you are using the Platform on behalf of your employer or a
             business entity, you personally confirm that you are authorized to
             act on their behalf and have the authority to bind both the entity
-            and its personnel to these Terms.{" "}
+            and its personnel to these Terms.
           </p>
 
           <h6 className="mt-4 scroll-m-20 text-base font-semibold tracking-tight first:mt-0">
@@ -150,6 +150,15 @@ export function TermsAndConditions() {
             Once an order for Products is placed, it cannot be cancelled. The
             order will automatically terminate at the end of the
             product/subscription period.
+          </p>
+
+          <h6 className="mt-4 scroll-m-20 text-base font-semibold tracking-tight first:mt-0">
+            No Shipping Required
+          </h6>
+          <p className="text-base leading-7 [&:not(:first-child)]:mt-2">
+            No shipping is required with Carderfly&apos;s digital business card
+            service. Everything is provided online, without the need for
+            physical delivery.
           </p>
 
           <h6 className="mt-4 scroll-m-20 text-base font-semibold tracking-tight">
@@ -481,6 +490,18 @@ export function TermsAndConditions() {
           <p className="text-base leading-7 [&:not(:first-child)]:mt-0">
             You authorize us to charge your selected payment method for product/
             subscription fees and any applicable taxes.
+          </p>
+
+          <h6 className="mt-4 scroll-m-20 text-base font-semibold tracking-tight first:mt-0">
+            Refund and Cancellation
+          </h6>
+          <p className="text-base leading-7 [&:not(:first-child)]:mt-2">
+            Subscriptions automatically terminate at the end of their designated
+            period. Once purchased, a subscription remains active for its full
+            term, after which it will be automatically canceled. You do not
+            cancel subscription or upgrade subscription. Please note that
+            subscription fees are non-refundable. All Fees and Product Fees are
+            non-refundable and non-transferable.
           </p>
 
           <h6 className="mt-4 scroll-m-20 text-base font-semibold tracking-tight first:mt-0">
