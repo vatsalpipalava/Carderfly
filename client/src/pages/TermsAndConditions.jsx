@@ -153,7 +153,7 @@ export function TermsAndConditions() {
           </p>
 
           <h6 className="mt-4 scroll-m-20 text-base font-semibold tracking-tight first:mt-0">
-            No Shipping Required
+            Shipping (No Shipping Required)
           </h6>
           <p className="text-base leading-7 [&:not(:first-child)]:mt-2">
             No shipping is required with Carderfly&apos;s digital business card
