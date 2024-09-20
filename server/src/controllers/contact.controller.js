@@ -22,7 +22,7 @@ async function verifyRecaptcha(token) {
       null,
       {
         params: {
-          secret: process.env.GOOGLE_CAPTCHA_secret,
+          secret: process.env.GOOGLE_CAPTCHA_SECRET,
           response: token,
         },
       }
