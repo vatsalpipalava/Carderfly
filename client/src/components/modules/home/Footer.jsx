@@ -26,7 +26,7 @@ export function Footer() {
             <div className="text-sm text-white/70">
               {location.pathname === "/contact" ? (
                 <>
-                  Office: A-422, Yash Plaza, Varachha Road, Surat.
+                  Office: Montech Design, A-422, Yash Plaza, Varachha Road, Surat.
                   <br />
                   Email: info@carderfly.com
                 </>
