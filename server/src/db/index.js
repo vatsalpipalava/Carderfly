@@ -44,10 +44,15 @@ export default connectDB;
 // import mongoose from "mongoose";
 // import { DB_NAME } from "../constants.js";
 
+// // Define the username and password
+// const USERNAME = process.env.DB_USER;
+// const PASSWORD = process.env.DB_PASSWORD;
+// const AUTHSOURCE = process.env.DB_AUTHSOURCE;
+
 // const connectDB = async () => {
 //   try {
 //     const connectionInstance = await mongoose.connect(
-//       `${process.env.MONGODB_URI}/${DB_NAME}`,
+//       `mongodb://${USERNAME}:${PASSWORD}@127.0.0.1:27017/${DB_NAME}?authSource=${AUTHSOURCE}`
 //     );
 //     console.log(`\nMongoDB connected !!\nDB HOST: ${connectionInstance.connection.host}`);
 

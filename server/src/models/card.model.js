@@ -46,19 +46,15 @@ const cardSchema = new Schema(
     },
     jobTitle: {
       type: String,
-      required: [true, "Job Title is required."],
     },
     businessName: {
       type: String,
-      required: [true, "Business Name is required."],
     },
     businessAddress: {
       type: String,
-      required: [true, "Business Address is required."],
     },
     businessDescription: {
       type: String,
-      required: [true, "Business Description is required."],
     },
     primaryActions: [
       {
