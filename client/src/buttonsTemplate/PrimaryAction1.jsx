@@ -23,7 +23,11 @@ export function PrimaryAction1({
               asChild
               size="icon"
               className="h-12 w-12 rounded-full"
-              style={{ backgroundColor: `${propButtonBg}20`, color: propButtonText, border: `1px solid ${propButtonBg}` }}
+              style={{
+                backgroundColor: `${propButtonBg}20`,
+                color: propButtonText,
+                border: `1px solid ${propButtonBg}`,
+              }}
             >
               <Link
                 to={`${addedField.linkPrefix}${value.value}${addedField.linkSuffix}`}

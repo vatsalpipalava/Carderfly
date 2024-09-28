@@ -125,9 +125,6 @@ function ExecutiveDesign({ cardData }) {
             <div className="text-center text-xl font-medium">
               {cardData?.businessName}
             </div>
-            <p className="text-center text-base">
-              {cardData?.businessDescription}
-            </p>
           </div>
 
           {/* Primary Action */}
@@ -194,13 +191,26 @@ function ExecutiveDesign({ cardData }) {
 
           {/* Secondary Actions */}
           {cardData?.secondaryActions.length === 0 ? null : (
-            <div className="flex w-full flex-wrap justify-center gap-5">
+            <div className="flex w-full flex-wrap justify-center gap-5 pb-6">
               <SecondaryAction4 secondaryActions={cardData?.secondaryActions} />
             </div>
           )}
 
+          {cardData?.businessDescription && (
+            <Card
+              className="border-none bg-transparent shadow-none"
+              style={{
+                color: cardData?.colors?.text,
+              }}
+            >
+              <CardContent className="px-0 text-justify">
+                {cardData.businessDescription}
+              </CardContent>
+            </Card>
+          )}
+
           {/* Feature Section */}
-          <div className="mt-6">
+          <div>
             <FeatureTemplate4
               sections={cardData?.sections}
               propText={cardData?.colors?.text}

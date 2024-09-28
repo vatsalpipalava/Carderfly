@@ -127,12 +127,9 @@ function PrestigeConnect({ cardData }) {
                 {cardData?.firstName} {cardData?.lastName}
               </h3>
               <p className="mb-3 text-center text-base">{cardData?.jobTitle}</p>
-              <div className="mb-3 text-center text-xl font-medium">
+              <div className="mb-[15px] text-center text-xl font-medium">
                 {cardData?.businessName}
               </div>
-              <p className="mb-[15px] text-center text-base">
-                {cardData?.businessDescription}
-              </p>
             </div>
 
             {/* Primary Action */}
@@ -260,6 +257,21 @@ function PrestigeConnect({ cardData }) {
             )}
           </Card>
         </div>
+
+        {cardData?.businessDescription && (
+          <div className="px-4 pt-4">
+            <Card
+              className="border-none bg-transparent shadow-none"
+              style={{
+                color: cardData?.colors?.text,
+              }}
+            >
+              <CardContent className="px-0 text-justify">
+                {cardData.businessDescription}
+              </CardContent>
+            </Card>
+          </div>
+        )}
 
         {/* Feature Section */}
         <div className="px-4">

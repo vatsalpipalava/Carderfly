@@ -39,6 +39,7 @@ import {
 import Location from "@/assets/svgs/location";
 import Mail from "@/assets/svgs/mail";
 import Website from "@/assets/svgs/website";
+import { Card, CardContent } from "@/components/ui/card";
 
 function ProfessionalEdge({ cardData }) {
   const dispatch = useDispatch();
@@ -87,7 +88,7 @@ function ProfessionalEdge({ cardData }) {
 
   return (
     <div
-      className={`relative mx-auto flex h-full max-w-[500px] flex-col overflow-hidden ${style.mobileRadius} font-open z-50`}
+      className={`relative mx-auto flex h-full max-w-[500px] flex-col overflow-hidden ${style.mobileRadius} z-50 font-open`}
       style={{
         backgroundColor: cardData?.colors?.background,
         color: cardData?.colors?.text,
@@ -102,7 +103,7 @@ function ProfessionalEdge({ cardData }) {
           />
         </div>
         <div
-          className="relative -z-40 -mt-10 h-auto w-full rounded-t-3xl p-6"
+          className="relative -mt-10 h-auto w-full rounded-t-3xl p-6"
           style={{ backgroundColor: cardData?.colors?.background }}
         >
           <div className="absolute left-1/2 top-0 z-50 -translate-x-1/2 -translate-y-1/2 transform">
@@ -118,12 +119,9 @@ function ProfessionalEdge({ cardData }) {
               {cardData?.firstName} {cardData?.lastName}
             </h3>
             <p className="mb-3 text-center text-base">{cardData?.jobTitle}</p>
-            <div className="mb-3 text-center text-xl font-semibold">
+            <div className="mb-[15px] text-center text-xl font-semibold">
               {cardData?.businessName}
             </div>
-            <p className="mb-[15px] text-center text-base">
-              {cardData?.businessDescription}
-            </p>
           </div>
 
           {/* Primary Action */}
@@ -204,6 +202,21 @@ function ProfessionalEdge({ cardData }) {
         <div className="mb-8 flex w-full flex-wrap justify-center gap-5">
           <SecondaryAction1 secondaryActions={cardData?.secondaryActions} />
         </div>
+
+        {cardData?.businessDescription && (
+          <div className="px-6">
+            <Card
+              className="border-none bg-transparent shadow-none"
+              style={{
+                color: cardData?.colors?.text,
+              }}
+            >
+              <CardContent className="px-0 text-justify">
+                {cardData.businessDescription}
+              </CardContent>
+            </Card>
+          </div>
+        )}
 
         {/* Feature Section */}
         <div className="px-6">

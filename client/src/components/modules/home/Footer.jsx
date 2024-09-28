@@ -26,7 +26,8 @@ export function Footer() {
             <div className="text-sm text-white/70">
               {location.pathname === "/contact" ? (
                 <>
-                  Office: Montech Design, A-422, Yash Plaza, Varachha Road, Surat.
+                  Office: Montech Design, A-422, Yash Plaza, Varachha Road,
+                  Surat.
                   <br />
                   Email: info@carderfly.com
                 </>
@@ -39,17 +40,23 @@ export function Footer() {
               <p className="text-white">Follow Us</p>
               <Button
                 variant="outline"
+                asChild
                 size="icon"
                 className="border-white bg-transparent hover:bg-white/15"
               >
-                <Facebook className="h-5 w-5 text-white" />
+                <Link to="https://www.facebook.com/carderfly" target="_blank">
+                  <Facebook className="h-5 w-5 text-white" />
+                </Link>
               </Button>
               <Button
                 variant="outline"
+                asChild
                 size="icon"
                 className="border-white bg-transparent hover:bg-white/15"
               >
-                <Instagram className="h-5 w-5 text-white" />
+                <Link to="https://www.instagram.com/carderfly" target="_blank">
+                  <Instagram className="h-5 w-5 text-white" />
+                </Link>
               </Button>
             </div>
           </div>

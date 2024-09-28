@@ -107,12 +107,9 @@ function ProfessionalSuite({ cardData }) {
               {cardData?.firstName} {cardData?.lastName}
             </h3>
             <p className="mb-1 text-center italic">{cardData?.jobTitle}</p>
-            <div className="mb-1 text-center text-lg font-semibold">
+            <div className="mb-6 text-center text-lg font-semibold">
               {cardData?.businessName}
             </div>
-            <p className="mb-6 text-center text-sm">
-              {cardData?.businessDescription}
-            </p>
           </div>
 
           {/* Primary Action */}
@@ -140,10 +137,6 @@ function ProfessionalSuite({ cardData }) {
             </CardHeader>
 
             <CardContent>
-              {/* <Separator
-                style={{ backgroundColor: cardData?.colors?.cardSeparator }}
-                className="my-3"
-              /> */}
               <div className="mt-3 flex w-full items-center gap-4">
                 <MdLocationOn
                   className="h-5 w-5"
@@ -152,10 +145,6 @@ function ProfessionalSuite({ cardData }) {
                 <p className="w-full">{cardData?.businessAddress}</p>
               </div>
 
-              {/* <Separator
-                style={{ backgroundColor: cardData?.colors?.cardSeparator }}
-                className="my-3"
-              /> */}
               <div className="mt-3 flex w-full items-center gap-4">
                 <IoCallSharp
                   className="h-5 w-5"
@@ -164,10 +153,6 @@ function ProfessionalSuite({ cardData }) {
                 <p className="w-full">{mobile?.value}</p>
               </div>
 
-              {/* <Separator
-                style={{ backgroundColor: cardData?.colors?.cardSeparator }}
-                className="my-3"
-              /> */}
               <div className="mt-3 flex w-full items-center gap-4">
                 <MdEmail
                   className="h-5 w-5"
@@ -178,10 +163,6 @@ function ProfessionalSuite({ cardData }) {
 
               {website?.value ? (
                 <>
-                  {/* <Separator
-                    style={{ backgroundColor: cardData?.colors?.cardSeparator }}
-                    className="my-3"
-                  /> */}
                   <div className="mt-3 flex w-full items-center gap-4">
                     <IoEarth
                       className="h-5 w-5"
@@ -200,6 +181,19 @@ function ProfessionalSuite({ cardData }) {
               secondaryActions={cardData?.secondaryActions}
             />
           </div>
+
+          {cardData?.businessDescription && (
+            <Card
+              className="border-none bg-transparent shadow-none"
+              style={{
+                color: cardData?.colors?.text,
+              }}
+            >
+              <CardContent className="px-0 text-justify">
+                {cardData.businessDescription}
+              </CardContent>
+            </Card>
+          )}
 
           {/* Feature Section */}
           <div>

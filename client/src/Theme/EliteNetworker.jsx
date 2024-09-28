@@ -87,7 +87,7 @@ function EliteNetworker({ cardData }) {
 
   return (
     <div
-      className={`relative mx-auto flex h-full max-w-[500px] flex-col overflow-hidden ${style.mobileRadius} font-laila z-50`}
+      className={`relative mx-auto flex h-full max-w-[500px] flex-col overflow-hidden ${style.mobileRadius} z-50 font-laila`}
       style={{
         backgroundColor: cardData?.colors?.background,
         color: cardData?.colors?.text,
@@ -147,15 +147,12 @@ function EliteNetworker({ cardData }) {
             <h3 className="mb-1 scroll-m-20 text-center text-[22px] font-medium tracking-tight">
               {cardData?.firstName} {cardData?.lastName}
             </h3>
-            <p className="text-base mb-1 text-center italic">
+            <p className="mb-1 text-center text-base italic">
               {cardData?.jobTitle}
             </p>
-            <div className="mb-1 text-center text-[22px] font-medium">
+            <div className="mb-6 text-center text-[22px] font-medium">
               {cardData?.businessName}
             </div>
-            <p className="mb-6 text-center text-sm">
-              {cardData?.businessDescription}
-            </p>
           </div>
 
           {/* Primary Action */}
@@ -261,6 +258,21 @@ function EliteNetworker({ cardData }) {
               }}
             ></div>
           </div>
+
+          {cardData?.businessDescription && (
+            <div className="px-6">
+              <Card
+                className="border-none bg-transparent shadow-none"
+                style={{
+                  color: cardData?.colors?.text,
+                }}
+              >
+                <CardContent className="px-0 text-justify">
+                  {cardData.businessDescription}
+                </CardContent>
+              </Card>
+            </div>
+          )}
 
           {/* Feature Section */}
           <div className="px-6">

@@ -110,12 +110,9 @@ function CorporateElegance({ cardData }) {
               {cardData?.firstName} {cardData?.lastName}
             </h3>
             <p className="mb-1 italic">{cardData?.jobTitle}</p>
-            <div className="mb-1 text-lg font-semibold">
+            <div className="mb-6 text-lg font-semibold">
               {cardData?.businessName}
             </div>
-            <p className="mb-6 text-sm text-muted-foreground">
-              {cardData?.businessDescription}
-            </p>
           </div>
 
           {/* Primary Action */}
@@ -156,29 +153,23 @@ function CorporateElegance({ cardData }) {
               </div>
 
               <div className="mt-3 flex w-full items-center gap-2">
-                <Phone
-                  className="h-5 w-5"
-                  color={cardData?.colors?.cardIcon}
-                />
+                <Phone className="h-5 w-5" color={cardData?.colors?.cardIcon} />
                 <p className="w-full">{mobile?.value}</p>
               </div>
 
               <div className="mt-3 flex w-full items-center gap-2">
-                <Mail
-                  className="h-5 w-5"
-                  color={cardData?.colors?.cardIcon}
-                />
+                <Mail className="h-5 w-5" color={cardData?.colors?.cardIcon} />
                 <p className="w-full">{email?.value}</p>
               </div>
 
               {website?.value ? (
-                  <div className="mt-3 flex w-full items-center gap-2">
-                    <Website
-                      className="h-5 w-5"
-                      color={cardData?.colors?.cardIcon}
-                    />
-                    <p className="w-full">{website?.value}</p>
-                  </div>
+                <div className="mt-3 flex w-full items-center gap-2">
+                  <Website
+                    className="h-5 w-5"
+                    color={cardData?.colors?.cardIcon}
+                  />
+                  <p className="w-full">{website?.value}</p>
+                </div>
               ) : null}
             </CardContent>
           </Card>
@@ -189,6 +180,19 @@ function CorporateElegance({ cardData }) {
               secondaryActions={cardData?.secondaryActions}
             />
           </div>
+
+          {cardData?.businessDescription && (
+            <Card
+              className="border-none bg-transparent shadow-none"
+              style={{
+                color: cardData?.colors?.text,
+              }}
+            >
+              <CardContent className="px-0 text-justify">
+                {cardData.businessDescription}
+              </CardContent>
+            </Card>
+          )}
 
           {/* Feature Section */}
           <div>

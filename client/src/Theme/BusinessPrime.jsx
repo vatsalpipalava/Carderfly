@@ -114,15 +114,12 @@ function BusinessPrime({ cardData }) {
             <div className="mb-1 text-center text-2xl font-bold">
               {cardData?.firstName} {cardData?.lastName}
             </div>
-            <div className="text-base mb-2 text-center italic">
+            <div className="mb-2 text-center text-base italic">
               {cardData?.jobTitle}
             </div>
             <div className="mb-2 text-center text-lg font-semibold">
               {cardData?.businessName}
             </div>
-            <p className="text-center text-sm">
-              {cardData?.businessDescription}
-            </p>
           </div>
 
           {/* Primary Action */}
@@ -159,30 +156,23 @@ function BusinessPrime({ cardData }) {
               </div>
 
               <div className="mt-3 flex w-full items-center gap-4">
-                <Phone
-                  className="h-6 w-6"
-                  color={cardData?.colors?.cardIcon}
-                />
+                <Phone className="h-6 w-6" color={cardData?.colors?.cardIcon} />
                 <p className="w-full">{mobile?.value}</p>
               </div>
 
               <div className="mt-3 flex w-full items-center gap-4">
-                <Mail
-                  className="h-6 w-6"
-                  color={cardData?.colors?.cardIcon}
-                />
+                <Mail className="h-6 w-6" color={cardData?.colors?.cardIcon} />
                 <p className="w-full">{email?.value}</p>
               </div>
 
               {website?.value ? (
-
-                  <div className="mt-3 flex w-full items-center gap-4">
-                    <Website
-                      className="h-6 w-6"
-                      color={cardData?.colors?.cardIcon}
-                    />
-                    <p className="w-full">{website?.value}</p>
-                  </div>
+                <div className="mt-3 flex w-full items-center gap-4">
+                  <Website
+                    className="h-6 w-6"
+                    color={cardData?.colors?.cardIcon}
+                  />
+                  <p className="w-full">{website?.value}</p>
+                </div>
               ) : null}
             </CardContent>
           </Card>
@@ -193,6 +183,21 @@ function BusinessPrime({ cardData }) {
               secondaryActions={cardData?.secondaryActions}
             />
           </div>
+
+          {cardData?.businessDescription && (
+            <div>
+              <Card
+                className="border-none bg-transparent shadow-none"
+                style={{
+                  color: cardData?.colors?.text,
+                }}
+              >
+                <CardContent className="px-0 text-justify">
+                  {cardData.businessDescription}
+                </CardContent>
+              </Card>
+            </div>
+          )}
 
           {/* Feature Section */}
           <div>

@@ -1,8 +1,9 @@
 /* eslint-disable react/prop-types */
+import { Link } from "react-router-dom";
+
 import { Button } from "@/components/ui/button";
 
 import { secondaryActionField } from "@/components/modules/secondaryActionField";
-import { Link } from "react-router-dom";
 
 export function SecondaryAction1({ secondaryActions }) {
   return (
@@ -18,13 +19,20 @@ export function SecondaryAction1({ secondaryActions }) {
               key={value._id}
               size="icon"
               className="h-12 w-12 rounded-full"
-              style={{ backgroundColor: `${addedField.color}20`, color: addedField.color, border: `1px solid ${addedField.color}` }}
+              style={{
+                backgroundColor: `${addedField.color}20`,
+                color: addedField.color,
+                border: `1px solid ${addedField.color}`,
+              }}
             >
               <Link
                 to={`${addedField.linkPrefix}${value.value}${addedField.linkSuffix}`}
                 target="_blank"
               >
-                <IconContainer icon={addedField.icon} style={{ color: addedField }} />
+                <IconContainer
+                  icon={addedField.icon}
+                  style={{ color: addedField }}
+                />
               </Link>
             </Button>
           );

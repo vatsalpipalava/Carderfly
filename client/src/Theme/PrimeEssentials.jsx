@@ -141,9 +141,6 @@ function PrimeEssentials({ cardData }) {
             <div className="text-center text-xl font-medium">
               {cardData?.businessName}
             </div>
-            <p className="text-center text-base">
-              {cardData?.businessDescription}
-            </p>
           </CardContent>
           <CardFooter>
             {/* Primary Action */}
@@ -158,7 +155,7 @@ function PrimeEssentials({ cardData }) {
         </Card>
         <div className="w-full px-5">
           <Card
-            className="my-5 border-none shadow-[-24px_4px_20px_0px_rgba(0,0,0,0.15)]"
+            className="mb-7 mt-5 border-none shadow-[-24px_4px_20px_0px_rgba(0,0,0,0.15)]"
             style={{
               backgroundColor: cardData?.colors?.cardBg,
               color: cardData?.colors?.cardText,
@@ -228,7 +225,7 @@ function PrimeEssentials({ cardData }) {
 
             {/* Secondary Actions */}
             {cardData?.secondaryActions.length === 0 ? null : (
-              <CardFooter className="">
+              <CardFooter>
                 <div className="flex w-full flex-wrap justify-center gap-5">
                   <SecondaryAction4
                     secondaryActions={cardData?.secondaryActions}
@@ -238,8 +235,21 @@ function PrimeEssentials({ cardData }) {
             )}
           </Card>
 
+          {cardData?.businessDescription && (
+            <Card
+              className="border-none bg-transparent pt-2 shadow-none"
+              style={{
+                color: cardData?.colors?.text,
+              }}
+            >
+              <CardContent className="px-0 text-justify">
+                {cardData.businessDescription}
+              </CardContent>
+            </Card>
+          )}
+
           {/* Feature Section */}
-          <div className="pt-2">
+          <div>
             <FeatureTemplate3
               sections={cardData?.sections}
               propText={cardData?.colors?.text}

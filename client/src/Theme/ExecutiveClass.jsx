@@ -93,7 +93,6 @@ function ExecutiveClass({ cardData }) {
       <ScrollArea className="mb-10 flex-grow overflow-auto">
         <div className="relative h-40 overflow-hidden">
           <img
-            // src="https://images.rawpixel.com/image_800/czNmcy1wcml2YXRlL3Jhd3BpeGVsX2ltYWdlcy93ZWJzaXRlX2NvbnRlbnQvbHIvdjU0NmJhdGNoMy1teW50LTM0LWJhZGdld2F0ZXJjb2xvcl8xLmpwZw.jpg"
             src={cardData?.backCoverImg}
             alt="Cover Image"
             className="aspect-[13/6] object-cover"
@@ -122,7 +121,6 @@ function ExecutiveClass({ cardData }) {
             {cardData?.firstName} {cardData?.lastName}
           </div>
           <div>{cardData?.jobTitle}</div>
-          <p className="text-center text-sm">{cardData?.businessDescription}</p>
 
           {/* Primary Action */}
           <div className="mb-6 mt-6 flex w-full flex-wrap justify-center gap-4">
@@ -183,15 +181,20 @@ function ExecutiveClass({ cardData }) {
             />
           </div>
 
+          {cardData?.businessDescription && (
+            <Card
+              className="border-none bg-transparent shadow-none"
+              style={{
+                color: cardData?.colors?.text,
+              }}
+            >
+              <CardContent className="px-0 text-justify">
+                {cardData.businessDescription}
+              </CardContent>
+            </Card>
+          )}
+
           <div className="w-full">
-            {/* <CarouselTemplate
-              sections={cardData?.sections}
-              propText={cardData?.colors?.text}
-              propFeatureText={cardData?.colors?.featureText}
-              propFeatureSeparator={cardData?.colors?.featureSeparator}
-              propButtonBg={cardData?.colors?.buttonBg}
-              propButtonText={cardData?.colors?.buttonText}
-            /> */}
             <FeatureTemplate3
               sections={cardData?.sections}
               propText={cardData?.colors?.text}
@@ -355,77 +358,6 @@ function ExecutiveClass({ cardData }) {
         </button>
       </footer>
     </div>
-
-    //   <div className="mt-4 flex flex-col items-start gap-2 text-sm">
-    //     <div className="flex items-center gap-2">
-    //       <img
-    //         src="https://marketplace.canva.com/EAFaFUz4aKo/2/0/1600w/canva-yellow-abstract-cooking-fire-free-logo-JmYWTjUsE-Q.jpg"
-    //         alt="Feature Image"
-    //         className="h-32 w-32 rounded-md"
-    //       />
-    //       <div>
-    //         <div className="font-medium">Advanced Analytics</div>
-    //         <div className="text-muted-foreground">
-    //           Powerful data insights
-    //         </div>
-    //       </div>
-    //     </div>
-    //     <div className="flex items-center gap-2">
-    //       <img
-    //         src="https://marketplace.canva.com/EAFaFUz4aKo/2/0/1600w/canva-yellow-abstract-cooking-fire-free-logo-JmYWTjUsE-Q.jpg"
-    //         alt="Feature Image"
-    //         className="h-32 w-32 rounded-md"
-    //       />
-    //       <div>
-    //         <div className="font-medium">Scalable Infrastructure</div>
-    //         <div className="text-muted-foreground">Grow with ease</div>
-    //       </div>
-    //     </div>
-    //     <div className="flex items-center gap-2">
-    //       <img
-    //         src="https://marketplace.canva.com/EAFaFUz4aKo/2/0/1600w/canva-yellow-abstract-cooking-fire-free-logo-JmYWTjUsE-Q.jpg"
-    //         alt="Feature Image"
-    //         className="h-32 w-32 rounded-md"
-    //       />
-    //       <div>
-    //         <div className="font-medium">Seamless Collaboration</div>
-    //         <div className="text-muted-foreground">
-    //           Work together effortlessly
-    //         </div>
-    //       </div>
-    //     </div>
-    //   </div>
-    //   <div className="mt-4 flex gap-4">
-    //     <Link
-    //       href="#"
-    //       className="text-muted-foreground hover:text-primary"
-    //       prefetch={false}
-    //     >
-    //       <FacebookIcon className="h-6 w-6" />
-    //     </Link>
-    //     <Link
-    //       href="#"
-    //       className="text-muted-foreground hover:text-primary"
-    //       prefetch={false}
-    //     >
-    //       <InstagramIcon className="h-6 w-6" />
-    //     </Link>
-    //     <Link
-    //       href="#"
-    //       className="text-muted-foreground hover:text-primary"
-    //       prefetch={false}
-    //     >
-    //       <GithubIcon className="h-6 w-6" />
-    //     </Link>
-    //     <Link
-    //       href="#"
-    //       className="text-muted-foreground hover:text-primary"
-    //       prefetch={false}
-    //     >
-    //       <LinkedinIcon className="h-6 w-6" />
-    //     </Link>
-    //   </div>
-    // </div>
   );
 }
 

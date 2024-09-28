@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { Box, House, Menu, Network, Tag } from "lucide-react";
+import { Box, House, LayoutTemplate, Menu, Network, Tag } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
@@ -30,6 +30,12 @@ export function Navbar() {
             className="ml-6 text-base text-muted-foreground transition-colors hover:text-foreground"
           >
             Home
+          </Link>
+          <Link
+            to="/#themes"
+            className="text-base text-muted-foreground transition-colors hover:text-foreground"
+          >
+            Templates
           </Link>
           <Link
             to="/#how-it-works"
@@ -76,6 +82,12 @@ export function Navbar() {
                 >
                   <House className="h-6 w-6" />
                   <span>Home</span>
+                </Link>
+                <Link
+                  to="/#themes"
+                  className="flex items-center gap-4 text-muted-foreground hover:text-foreground"
+                >
+                  <LayoutTemplate className="h-6 w-6" /> <span>Templates</span>
                 </Link>
                 <Link
                   to="/#how-it-works"

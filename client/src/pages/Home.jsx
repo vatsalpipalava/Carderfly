@@ -13,6 +13,7 @@ import { CustomizeCard } from "@/components/modules/home/CustomizeCard";
 import { Pricing } from "@/components/modules/home/Pricing";
 import { GetInTouch } from "@/components/modules/home/GetInTouch";
 import { Footer } from "@/components/modules/home/Footer";
+import { Themes } from "@/components/modules/home/Themes";
 
 export function Home() {
   const { auth } = useAuth();
@@ -33,7 +34,14 @@ export function Home() {
         <section id="hero-section">
           <HeroSection />
         </section>
+      </div>
 
+      {/*Themes */}
+      <section id="themes">
+        <Themes />
+      </section>
+
+      <div className="bg-grid-small-black/[0.1] dark:bg-grid-small-white/[0.1] mx-auto flex h-full w-full max-w-[1280px] flex-col px-4 sm:px-6">
         {/*How it works */}
         <section id="how-it-works" className="bg-background py-20">
           <HowItWorks />

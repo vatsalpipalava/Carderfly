@@ -462,6 +462,11 @@ const subscribedCard = asyncHandler(async (req, res) => {
     throw new ApiError(404, "Card Not Found.");
   }
 
+  const adminUserId = process.env.ADMIN_USER_ID;
+  if (card.userId.toString() === adminUserId) {
+    return res.status(200).json(new ApiResponse(200, card, "Access granted to admin."));
+  }
+
   const cardSubscriptionId = card.subscribeId;
 
   if (!cardSubscriptionId) {
