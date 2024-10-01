@@ -63,10 +63,7 @@ export const InfiniteMovingCards = ({
   return (
     <div
       ref={containerRef}
-      className={cn(
-        "scroller relative z-20 w-full overflow-hidden",
-        className
-      )}
+      className={cn("scroller relative z-20 w-full overflow-hidden", className)}
     >
       <ul
         ref={scrollerRef}
@@ -77,7 +74,12 @@ export const InfiniteMovingCards = ({
         )}
       >
         {items.map((item, index) => (
-          <Link to={item.url} key={index} target="_blank">
+          <Link
+            to="#"
+            // to={item.url}
+            key={index}
+            // target="_blank"
+          >
             <li
               className="relative h-full w-[325px] max-w-full flex-shrink-0 rounded-2xl border-2 md:w-[325px]"
               style={{

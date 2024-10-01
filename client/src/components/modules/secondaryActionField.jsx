@@ -62,8 +62,8 @@ export const secondaryActionField = [
     label: "LinkedIn",
     color: "#0A66C2",
     icon: SiLinkedin,
-    placeholder: "username",
-    linkPrefix: "https://linkedin.com/in/",
+    placeholder: "Linkedin url",
+    linkPrefix: "",
     linkSuffix: "",
   },
   {
