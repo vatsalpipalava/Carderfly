@@ -1,30 +1,37 @@
 /* eslint-disable react/prop-types */
-import { useEffect, useState } from "react";
+import {
+  // useEffect,
+  useState,
+} from "react";
 import { cn } from "@/lib/utils";
 
-import { DollarSign, IndianRupee, SquareCheck } from "lucide-react";
+import {
+  // DollarSign,
+  IndianRupee,
+  SquareCheck,
+} from "lucide-react";
 
 import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
-import { getUserLocation } from "@/api/userLocation";
+// import { getUserLocation } from "@/api/userLocation";
 import { useId } from "react";
 
 export function Pricing() {
-  const [defaultCurrency, setDefaultCurrency] = useState("USD");
+  const [defaultCurrency, setDefaultCurrency] = useState("INR");
 
-  useEffect(() => {
-    const setCurrencyBasedOnLocation = async () => {
-      const country = await getUserLocation();
-      if (country === "IN") {
-        setDefaultCurrency("INR");
-      } else {
-        setDefaultCurrency("USD");
-      }
-    };
+  // useEffect(() => {
+  //   const setCurrencyBasedOnLocation = async () => {
+  //     const country = await getUserLocation();
+  //     if (country === "IN") {
+  //       setDefaultCurrency("INR");
+  //     } else {
+  //       setDefaultCurrency("USD");
+  //     }
+  //   };
 
-    setCurrencyBasedOnLocation();
-  }, []);
+  //   setCurrencyBasedOnLocation();
+  // }, []);
 
   return (
     <main className="relative z-10 h-auto w-full pt-12 md:pt-16 lg:pt-20">
@@ -51,19 +58,19 @@ export function Pricing() {
           onValueChange={setDefaultCurrency}
           className="relative z-30 w-full"
         >
-          <TabsList className="mx-auto mb-10 grid h-auto w-full max-w-sm grid-cols-2">
+          <TabsList className="mx-auto mb-10 grid h-auto w-full max-w-sm grid-cols-1">
             <TabsTrigger value="INR" className="group gap-3">
               <div className="flex h-8 w-8 items-center justify-center rounded-full border-2 border-primary group-data-[state=active]:border-transparent group-data-[state=active]:bg-primary">
                 <IndianRupee className="h-4 w-4 text-primary group-data-[state=active]:text-white" />
               </div>
               <p className="text-lg">INR</p>
             </TabsTrigger>
-            <TabsTrigger value="USD" className="group gap-3">
+            {/* <TabsTrigger value="USD" className="group gap-3">
               <div className="flex h-8 w-8 items-center justify-center rounded-full border-2 border-primary group-data-[state=active]:border-transparent group-data-[state=active]:bg-primary">
                 <DollarSign className="h-4 w-4 text-primary group-data-[state=active]:text-white" />
               </div>
               <p className="text-lg">USD</p>
-            </TabsTrigger>
+            </TabsTrigger> */}
           </TabsList>
           <TabsContent value="INR">
             <div className="grid grid-cols-1 gap-10 md:grid-cols-3 md:gap-2">
@@ -91,7 +98,7 @@ export function Pricing() {
                   <div className="flex w-full items-center gap-4">
                     <SquareCheck className="h-5 max-h-5 min-h-5 w-5 min-w-5 max-w-5 text-primary" />
                     <p className="break-words">
-                      Cancel subscription at period&apos;s end
+                      Renew at period&apos;s end
                     </p>
                   </div>
                 </div>
@@ -122,7 +129,7 @@ export function Pricing() {
                   <div className="flex w-full items-center gap-4">
                     <SquareCheck className="h-5 max-h-5 min-h-5 w-5 min-w-5 max-w-5 text-primary" />
                     <p className="break-words">
-                      Cancel subscription at period&apos;s end
+                      Renew at period&apos;s end
                     </p>
                   </div>
                 </div>
@@ -153,14 +160,14 @@ export function Pricing() {
                   <div className="flex w-full items-center gap-4">
                     <SquareCheck className="h-5 max-h-5 min-h-5 w-5 min-w-5 max-w-5 text-primary" />
                     <p className="break-words">
-                      Cancel subscription at period&apos;s end
+                      Renew at period&apos;s end
                     </p>
                   </div>
                 </div>
               </div>
             </div>
           </TabsContent>
-          <TabsContent value="USD">
+          {/* <TabsContent value="USD">
             <div className="grid grid-cols-1 gap-10 sm:grid-cols-2 md:grid-cols-3 md:gap-2">
               <div className="relative overflow-hidden rounded-3xl bg-gradient-to-b from-neutral-100 to-white p-6 dark:from-neutral-900 dark:to-neutral-950">
                 <Grid size={20} />
@@ -186,13 +193,12 @@ export function Pricing() {
                   <div className="flex w-full items-center gap-4">
                     <SquareCheck className="h-5 max-h-5 min-h-5 w-5 min-w-5 max-w-5 text-primary" />
                     <p className="break-words">
-                      Cancel subscription at period&apos;s end
+                      Renew at period&apos;s end
                     </p>
                   </div>
                 </div>
               </div>
 
-              {/* Standard */}
               <div className="relative overflow-hidden rounded-3xl bg-gradient-to-b from-neutral-100 to-white p-6 dark:from-neutral-900 dark:to-neutral-950">
                 <Grid size={20} />
                 <p className="relative z-20 mb-3 text-base font-bold text-neutral-800 dark:text-white">
@@ -217,13 +223,12 @@ export function Pricing() {
                   <div className="flex w-full items-center gap-4">
                     <SquareCheck className="h-5 max-h-5 min-h-5 w-5 min-w-5 max-w-5 text-primary" />
                     <p className="break-words">
-                      Cancel subscription at period&apos;s end
+                      Renew at period&apos;s end
                     </p>
                   </div>
                 </div>
               </div>
 
-              {/* Premium */}
               <div className="relative overflow-hidden rounded-3xl bg-gradient-to-b from-neutral-100 to-white p-6 dark:from-neutral-900 dark:to-neutral-950">
                 <Grid size={20} />
                 <p className="relative z-20 mb-3 text-base font-bold text-neutral-800 dark:text-white">
@@ -248,13 +253,13 @@ export function Pricing() {
                   <div className="flex w-full items-center gap-4">
                     <SquareCheck className="h-5 max-h-5 min-h-5 w-5 min-w-5 max-w-5 text-primary" />
                     <p className="break-words">
-                      Cancel subscription at period&apos;s end
+                      Renew at period&apos;s end
                     </p>
                   </div>
                 </div>
               </div>
             </div>
-          </TabsContent>
+          </TabsContent> */}
         </Tabs>
       </div>
 

@@ -1,7 +1,6 @@
 /* eslint-disable react/prop-types */
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
-import { useDispatch } from "react-redux";
 
 import { MdLocationOn, MdOutlineQrCode2, MdEmail } from "react-icons/md";
 import { IoCallSharp, IoEarth } from "react-icons/io5";
@@ -22,25 +21,7 @@ import { QrCodeDrawerTemplate } from "@/components/modules/templateComponents/Qr
 import { HandleShareTemplate } from "@/components/modules/templateComponents/HandleShareTemplate";
 import { DownloadVcfTemplate } from "@/components/modules/templateComponents/DownloadVcfTemplate";
 
-import {
-  reButtonBg,
-  reBackground,
-  reText,
-  reButtonText,
-  reCardBg,
-  reCardText,
-  // reCardSeparator,
-  reCardIcon,
-  reFeatureText,
-  // reFeatureSeparator,
-  reFooterBg,
-  reFooterIcon,
-  reQrCode,
-} from "@/slices/cardSlice";
-
 function ProfessionalSuite({ cardData }) {
-  const dispatch = useDispatch();
-
   const { style } = useStyle();
 
   const [qrDrawerOpen, setQrDrawerOpen] = useState(false);
@@ -60,23 +41,6 @@ function ProfessionalSuite({ cardData }) {
   const whatsapp = cardData?.primaryActions.find(
     (action) => action?._id === "whatsapp"
   );
-
-  useEffect(() => {
-    dispatch(reButtonBg("#DC2626"));
-    dispatch(reBackground("#FFFFFF"));
-    dispatch(reText("#000000"));
-    dispatch(reButtonText("#FFFFFF"));
-    dispatch(reCardBg("#F1F1F1"));
-    dispatch(reCardText("#000000"));
-    // dispatch(reCardSeparator("#E5E5E5"));
-    dispatch(reCardIcon("#000000"));
-    dispatch(reFeatureText("#000000"));
-    // dispatch(reFeatureSeparator("#E5E5E5"));
-    dispatch(reFooterBg("#4E4E4E"));
-    dispatch(reFooterIcon("#E1E1E1"));
-    dispatch(reQrCode("#4E4E4E"));
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
 
   return (
     <div
@@ -101,19 +65,19 @@ function ProfessionalSuite({ cardData }) {
             />
           </div>
         </div>
-        <div className="w-full p-6">
+        <div className="w-full px-6 pb-6 pt-4">
           <div className="w-full">
-            <h3 className="mb-1 scroll-m-20 text-center text-2xl font-semibold tracking-tight">
+            <h3 className="scroll-m-20 text-center text-2xl font-semibold tracking-tight">
               {cardData?.firstName} {cardData?.lastName}
             </h3>
-            <p className="mb-1 text-center italic">{cardData?.jobTitle}</p>
-            <div className="mb-6 text-center text-lg font-semibold">
+            <p className="text-center italic">{cardData?.jobTitle}</p>
+            <div className="mb-4 text-center text-lg font-semibold">
               {cardData?.businessName}
             </div>
           </div>
 
           {/* Primary Action */}
-          <div className="mb-8 flex w-full flex-wrap justify-center gap-6">
+          <div className="mb-4 flex w-full flex-wrap justify-center gap-3">
             <PrimaryActionTemplate
               primaryActions={cardData?.primaryActions}
               propButtonBg={cardData?.colors?.buttonBg}
@@ -176,7 +140,7 @@ function ProfessionalSuite({ cardData }) {
           </Card>
 
           {/* Secondary Actions */}
-          <div className="mb-8 flex w-full flex-wrap justify-center gap-6">
+          <div className="mb-6 flex w-full flex-wrap justify-center gap-3">
             <SecondaryActionTemplate
               secondaryActions={cardData?.secondaryActions}
             />

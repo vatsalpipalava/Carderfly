@@ -36,12 +36,14 @@ import { FeatureContent } from "@/components/modules/userData/FeatureContent";
 import { Color } from "@/components/modules/userData/Color";
 import { CreateCardButton } from "@/components/modules/userData/CreateCardButton";
 import { Helmet } from "react-helmet";
+import { useApplyTheme } from "@/components/modules/ApplyTheme";
 
 function EnterDetails() {
   const dispatch = useDispatch();
 
   const { templateId } = useParams();
   const { setStyle } = useStyle();
+  const applyTheme = useApplyTheme();
 
   useEffect(() => {
     setStyle({
@@ -63,14 +65,15 @@ function EnterDetails() {
   useEffect(() => {
     if (selectedTemplate) {
       dispatch(setTemplateId(selectedTemplate.id));
+      applyTheme(selectedTemplate.id);
     } else {
       console.error("Theme not found");
     }
-  }, [dispatch, selectedTemplate]);
+  }, []);
 
   return (
     <>
-    <Helmet>
+      <Helmet>
         <title>Add Details</title>
       </Helmet>
       <header className="sticky top-0 z-30 flex h-14 items-center gap-4 border-b bg-background px-4 py-3 sm:h-auto">

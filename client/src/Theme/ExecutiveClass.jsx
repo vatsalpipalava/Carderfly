@@ -1,7 +1,6 @@
 /* eslint-disable react/prop-types */
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
-import { useDispatch } from "react-redux";
 
 import {
   Earth,
@@ -16,36 +15,18 @@ import { BsWhatsapp } from "react-icons/bs";
 
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
+import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { ScrollArea } from "@/components/ui/scroll-area";
 
 import useStyle from "@/hooks/useStyle";
 import { PrimaryActionTemplate } from "@/components/modules/templateComponents/PrimaryActionTemplate";
 import { SecondaryActionTemplate } from "@/components/modules/templateComponents/SecondaryActionTemplate";
-// import { CarouselTemplate } from "@/components/modules/templateComponents/CarouselTemplate";
 import { FeatureTemplate3 } from "@/featureTemplate/FeatureTemplate3";
 import { QrCodeDrawerTemplate } from "@/components/modules/templateComponents/QrCodeDrawerTemplate";
 import { HandleShareTemplate } from "@/components/modules/templateComponents/HandleShareTemplate";
 import { DownloadVcfTemplate } from "@/components/modules/templateComponents/DownloadVcfTemplate";
 
-import {
-  reButtonBg,
-  reBackground,
-  reText,
-  reButtonText,
-  reCardBg,
-  reCardText,
-  // reCardSeparator,
-  reCardIcon,
-  reFeatureText,
-  // reFeatureSeparator,
-  reFooterBg,
-  reFooterIcon,
-  reQrCode,
-} from "@/slices/cardSlice";
-
 function ExecutiveClass({ cardData }) {
-  const dispatch = useDispatch();
   const { style } = useStyle();
 
   const [qrDrawerOpen, setQrDrawerOpen] = useState(false);
@@ -66,22 +47,6 @@ function ExecutiveClass({ cardData }) {
     (action) => action?._id === "whatsapp"
   );
 
-  useEffect(() => {
-    dispatch(reButtonBg("#737373"));
-    dispatch(reBackground("#FFFFFF"));
-    dispatch(reText("#000000"));
-    dispatch(reButtonText("#FFFFFF"));
-    dispatch(reCardBg("#FFFFFF"));
-    dispatch(reCardText("#000000"));
-    // dispatch(reCardSeparator("#E5E5E5"));
-    dispatch(reCardIcon("#737373"));
-    dispatch(reFeatureText("#000000"));
-    // dispatch(reFeatureSeparator("#E5E5E5"));
-    dispatch(reFooterBg("#F5F5F5"));
-    dispatch(reFooterIcon("#737373"));
-    dispatch(reQrCode("#4E4E4E"));
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
   return (
     <div
       className={`relative mx-auto flex h-full max-w-[500px] flex-col overflow-hidden ${style.mobileRadius}`}
@@ -108,22 +73,15 @@ function ExecutiveClass({ cardData }) {
           </Avatar>
         </div>
         {/* <div className="w-full p-6"> */}
-        <div className="mt-4 flex flex-col items-center gap-2 px-6 pb-6">
-          <div className="flex items-center justify-center gap-2">
-            <img
-              src={cardData?.logoImg}
-              alt="Company Logo"
-              className="h-auto w-auto max-w-[20%] bg-transparent object-cover"
-            />
-            <h2 className="text-2xl font-bold">{cardData?.businessName}</h2>
-          </div>
+        <div className="mt-4 flex flex-col items-center gap-1 px-6 pb-6">
           <div className="text-lg font-medium">
             {cardData?.firstName} {cardData?.lastName}
           </div>
           <div>{cardData?.jobTitle}</div>
+          <h2 className="text-lg font-bold">{cardData?.businessName}</h2>
 
           {/* Primary Action */}
-          <div className="mb-6 mt-6 flex w-full flex-wrap justify-center gap-4">
+          <div className="mb-4 mt-4 flex w-full flex-wrap justify-center gap-3">
             <PrimaryActionTemplate
               primaryActions={cardData?.primaryActions}
               propButtonBg={cardData?.colors?.buttonBg}
@@ -132,13 +90,20 @@ function ExecutiveClass({ cardData }) {
           </div>
 
           <Card
-            className="mb-6 w-full border-none shadow-none"
+            className="mb-4 w-full border-none shadow-none"
             style={{
               backgroundColor: cardData?.colors?.cardBg,
               color: cardData?.colors?.cardText,
             }}
           >
-            <CardContent className="mx-auto flex max-w-60 flex-col items-center gap-2 p-6">
+            <CardHeader className="flex items-center justify-center bg-transparent pb-0">
+              <img
+                src={cardData?.logoImg}
+                alt="logo"
+                className="h-auto max-w-[60%] rounded-md bg-transparent object-cover"
+              />
+            </CardHeader>
+            <CardContent className="mx-auto flex max-w-80 flex-col items-center gap-2 p-6">
               <div className="flex flex-col items-start gap-2 text-sm">
                 <div className="flex items-center gap-2">
                   <LocateIcon
@@ -175,7 +140,7 @@ function ExecutiveClass({ cardData }) {
           </Card>
 
           {/* Secondary Actions */}
-          <div className="mb-8 flex w-full flex-wrap justify-center gap-4">
+          <div className="mb-4 flex w-full flex-wrap justify-center gap-3">
             <SecondaryActionTemplate
               secondaryActions={cardData?.secondaryActions}
             />

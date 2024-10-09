@@ -6,7 +6,7 @@ import { Helmet } from "react-helmet";
 
 import {
   AlertCircle,
-  DollarSign,
+  // DollarSign,
   IndianRupee,
   MailIcon,
   PhoneIcon,
@@ -30,10 +30,13 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useToast } from "@/components/ui/use-toast";
 
-import { inrPlanSchema, usdPlanSchema } from "@/schemas/cardSchema";
+import {
+  inrPlanSchema,
+  // usdPlanSchema
+} from "@/schemas/cardSchema";
 import useAxiosPrivate from "@/hooks/useAxiosPrivate";
 import NotFound from "./NotFound";
-import { getUserLocation } from "@/api/userLocation";
+// import { getUserLocation } from "@/api/userLocation";
 
 export function Checkout() {
   const { cardId } = useParams();
@@ -45,7 +48,7 @@ export function Checkout() {
   const [validError, setValidError] = useState("");
   const [notFound, setNotFound] = useState(false);
   const [alreadySubscribed, setAlreadySubscribed] = useState(false);
-  const [defaultCurrency, setDefaultCurrency] = useState("USD");
+  const [defaultCurrency, setDefaultCurrency] = useState("INR");
 
   const inrForm = useForm({
     resolver: zodResolver(inrPlanSchema),
@@ -55,13 +58,13 @@ export function Checkout() {
     },
   });
 
-  const usdForm = useForm({
-    resolver: zodResolver(usdPlanSchema),
-    defaultValues: {
-      type: "usd_standard",
-      terms: false,
-    },
-  });
+  // const usdForm = useForm({
+  //   resolver: zodResolver(usdPlanSchema),
+  //   defaultValues: {
+  //     type: "usd_standard",
+  //     terms: false,
+  //   },
+  // });
 
   useEffect(() => {
     const checkValidSubscription = async () => {
@@ -92,18 +95,18 @@ export function Checkout() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  useEffect(() => {
-    const setCurrencyBasedOnLocation = async () => {
-      const country = await getUserLocation();
-      if (country === "IN") {
-        setDefaultCurrency("INR");
-      } else {
-        setDefaultCurrency("USD");
-      }
-    };
+  // useEffect(() => {
+  //   const setCurrencyBasedOnLocation = async () => {
+  //     const country = await getUserLocation();
+  //     if (country === "IN") {
+  //       setDefaultCurrency("INR");
+  //     } else {
+  //       setDefaultCurrency("USD");
+  //     }
+  //   };
 
-    setCurrencyBasedOnLocation();
-  }, []);
+  //   setCurrencyBasedOnLocation();
+  // }, []);
 
   if (notFound) {
     return <NotFound />;
@@ -118,7 +121,7 @@ export function Checkout() {
   }
 
   const termsCheckedINR = inrForm.watch("terms");
-  const termsCheckedUSD = usdForm.watch("terms");
+  // const termsCheckedUSD = usdForm.watch("terms");
 
   const onSubmit = async (data) => {
     navigate(`/checkout/card/subscribe/${cardId}/${data.type}`);
@@ -218,19 +221,19 @@ export function Checkout() {
               onValueChange={setDefaultCurrency}
               className="h-full w-full"
             >
-              <TabsList className="grid h-auto w-full grid-cols-2">
+              <TabsList className="grid h-auto w-full grid-cols-1">
                 <TabsTrigger value="INR" className="group gap-3">
                   <div className="flex h-8 w-8 items-center justify-center rounded-full border-2 border-primary group-data-[state=active]:border-transparent group-data-[state=active]:bg-primary">
                     <IndianRupee className="h-4 w-4 text-primary group-data-[state=active]:text-white" />
                   </div>
                   <p className="text-lg">INR</p>
                 </TabsTrigger>
-                <TabsTrigger value="USD" className="group gap-3">
+                {/* <TabsTrigger value="USD" className="group gap-3">
                   <div className="flex h-8 w-8 items-center justify-center rounded-full border-2 border-primary group-data-[state=active]:border-transparent group-data-[state=active]:bg-primary">
                     <DollarSign className="h-4 w-4 text-primary group-data-[state=active]:text-white" />
                   </div>
                   <p className="text-lg">USD</p>
-                </TabsTrigger>
+                </TabsTrigger> */}
               </TabsList>
               <TabsContent value="INR">
                 {/* INR */}
@@ -361,11 +364,10 @@ export function Checkout() {
                   </form>
                 </Form>
               </TabsContent>
-              <TabsContent value="USD">
+              {/* <TabsContent value="USD">
                 <Form {...usdForm}>
                   <form onSubmit={usdForm.handleSubmit(onSubmit)}>
                     <div className="space-y-4">
-                      {/* USD */}
                       <FormField
                         control={usdForm.control}
                         name="type"
@@ -377,7 +379,6 @@ export function Checkout() {
                                 defaultValue={field.value}
                               >
                                 <div className="grid gap-2">
-                                  {/* Starter */}
                                   <FormItem>
                                     <FormLabel className="border-accent*40 flex cursor-pointer items-center justify-between gap-4 rounded-md border-2 bg-popover p-4 hover:border-accent hover:bg-accent hover:text-accent-foreground peer-data-[state=checked]:border-primary [&:has([data-state=checked])]:border-primary">
                                       <div className="grid gap-1">
@@ -397,7 +398,6 @@ export function Checkout() {
                                     </FormLabel>
                                   </FormItem>
 
-                                  {/* 6 Month */}
                                   <FormItem>
                                     <FormLabel className="border-accent*40 flex cursor-pointer items-center justify-between gap-4 rounded-md border-2 bg-popover p-4 hover:border-accent hover:bg-accent hover:text-accent-foreground peer-data-[state=checked]:border-primary [&:has([data-state=checked])]:border-primary">
                                       <div className="grid gap-1">
@@ -416,7 +416,7 @@ export function Checkout() {
                                       </FormControl>
                                     </FormLabel>
                                   </FormItem>
-                                  {/* 12 Month */}
+
                                   <FormItem>
                                     <FormLabel className="border-accent*40 flex cursor-pointer items-center justify-between gap-4 rounded-md border-2 bg-popover p-4 hover:border-accent hover:bg-accent hover:text-accent-foreground peer-data-[state=checked]:border-primary [&:has([data-state=checked])]:border-primary">
                                       <div className="grid gap-1">
@@ -443,7 +443,6 @@ export function Checkout() {
                         )}
                       />
 
-                      {/* Terms */}
                       <FormField
                         control={usdForm.control}
                         name="terms"
@@ -488,7 +487,7 @@ export function Checkout() {
                     </div>
                   </form>
                 </Form>
-              </TabsContent>
+              </TabsContent> */}
             </Tabs>
           </div>
           <div className="flex flex-col items-center rounded-lg bg-muted p-6">

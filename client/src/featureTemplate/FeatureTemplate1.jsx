@@ -35,8 +35,10 @@ export function FeatureTemplate1({
                       alt={subSection.heading}
                       className="aspect-square h-full w-full rounded-lg object-cover shadow-md"
                     />
-                    <CardContent className="px-2 absolute bottom-0 left-0 py-2 bg-[#ffffff10] backdrop-blur-md rounded-lg w-full">
-                      <p className="font-bold text-base">{subSection.heading}</p>
+                    <CardContent className="absolute bottom-0 left-0 w-full rounded-lg bg-[#ffffff10] px-2 py-2 backdrop-blur-md">
+                      <p className="text-base font-medium">
+                        {subSection.heading}
+                      </p>
                     </CardContent>
                   </CardContent>
                 </Card>

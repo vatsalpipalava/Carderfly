@@ -1,14 +1,12 @@
 /* eslint-disable react/prop-types */
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
-import { useDispatch } from "react-redux";
 
 import { MapPin, Plus, QrCode, Share } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
-// import { Separator } from "@/components/ui/separator";
 
 import useStyle from "@/hooks/useStyle";
 import { PrimaryActionTemplate } from "@/components/modules/templateComponents/PrimaryActionTemplate";
@@ -18,21 +16,6 @@ import { QrCodeDrawerTemplate } from "@/components/modules/templateComponents/Qr
 import { HandleShareTemplate } from "@/components/modules/templateComponents/HandleShareTemplate";
 import { DownloadVcfTemplate } from "@/components/modules/templateComponents/DownloadVcfTemplate";
 
-import {
-  reButtonBg,
-  reBackground,
-  reText,
-  reButtonText,
-  reCardBg,
-  reCardText,
-  // reCardSeparator,
-  reCardIcon,
-  reFeatureText,
-  // reFeatureSeparator,
-  reFooterBg,
-  reFooterIcon,
-  reQrCode,
-} from "@/slices/cardSlice";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { ImWhatsapp } from "react-icons/im";
 import Location from "@/assets/svgs/location";
@@ -41,8 +24,6 @@ import Website from "@/assets/svgs/website";
 import Mail from "@/assets/svgs/mail";
 
 function BusinessPrime({ cardData }) {
-  const dispatch = useDispatch();
-
   const { style } = useStyle();
 
   const [qrDrawerOpen, setQrDrawerOpen] = useState(false);
@@ -66,22 +47,6 @@ function BusinessPrime({ cardData }) {
     (action) => action._id === "location"
   );
 
-  useEffect(() => {
-    dispatch(reButtonBg("#232323"));
-    dispatch(reBackground("#FFFFFF"));
-    dispatch(reText("#232323"));
-    dispatch(reButtonText("#FFFFFF"));
-    dispatch(reCardBg("#EFEFEF"));
-    dispatch(reCardText("#232323"));
-    // dispatch(reCardSeparator("#E5E5E5"));
-    dispatch(reCardIcon("#6b7280"));
-    dispatch(reFeatureText("#000000"));
-    // dispatch(reFeatureSeparator("#E5E5E5"));
-    dispatch(reFooterBg("#F8FAFC"));
-    dispatch(reFooterIcon("#6b7280"));
-    dispatch(reQrCode("#232323"));
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
   return (
     <div
       className={`relative mx-auto flex h-full max-w-[500px] flex-col overflow-hidden ${style.mobileRadius}`}
@@ -109,21 +74,21 @@ function BusinessPrime({ cardData }) {
           </Avatar>
         </div>
 
-        <div className="mt-4 flex flex-col items-center gap-2 px-6 pb-6">
+        <div className="mt-1 flex flex-col items-center gap-2 px-6">
           <div>
-            <div className="mb-1 text-center text-2xl font-bold">
+            <div className="text-center text-2xl font-bold">
               {cardData?.firstName} {cardData?.lastName}
             </div>
-            <div className="mb-2 text-center text-base italic">
+            <div className="text-center text-base italic">
               {cardData?.jobTitle}
             </div>
-            <div className="mb-2 text-center text-lg font-semibold">
+            <div className="text-center text-lg font-semibold">
               {cardData?.businessName}
             </div>
           </div>
 
           {/* Primary Action */}
-          <div className="mb-6 mt-6 flex w-full flex-wrap justify-center gap-4">
+          <div className="mb-4 mt-2 flex w-full flex-wrap justify-center gap-3">
             <PrimaryActionTemplate
               primaryActions={cardData?.primaryActions}
               propButtonBg={cardData?.colors?.buttonBg}
@@ -132,7 +97,7 @@ function BusinessPrime({ cardData }) {
           </div>
 
           <Card
-            className="mb-6 border-none shadow-lg"
+            className="mb-4 border-none shadow-lg"
             style={{
               backgroundColor: cardData?.colors?.cardBg,
               color: cardData?.colors?.cardText,
@@ -178,7 +143,7 @@ function BusinessPrime({ cardData }) {
           </Card>
 
           {/* Secondary Actions */}
-          <div className="mb-8 flex w-full flex-wrap justify-center gap-6">
+          <div className="mb-4 flex w-full flex-wrap justify-center gap-3">
             <SecondaryActionTemplate
               secondaryActions={cardData?.secondaryActions}
             />

@@ -1,7 +1,6 @@
 /* eslint-disable react/prop-types */
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
-import { useDispatch } from "react-redux";
 
 import { IoCallSharp, IoShare } from "react-icons/io5";
 import { RiWhatsappFill } from "react-icons/ri";
@@ -12,7 +11,6 @@ import { QrCode } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
-// import { Separator } from "@/components/ui/separator";
 
 import useStyle from "@/hooks/useStyle";
 import { PrimaryActionTemplate } from "@/components/modules/templateComponents/PrimaryActionTemplate";
@@ -22,29 +20,12 @@ import { QrCodeDrawerTemplate } from "@/components/modules/templateComponents/Qr
 import { HandleShareTemplate } from "@/components/modules/templateComponents/HandleShareTemplate";
 import { DownloadVcfTemplate } from "@/components/modules/templateComponents/DownloadVcfTemplate";
 
-import {
-  reButtonBg,
-  reBackground,
-  reText,
-  reButtonText,
-  reCardBg,
-  reCardText,
-  // reCardSeparator,
-  reCardIcon,
-  reFeatureText,
-  // reFeatureSeparator,
-  reFooterBg,
-  reFooterIcon,
-  reQrCode,
-} from "@/slices/cardSlice";
 import Location from "@/assets/svgs/location";
 import Phone from "@/assets/svgs/phone";
 import Mail from "@/assets/svgs/mail";
 import Website from "@/assets/svgs/website";
 
 function CorporateElegance({ cardData }) {
-  const dispatch = useDispatch();
-
   const { style } = useStyle();
 
   const [qrDrawerOpen, setQrDrawerOpen] = useState(false);
@@ -65,22 +46,6 @@ function CorporateElegance({ cardData }) {
     (action) => action?._id === "whatsapp"
   );
 
-  useEffect(() => {
-    dispatch(reButtonBg("#004170"));
-    dispatch(reBackground("#F9F9F9"));
-    dispatch(reText("#000000"));
-    dispatch(reButtonText("#FFFFFF"));
-    dispatch(reCardBg("#0294FF"));
-    dispatch(reCardText("#FFFFFF"));
-    // dispatch(reCardSeparator("#E5E5E5"));
-    dispatch(reCardIcon("#FFFFFF"));
-    dispatch(reFeatureText("#000000"));
-    // dispatch(reFeatureSeparator("#E5E5E5"));
-    dispatch(reFooterBg("#0294ff"));
-    dispatch(reFooterIcon("#FFFFFF"));
-    dispatch(reQrCode("#4E4E4E"));
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
   return (
     <div
       className={`relative mx-auto flex h-full max-w-[500px] flex-col overflow-hidden ${style.mobileRadius}`}
@@ -106,17 +71,17 @@ function CorporateElegance({ cardData }) {
         </div>
         <div className="w-full p-4">
           <div className="w-full">
-            <h3 className="mb-1 scroll-m-20 text-2xl font-semibold tracking-tight">
+            <h3 className="mb-0 scroll-m-20 text-2xl font-semibold tracking-tight">
               {cardData?.firstName} {cardData?.lastName}
             </h3>
-            <p className="mb-1 italic">{cardData?.jobTitle}</p>
-            <div className="mb-6 text-lg font-semibold">
+            <p className="mb-0 italic">{cardData?.jobTitle}</p>
+            <div className="mb-4 text-lg font-semibold">
               {cardData?.businessName}
             </div>
           </div>
 
           {/* Primary Action */}
-          <div className="mb-8 flex w-full flex-wrap justify-start gap-4">
+          <div className="mb-6 flex w-full flex-wrap justify-start gap-3">
             <PrimaryActionTemplate
               primaryActions={cardData?.primaryActions}
               propButtonBg={cardData?.colors?.buttonBg}
@@ -126,12 +91,12 @@ function CorporateElegance({ cardData }) {
 
           {/* Contact Card */}
           <Card
-            className="mb-8 flex w-full border-none shadow-[0_8px_30px_rgba(0,0,0,0.1)]"
+            className="mb-6 flex w-full border-none shadow-[0_8px_30px_rgba(0,0,0,0.1)]"
             style={{
               color: cardData?.colors?.cardText,
             }}
           >
-            <CardHeader className="flex w-[35%] items-center justify-center bg-white p-1">
+            <CardHeader className="flex w-[35%] items-center justify-center bg-white p-2">
               <img
                 src={cardData?.logoImg}
                 alt="logo"
@@ -175,7 +140,7 @@ function CorporateElegance({ cardData }) {
           </Card>
 
           {/* Secondary Actions */}
-          <div className="mb-8 flex w-full flex-wrap justify-start gap-4">
+          <div className="mb-6 flex w-full flex-wrap justify-start gap-3">
             <SecondaryActionTemplate
               secondaryActions={cardData?.secondaryActions}
             />

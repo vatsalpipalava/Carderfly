@@ -1,7 +1,6 @@
 /* eslint-disable react/prop-types */
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
-import { useDispatch } from "react-redux";
 
 import { Plus, QrCode, Share } from "lucide-react";
 import Phone from "@/assets/svgs/phone";
@@ -19,29 +18,11 @@ import { QrCodeDrawerTemplate } from "@/components/modules/templateComponents/Qr
 import { HandleShareTemplate } from "@/components/modules/templateComponents/HandleShareTemplate";
 import { DownloadVcfTemplate } from "@/components/modules/templateComponents/DownloadVcfTemplate";
 
-import {
-  reButtonBg,
-  reBackground,
-  reText,
-  reButtonText,
-  reCardBg,
-  reCardText,
-  // reCardSeparator,
-  reCardIcon,
-  reFeatureText,
-  // reFeatureSeparator,
-  reFooterBg,
-  reFooterIcon,
-  reQrCode,
-  // backCoverImg,
-} from "@/slices/cardSlice";
 import { PrimaryAction4 } from "@/buttonsTemplate/PrimaryAction4";
 import { SecondaryAction1 } from "@/buttonsTemplate/SecondaryAction1";
 import { FeatureTemplate3 } from "@/featureTemplate/FeatureTemplate3";
 
 function CorporateIdentity({ cardData }) {
-  const dispatch = useDispatch();
-
   const { style } = useStyle();
 
   const [qrDrawerOpen, setQrDrawerOpen] = useState(false);
@@ -62,23 +43,6 @@ function CorporateIdentity({ cardData }) {
     (action) => action?._id === "whatsapp"
   );
 
-  useEffect(() => {
-    // dispatch(backCoverImg(""));
-    dispatch(reButtonBg("#3B82F6"));
-    dispatch(reBackground("#F8F8F8"));
-    dispatch(reText("#000000"));
-    dispatch(reButtonText("#FFFFFF"));
-    dispatch(reCardBg("#172554"));
-    dispatch(reCardText("#FFFFFF"));
-    // dispatch(reCardSeparator("#E5E5E5"));
-    dispatch(reCardIcon("#76C2FF"));
-    dispatch(reFeatureText("#000000"));
-    // dispatch(reFeatureSeparator("#E5E5E5"));
-    dispatch(reFooterBg("#3B82F6"));
-    dispatch(reFooterIcon("#FFFFFF"));
-    dispatch(reQrCode("#3B82F6"));
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
   return (
     <div
       className={`relative mx-auto flex h-full max-w-[500px] flex-col overflow-hidden ${style.mobileRadius} z-50 font-mulish`}
@@ -113,7 +77,7 @@ function CorporateIdentity({ cardData }) {
             <CardContent className="px-4 py-2">
               <h3 className="mb-1 text-left text-xl font-bold">
                 {cardData?.firstName}
-                <br />
+                &nbsp;
                 {cardData?.lastName}
               </h3>
               <p className="mb-1 text-left text-sm italic">
@@ -147,7 +111,7 @@ function CorporateIdentity({ cardData }) {
               className="rounded-lg py-3 shadow-[0px_4px_4px_2px_rgba(0,0,0,0.04)]"
               style={{ backgroundColor: cardData?.colors?.buttonBg }}
             >
-              <div className="flex flex-wrap justify-center gap-5">
+              <div className="flex flex-wrap justify-center gap-3">
                 <PrimaryAction4
                   primaryActions={cardData?.primaryActions}
                   // propButtonBg={cardData?.colors?.buttonBg}
@@ -164,12 +128,11 @@ function CorporateIdentity({ cardData }) {
               color: cardData?.colors?.cardText,
             }}
           >
-            <CardHeader className="flex flex-row justify-between p-4">
-              <h4 className="text-lg font-bold">Contact Details</h4>
+            <CardHeader className="flex w-full items-center justify-center">
               <img
                 src={cardData?.logoImg}
                 alt="logo"
-                className="h-auto max-w-[35%] rounded-md bg-transparent object-cover"
+                className="h-auto max-w-[60%] rounded-md bg-transparent object-cover"
               />
             </CardHeader>
             <CardContent className="flex flex-col items-start gap-3 p-4">
@@ -204,7 +167,7 @@ function CorporateIdentity({ cardData }) {
 
           {/* Secondary Actions */}
           {cardData?.secondaryActions.length === 0 ? null : (
-            <div className="mb-8 flex w-full flex-wrap justify-center gap-5 px-4">
+            <div className="mb-8 flex w-full flex-wrap justify-center gap-3 px-4">
               <SecondaryAction1 secondaryActions={cardData?.secondaryActions} />
             </div>
           )}

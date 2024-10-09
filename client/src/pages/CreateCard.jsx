@@ -68,14 +68,14 @@ function CreateCard() {
         <div className="p-4 sm:p-6 sm:px-6">
           <Separator />
         </div>
-        <main className="mb-6 grid flex-1 grid-cols-1 items-start gap-4 p-4 sm:grid-cols-2 sm:px-6 sm:py-0 md:gap-8 lg:grid-cols-3">
+        <main className="mb-6 grid flex-1 grid-cols-1 items-start gap-4 p-4 sm:grid-cols-2 sm:px-6 sm:py-0 md:gap-8 lg:grid-cols-4">
           {templates.map((template) => (
             <Card
               key={template.id}
               className="rounded-xl shadow-md hover:shadow-xl"
             >
               <CardContent className="p-0">
-                <ScrollArea className="relative h-96 w-auto rounded-t-xl border-none">
+                <ScrollArea className="relative h-[21rem] w-auto rounded-t-xl border-none">
                   <img
                     src={template.imageUrl}
                     alt={template.name}

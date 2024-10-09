@@ -19,17 +19,17 @@ export function FeatureTemplate3({ sections, propText, propFeatureText }) {
               {section.subSections.map((subSection) => (
                 <Card
                   key={subSection._id}
-                  className="border-none bg-transparent shadow-[1px_1px_10px_0px_rgba(0,0,0,0.1)] rounded-[14px]"
+                  className="rounded-lg border-none bg-transparent shadow-[1px_1px_10px_0px_rgba(0,0,0,0.1)]"
                   style={{ color: propFeatureText }}
                 >
                   <CardContent className="p-0">
                     <img
                       src={subSection.image}
                       alt={subSection.heading}
-                      className="aspect-square h-full w-full rounded-t-[14px] object-cover shadow-md"
+                      className="aspect-square h-full w-full rounded-t-lg object-cover shadow-md"
                     />
                   </CardContent>
-                  <CardContent className="rounded-b-[14px] bg-white px-2 py-2">
+                  <CardContent className="rounded-b-lg bg-white px-2 py-2">
                     <p className="text-center text-sm font-normal">
                       {subSection.heading}
                     </p>
