@@ -1,14 +1,4 @@
 import { InfiniteMovingCards } from "@/components/ui/infinite-moving-cards";
-import ProfessionalSuiteImg from "@/assets/templates/professional-suite.jpg";
-import CorporateEleganceImg from "@/assets/templates/corporate-elegance.jpg";
-import ExecutiveClassImg from "@/assets/templates/executive-class.jpg";
-import BusinessPrimeImg from "@/assets/templates/business-prime.jpg";
-import ProfessionalEdgeImg from "@/assets/templates/professional-edge.jpg";
-import PrestigeConnectImg from "@/assets/templates/prestige-connect.jpg";
-import EliteNetworkerImg from "@/assets/templates/elite-networker.jpg";
-import CorporateIdentityImg from "@/assets/templates/corporate-identity.jpg";
-import PrimeEssentialsImg from "@/assets/templates/prime-essentials.jpg";
-import ExecutiveDesignImg from "@/assets/templates/executive-design.jpg";
 
 export function Themes() {
   return (
@@ -20,52 +10,52 @@ export function Themes() {
 
 const templates = [
   {
-    image: ProfessionalSuiteImg,
+    image: "/templates/professional_suite.jpg",
     name: "Professional Suite",
     url: "professional_suite",
   },
   {
-    image: CorporateEleganceImg,
+    image: "/templates/corporate_elegance.jpg",
     name: "Corporate Elegance",
     url: "corporate_elegance",
   },
   {
-    image: ExecutiveClassImg,
+    image: "/templates/executive_class.jpg",
     name: "Executive Class",
     url: "executive_class",
   },
   {
-    image: EliteNetworkerImg,
+    image: "/templates/elite_networker.jpg",
     name: "Elite Networker",
     url: "elite_networker",
   },
   {
-    image: PrimeEssentialsImg,
+    image: "/templates/prime_essentials.jpg",
     name: "Prime Essentials",
     url: "prime_essentials",
   },
   {
-    image: BusinessPrimeImg,
+    image: "/templates/business_prime.jpg",
     name: "Business Prime",
     url: "business_prime",
   },
   {
-    image: ProfessionalEdgeImg,
+    image: "/templates/professional_edge.jpg",
     name: "Professional Edge",
     url: "professional_edge",
   },
   {
-    image: PrestigeConnectImg,
+    image: "/templates/prestige_connect.jpg",
     name: "Prestige Connect",
     url: "prestige_connect",
   },
   {
-    image: CorporateIdentityImg,
+    image: "/templates/corporate_identity.jpg",
     name: "Corporate Identity",
     url: "corporate_identity",
   },
   {
-    image: ExecutiveDesignImg,
+    image: "/templates/executive_design.jpg",
     name: "Executive Design",
     url: "executive_design",
   },

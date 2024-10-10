@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 "use client";
 
 import { cn } from "@/lib/utils";
@@ -74,12 +75,7 @@ export const InfiniteMovingCards = ({
         )}
       >
         {items.map((item, index) => (
-          <Link
-            to="#"
-            // to={item.url}
-            key={index}
-            // target="_blank"
-          >
+          <Link to={`/${item.url}`} key={index} target="_blank">
             <li
               className="relative h-full w-[325px] max-w-full flex-shrink-0 rounded-2xl border-2 md:w-[325px]"
               style={{

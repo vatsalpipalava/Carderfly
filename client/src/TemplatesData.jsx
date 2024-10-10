@@ -1,14 +1,3 @@
-import ProfessionalSuiteImg from "@/assets/templates/professional-suite.jpg";
-import CorporateEleganceImg from "@/assets/templates/corporate-elegance.jpg";
-import ExecutiveClassImg from "@/assets/templates/executive-class.jpg";
-import BusinessPrimeImg from "@/assets/templates/business-prime.jpg";
-import ProfessionalEdgeImg from "@/assets/templates/professional-edge.jpg";
-import PrestigeConnectImg from "@/assets/templates/prestige-connect.jpg";
-import EliteNetworkerImg from "@/assets/templates/elite-networker.jpg";
-import CorporateIdentityImg from "@/assets/templates/corporate-identity.jpg";
-import PrimeEssentialsImg from "@/assets/templates/prime-essentials.jpg";
-import ExecutiveDesignImg from "@/assets/templates/executive-design.jpg";
-
 import ProfessionalSuite from "./Theme/ProfessionalSuite";
 import CorporateElegance from "./Theme/CorporateElegance";
 import ExecutiveClass from "./Theme/ExecutiveClass";
@@ -24,70 +13,66 @@ const templates = [
   {
     id: "professional-suite",
     name: "Professional Suite",
-    imageUrl: ProfessionalSuiteImg,
+    imageUrl: "/templates/professional_suite.jpg",
     templateComponents: ProfessionalSuite,
   },
   {
     id: "corporate-elegance",
     name: "Corporate Elegance",
-    imageUrl: CorporateEleganceImg,
+    imageUrl: "/templates/corporate_elegance.jpg",
     templateComponents: CorporateElegance,
   },
   {
     id: "executive-class",
     name: "Executive Class",
-    imageUrl: ExecutiveClassImg,
+    imageUrl: "/templates/executive_class.jpg",
     templateComponents: ExecutiveClass,
   },
   {
     id: "business-prime",
     name: "BusinessPrime",
-    imageUrl: BusinessPrimeImg,
+    imageUrl: "/templates/business_prime.jpg",
     templateComponents: BusinessPrime,
   },
   {
     id: "professional-edge",
     name: "Professional Edge",
-    imageUrl: ProfessionalEdgeImg,
+    imageUrl: "/templates/professional_edge.jpg",
     templateComponents: ProfessionalEdge,
   },
   {
     id: "prestige-connect",
     name: "Prestige Connect",
-    imageUrl: PrestigeConnectImg,
+    imageUrl: "/templates/prestige_connect.jpg",
     templateComponents: PrestigeConnect,
   },
   {
     id: "elite-networker",
     name: "Elite Networker",
-    imageUrl: EliteNetworkerImg,
+    imageUrl: "/templates/elite_networker.jpg",
     templateComponents: EliteNetworker,
   },
   {
     id: "corporate-identity",
     name: "Corporate Identity",
-    imageUrl: CorporateIdentityImg,
+    imageUrl: "/templates/corporate_identity.jpg",
     templateComponents: CorporateIdentity,
   },
   {
     id: "prime-essentials",
     name: "Prime Essentials",
-    imageUrl: PrimeEssentialsImg,
+    imageUrl: "/templates/prime_essentials.jpg",
     templateComponents: PrimeEssentials,
   },
   {
     id: "executive-design",
     name: "Executive Design",
-    imageUrl: ExecutiveDesignImg,
-    templateComponents: ExecutiveDesign ,
+    imageUrl: "/templates/executive_design.jpg",
+    templateComponents: ExecutiveDesign,
   },
 ];
 
 export default templates;
-
-// import ProfessionalSuiteImg from "./assets/templates/professional-suite.png";
-// import CorporateEleganceImg from "./assets/templates/corporate-elegance.png";
-
 
 // import CorporateIdentity from "./Theme/CorporateIdentity";
 // import PrimeEssentials from "./Theme/PrimeEssentials";
